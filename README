@@ -6,6 +6,7 @@ aclocal
 automake --add-missing
 autoconf
 ./configure --prefix=folder/to/install/to
+cd model; ./make_data_files.py -d cvmh1511 -u uid
 make
 make install
 
