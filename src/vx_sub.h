@@ -1,12 +1,13 @@
 #ifndef VX_SUB_H
 #define VX_SUB_H
 
-extern char *VX_SRC_NAMES[7];
+extern char *VX_SRC_NAMES[8];
 
 typedef enum { VX_SRC_NR = 0, 
 	       VX_SRC_HR, 
 	       VX_SRC_LR, 
 	       VX_SRC_CM,
+	       VX_SRC_GFM,
 	       VX_SRC_TO,
 	       VX_SRC_BK,
                VX_SRC_GT} vx_src_t;
@@ -58,6 +59,8 @@ typedef struct vx_entry_t
   float vp;
   float vs;
   double rho;
+  float regionID;
+  float temp_median; 
 } vx_entry_t;
 
 
@@ -75,6 +78,8 @@ typedef struct vx_voxel_t
   float vp;
   float vs;
   double rho;
+  float regionID;
+  float temp_median; 
 } vx_voxel_t;
 
 

@@ -90,8 +90,9 @@ POST_INSTALL = :
 NORMAL_UNINSTALL = :
 PRE_UNINSTALL = :
 POST_UNINSTALL = :
-bin_PROGRAMS = vx$(EXEEXT) vx_lite$(EXEEXT) vx_slice$(EXEEXT) \
-	run_vx.sh$(EXEEXT) run_vx_lite.sh$(EXEEXT) $(am__EXEEXT_1)
+bin_PROGRAMS = testvx$(EXEEXT) vx$(EXEEXT) vx_lite$(EXEEXT) \
+	vx_slice$(EXEEXT) run_vx.sh$(EXEEXT) run_vx_lite.sh$(EXEEXT) \
+	$(am__EXEEXT_1)
 
 # Optional cvmdst program
 @VX_ENABLE_GTS_TRUE@am__append_1 = cvmdst
@@ -158,6 +159,9 @@ run_vx_sh_LDADD = $(LDADD)
 am_run_vx_lite_sh_OBJECTS =
 run_vx_lite_sh_OBJECTS = $(am_run_vx_lite_sh_OBJECTS)
 run_vx_lite_sh_LDADD = $(LDADD)
+testvx_SOURCES = testvx.c
+testvx_OBJECTS = testvx.$(OBJEXT)
+testvx_LDADD = $(LDADD)
 am_vx_OBJECTS = vx.$(OBJEXT)
 vx_OBJECTS = $(am_vx_OBJECTS)
 vx_LDADD = $(LDADD)
@@ -196,11 +200,11 @@ am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
 am__v_CCLD_0 = @echo "  CCLD    " $@;
 am__v_CCLD_1 = 
 SOURCES = $(libvxapi_a_SOURCES) $(cvmdst_SOURCES) $(run_vx_sh_SOURCES) \
-	$(run_vx_lite_sh_SOURCES) $(vx_SOURCES) $(vx_lite_SOURCES) \
-	$(vx_slice_SOURCES)
-DIST_SOURCES = $(libvxapi_a_SOURCES) $(am__cvmdst_SOURCES_DIST) \
-	$(run_vx_sh_SOURCES) $(run_vx_lite_sh_SOURCES) $(vx_SOURCES) \
+	$(run_vx_lite_sh_SOURCES) testvx.c $(vx_SOURCES) \
 	$(vx_lite_SOURCES) $(vx_slice_SOURCES)
+DIST_SOURCES = $(libvxapi_a_SOURCES) $(am__cvmdst_SOURCES_DIST) \
+	$(run_vx_sh_SOURCES) $(run_vx_lite_sh_SOURCES) testvx.c \
+	$(vx_SOURCES) $(vx_lite_SOURCES) $(vx_slice_SOURCES)
 am__can_run_installinfo = \
   case $$AM_UPDATE_INFO_DIR in \
     n|no|NO) false;; \
@@ -321,7 +325,7 @@ lib_LIBRARIES = libvxapi.a
 include_HEADERS = vx_sub.h
 
 # General compiler/linker flags
-AM_CFLAGS = -Wall -O3 -std=c99 -D_LARGEFILE_SOURCE \
+AM_CFLAGS = -Wall -g -std=c99 -D_LARGEFILE_SOURCE \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 
 AM_LDFLAGS = ${LDFLAGS} -L../gctpc/source -lgeo
@@ -454,6 +458,7 @@ distclean-compile:
 
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/cvm_dst.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/scec1d.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/testvx.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/utils.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vs30_gtl.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/vx.Po@am__quote@
@@ -714,6 +719,9 @@ all: $(lib_LIBRARIES) $(bin_PROGRAMS)
 
 libucvm.a: version.h vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
 	$(AR) rcs $@ $^
+
+testvx: testvx.o libvxapi.a
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 vx: vx.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
