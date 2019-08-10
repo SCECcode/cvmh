@@ -1,7 +1,7 @@
 # GNU Automake config
 
 lib_LIBRARIES = libvxapi.a
-bin_PROGRAMS = vx vx_lite vx_slice run_vx.sh run_vx_lite.sh
+bin_PROGRAMS = testvx vx vx_lite vx_slice run_vx.sh run_vx_lite.sh
 include_HEADERS = vx_sub.h
 
 # Optional cvmdst program
@@ -11,7 +11,7 @@ endif
 
 
 # General compiler/linker flags
-AM_CFLAGS = -Wall -O3 -std=c99 -D_LARGEFILE_SOURCE \
+AM_CFLAGS = -Wall -g -std=c99 -D_LARGEFILE_SOURCE \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
 AM_LDFLAGS = ${LDFLAGS} -L../gctpc/source -lgeo
 
@@ -37,6 +37,9 @@ all: $(lib_LIBRARIES) $(bin_PROGRAMS)
 
 libucvm.a: version.h vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
 	$(AR) rcs $@ $^
+
+testvx: testvx.o libvxapi.a
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 vx: vx.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)

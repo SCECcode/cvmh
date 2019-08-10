@@ -1,7 +1,8 @@
 # GNU Automake config
 
 EXTRA_DIST = base@@ *.gts CVM_* cvm_vs30* interfaces.vo model_top@@ \
-	moho@@ topo_dem@@
+	moho@@ topo_dem@@ \
+	GFM_box_10x10x1km_forPhil_regionID@@ GFM_box_10x10x1km_forPhil_temp_median@@
 
 all:
 
@@ -16,5 +17,6 @@ install:
 	cp model_top@@ ${prefix}/model
 	cp moho@@ ${prefix}/model
 	cp topo_dem@@ ${prefix}/model
+	cp GFM_box_10x10x1km_forPhil* ${prefix}/model
 
 clean:

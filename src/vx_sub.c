@@ -21,6 +21,8 @@
 #include "vx_io.h"
 #include "vx_sub.h"
 
+#define GFM_NAME "GFM_box_10x10x1km_forPhil"
+
 /* Smoothing parameters for SCEC 1D */
 #define SCEC_SMOOTH_DIST 50.0 // km
 
@@ -33,6 +35,7 @@
 void gctp();
 int voxbytepos(int *, int* ,int);
 double calc_rho(float vp, vx_src_t data_src);
+int vx_extract_gfm(vx_entry_t *entry);
 
 /* User-defined background model function pointer */
 int (*callback_bkg)(vx_entry_t *entry, vx_request_t req_type) = NULL;
@@ -41,27 +44,36 @@ int (*callback_bkg)(vx_entry_t *entry, vx_request_t req_type) = NULL;
 static int is_setup = False;
 vx_zmode_t vx_zmode = VX_ZMODE_ELEV;
 int vx_use_gtl = True;
+
 struct axis lr_a, mr_a, hr_a, cm_a, to_a;
 struct property p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
 float step_to[3], step_lr[3], step_hr[3], step_cm[3];
 
+struct axis gfm_a;
+struct property p_gfm_regionID, p_gfm_tempMedian;
+float step_gfm[3];
+
+
 /* Model buffers */
 static char *hrbuffer = NULL;
 static char *lrbuffer = NULL;
-static char *cmbuffer = NULL;
+static char *cmbuffer = NULL;   // cm - vp
 static char *tobuffer = NULL;
 static char *mobuffer = NULL;
 static char *babuffer = NULL;
 static char *mtopbuffer = NULL;
 static char *lrtbuffer = NULL;
-static char *cmtbuffer = NULL;
-static char *cmvsbuffer = NULL;
+static char *cmtbuffer = NULL;  // cm - tag
+static char *cmvsbuffer = NULL; // cm - vs
 static char *hrtbuffer = NULL;
 static char *lrvsbuffer = NULL;
 static char *hrvsbuffer = NULL;
 
+static char *gfmRegionIDbuffer = NULL; //regionID
+static char *gfmTempMedianbuffer = NULL; //temp_median
+
 /* Data source labels */
-char *VX_SRC_NAMES[7] = {"nr", "hr", "lr", "cm", "to", "bk", "gt"};
+char *VX_SRC_NAMES[8] = {"nr", "hr", "lr", "cm", "to", "bk", "gt", "gfm"};
 
 
 /* Setup function to be called prior to querying points */
@@ -79,7 +91,8 @@ int vx_setup(const char *data_dir)
   tobuffer = mobuffer = babuffer = mtopbuffer = NULL;
   lrtbuffer = cmtbuffer = hrtbuffer = NULL;
   cmvsbuffer = lrvsbuffer = hrvsbuffer = NULL;
-
+  gfmRegionIDbuffer = gfmTempMedianbuffer = NULL;
+  
   sprintf(gtlpath, "%s/%s", data_dir, DEFAULT_GTL_FILE);
 
   char LR_PAR[CMLEN];
@@ -94,6 +107,15 @@ int vx_setup(const char *data_dir)
   char TO_PAR[CMLEN];
   sprintf(TO_PAR, "%s/interfaces.vo", data_dir);
 
+  char GFM_PAR[CMLEN];
+  sprintf(GFM_PAR, "%s/%s.vo", data_dir, GFM_NAME);
+
+
+fprintf(stderr,"###%s\n", LR_PAR);
+fprintf(stderr,"###%s\n", HR_PAR);
+fprintf(stderr,"###%s\n", CM_PAR);
+fprintf(stderr,"###%s\n", TO_PAR);
+fprintf(stderr,"###%s\n", GFM_PAR);
 
   /**** First we load the LowRes File****/
   if (vx_io_init(LR_PAR) != 0) {
@@ -386,6 +408,58 @@ int vx_setup(const char *data_dir)
 
   vx_io_finalize();
 
+  /**** Now we load the GFM File *****/
+  if (vx_io_init(GFM_PAR) != 0) {
+    fprintf(stderr, "Failed to load GFM param file %s\n", CM_PAR);
+    return(1);
+  }
+
+  vx_io_getvec("AXIS_O",gfm_a.O);
+  vx_io_getvec("AXIS_U",gfm_a.U);
+  vx_io_getvec("AXIS_V",gfm_a.V);
+  vx_io_getvec("AXIS_W",gfm_a.W);
+  vx_io_getvec("AXIS_MIN",gfm_a.MIN);
+  vx_io_getvec("AXIS_MAX",gfm_a.MAX);
+  vx_io_getdim("AXIS_N ",gfm_a.N);
+
+  NCells=gfm_a.N[0]*gfm_a.N[1]*gfm_a.N[2];
+
+// regionID
+  sprintf(p_gfm_regionID.NAME,"regionID");
+  vx_io_getpropname("PROP_FILE",1,p_gfm_regionID.FN);
+  vx_io_getpropsize("PROP_ESIZE",1,&p_gfm_regionID.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",1,&p_gfm_regionID.NO_DATA_VALUE);
+
+  gfmRegionIDbuffer=(char *)malloc(NCells*p_gfm_regionID.ESIZE);
+  if (gfmRegionIDbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM regionID buffer\n");
+    return(1);
+  }
+  if (vx_io_loadvolume(data_dir, p_gfm_regionID.FN, 
+		       p_gfm_regionID.ESIZE, NCells, gfmRegionIDbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM regionID volume\n");
+    return(1);
+  } 
+
+  sprintf(p_gfm_tempMedian.NAME,"temp_median");
+  vx_io_getpropname("PROP_FILE",2,p_gfm_tempMedian.FN);
+  vx_io_getpropsize("PROP_ESIZE",2,&p_gfm_tempMedian.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",2,&p_gfm_tempMedian.NO_DATA_VALUE);
+
+  gfmTempMedianbuffer=(char *)malloc(NCells*p_gfm_tempMedian.ESIZE);
+  if (gfmTempMedianbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM temp_median buffer\n");
+    return(1);
+  }
+  if (vx_io_loadvolume(data_dir, p_gfm_tempMedian.FN, 
+		       p_gfm_tempMedian.ESIZE, NCells, gfmTempMedianbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM temp_median volume\n");
+    return(1);
+  }
+
+  vx_io_finalize();
+
+
   // compute steps
   step_to[0]=to_a.U[0]/(to_a.N[0]-1);
   step_to[1]=to_a.V[1]/(to_a.N[1]-1);
@@ -402,6 +476,10 @@ int vx_setup(const char *data_dir)
   step_cm[0]=cm_a.U[0]/(cm_a.N[0]-1);
   step_cm[1]=cm_a.V[1]/(cm_a.N[1]-1);
   step_cm[2]=cm_a.W[2]/(cm_a.N[2]-1);
+
+  step_gfm[0]=gfm_a.U[0]/(gfm_a.N[0]-1);
+  step_gfm[1]=gfm_a.V[1]/(gfm_a.N[1]-1);
+  step_gfm[2]=gfm_a.W[2]/(gfm_a.N[2]-1);
 
   // Load GTL
   if (gtl_setup(gtlpath) != 0) {
@@ -486,6 +564,9 @@ int vx_getcoord(vx_entry_t *entry) {
    depth/offset query modes.
 */ 
 int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
+
+fprintf(stderr,"###---> calling vx_getcoord_private..\n");
+
   int j;
   double SP[2],SPUTM[2];
   int gcoor[3];
@@ -536,6 +617,7 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
     return(1);
     break;
   }
+fprintf(stderr,"###-->> on UTM: %lf %lf %lf \n", entry->coor_utm[0], entry->coor_utm[1], entry->coor_utm[2]);
 
   /* Now we have UTM Zone 11 */
   /*** Prevent all to obvious bad coordinates from being displayed */
@@ -557,6 +639,7 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
       memcpy(&(entry->mtop), &mtopbuffer[j], p4.ESIZE);
       memcpy(&(entry->base), &babuffer[j], p4.ESIZE);
       memcpy(&(entry->moho), &mobuffer[j], p4.ESIZE);
+//fprintf(stderr,"### coordinate is in good standing..\n");
       if (((entry->topo - p0.NO_DATA_VALUE < 0.1) || 
 	   (entry->mtop - p0.NO_DATA_VALUE < 0.1))) {
 	do_bkg = True;
@@ -564,6 +647,8 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
     } else {
       do_bkg = True;
     }
+
+    vx_extract_gfm(entry);
 
     /* Convert depth/offset Z coordinate to elevation */
     if (enhanced == True) {
@@ -590,6 +675,8 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
       depth = surface - entry->coor_utm[2];
     }
 
+//XXX    if (enhanced == False) { vx_extract_gfm(entry); }
+
     if ((do_bkg == False) || ((do_bkg == True) && (callback_bkg == NULL)) || 
 	(enhanced == False)) {
       /* AP: this calculates the cell numbers from the coordinates and 
@@ -598,11 +685,12 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
 	 centered, eg. they are valid half a cell width away from the 
 	 data point */
 
+
       /* Extract vp/vs */      
       gcoor[0]=round((entry->coor_utm[0]-hr_a.O[0])/step_hr[0]);
       gcoor[1]=round((entry->coor_utm[1]-hr_a.O[1])/step_hr[1]);
       gcoor[2]=round((entry->coor_utm[2]-hr_a.O[2])/step_hr[2]);
-      
+
       if(gcoor[0]>=0&&gcoor[1]>=0&&gcoor[2]>=0&&
 	 gcoor[0]<hr_a.N[0]&&gcoor[1]<hr_a.N[1]&&gcoor[2]<hr_a.N[2]) {
 	/* AP: And here are the cell centers*/
@@ -621,6 +709,8 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
 	
 	if(gcoor[0]>=0&&gcoor[1]>=0&&gcoor[2]>=0&&
 	   gcoor[0]<lr_a.N[0]&&gcoor[1]<lr_a.N[1]&&gcoor[2]<lr_a.N[2]) {
+
+
 	  /* AP: And here are the cell centers*/
 	  entry->vel_cell[0]= lr_a.O[0]+gcoor[0]*step_lr[0];
 	  entry->vel_cell[1]= lr_a.O[1]+gcoor[1]*step_lr[1];
@@ -634,7 +724,7 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
 	  gcoor[0]=round((entry->coor_utm[0]-cm_a.O[0])/step_cm[0]);
 	  gcoor[1]=round((entry->coor_utm[1]-cm_a.O[1])/step_cm[1]);
 	  gcoor[2]=round((entry->coor_utm[2]-cm_a.O[2])/step_cm[2]);
-	  
+
 	  /** AP: check if inside CM voxet; the uppermost layer of 
 	      CM overlaps with the lowermost of LR, may need to be 
 	      ignored but is not.
@@ -703,6 +793,35 @@ int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
   return(0);
 }
 
+int vx_extract_gfm(vx_entry_t *entry) {
+
+  int j;
+  int gcoor[3];
+
+//fprintf(stderr,"### calling GFM part..\n");
+  /* Extract from GFM */      
+  gcoor[0]=round((entry->coor_utm[0]-gfm_a.O[0])/step_gfm[0]);
+  gcoor[1]=round((entry->coor_utm[1]-gfm_a.O[1])/step_gfm[1]);
+  gcoor[2]=round((entry->coor_utm[2]-gfm_a.O[2])/step_gfm[2]);
+
+  if(gcoor[0]>=0&&gcoor[1]>=0&&gcoor[2]>=0&&
+	 gcoor[0]<gfm_a.N[0]&&gcoor[1]<gfm_a.N[1]&&gcoor[2]<gfm_a.N[2]) {
+	/* AP: And here are the cell centers*/
+
+    entry->vel_cell[0]= gfm_a.O[0]+gcoor[0]*step_gfm[0];
+    entry->vel_cell[1]= gfm_a.O[1]+gcoor[1]*step_gfm[1];
+    entry->vel_cell[2]= gfm_a.O[2]+gcoor[2]*step_gfm[2];
+
+    j=voxbytepos(gcoor,gfm_a.N,p_gfm_tempMedian.ESIZE);
+
+    memcpy(&(entry->temp_median), &gfmTempMedianbuffer[j], p_gfm_tempMedian.ESIZE);
+    memcpy(&(entry->regionID), &gfmRegionIDbuffer[j], p_gfm_regionID.ESIZE);
+
+    entry->data_src = VX_SRC_GFM;
+  }
+  return 1;
+}
+
 
 /* Smooth the material properties contained in 'entry' with the GTL, at 
    effective depth 'depth' and with a local topo gap of 'topo-gap'. */
@@ -749,6 +868,7 @@ int vx_apply_gtl_entry(vx_entry_t *entry, double depth, double topo_gap) {
 
 /* Get raw voxel information at the supplied voxel volume coordinates */
 void vx_getvoxel(vx_voxel_t *voxel) {
+
   int gcoor[3];
   int j;
 
@@ -2085,6 +2205,8 @@ void vx_init_entry(vx_entry_t *entry) {
   entry->provenance = p0.NO_DATA_VALUE;
   entry->vp = entry->vs = entry->rho = p0.NO_DATA_VALUE;
   entry->data_src = VX_SRC_NR;
+  entry->temp_median = p0.NO_DATA_VALUE;
+  entry->regionID = p0.NO_DATA_VALUE;
 
   return;
 }
@@ -2103,6 +2225,8 @@ void vx_init_voxel(vx_voxel_t *voxel) {
   voxel->topo = voxel->mtop = voxel->base = voxel->moho = p0.NO_DATA_VALUE;
   voxel->provenance = p0.NO_DATA_VALUE;
   voxel->vp = voxel->vs = voxel->rho = p0.NO_DATA_VALUE;
+  voxel->temp_median = p0.NO_DATA_VALUE;
+  voxel->regionID = p0.NO_DATA_VALUE;
 
   return;
 }
