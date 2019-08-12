@@ -804,6 +804,8 @@ int vx_extract_gfm(vx_entry_t *entry) {
   gcoor[1]=round((entry->coor_utm[1]-gfm_a.O[1])/step_gfm[1]);
   gcoor[2]=round((entry->coor_utm[2]-gfm_a.O[2])/step_gfm[2]);
 
+//fprintf(stderr,"%lf %lf %lf | %lf %lf %lf\n", gfm_a.O[0], gfm_a.O[1], gfm_a.O[2], step_gfm[0], step_gfm[1], step_gfm[2]);
+
   if(gcoor[0]>=0&&gcoor[1]>=0&&gcoor[2]>=0&&
 	 gcoor[0]<gfm_a.N[0]&&gcoor[1]<gfm_a.N[1]&&gcoor[2]<gfm_a.N[2]) {
 	/* AP: And here are the cell centers*/
@@ -816,6 +818,8 @@ int vx_extract_gfm(vx_entry_t *entry) {
 
     memcpy(&(entry->temp_median), &gfmTempMedianbuffer[j], p_gfm_tempMedian.ESIZE);
     memcpy(&(entry->regionID), &gfmRegionIDbuffer[j], p_gfm_regionID.ESIZE);
+
+fprintf(stderr,"### GFM part..%lf %lf\n",entry->temp_median,entry->regionID);
 
     entry->data_src = VX_SRC_GFM;
   }
