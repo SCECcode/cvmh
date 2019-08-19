@@ -108,9 +108,11 @@ void process_one(vx_entry_t *entry,int json) {
 	  printf("%s %10.2f %11.2f %9.2f ", VX_SRC_NAMES[entry->data_src], 
 	       entry->vel_cell[0], entry->vel_cell[1], entry->vel_cell[2]);
 	  printf("%9.2f %9.2f %9.2f ", entry->provenance, entry->vp, entry->vs);
-	  printf("%9.2f\n", entry->rho);
-	  printf("temp_median=%lf\n", entry->temp_median);
-	  printf("regionID=%lf\n", entry->regionID);
+	  printf("%9.2f ", entry->rho);
+  	  printf("%0.4f ", entry->temp_median);
+  	  printf("%0.0f\n", entry->regionID);
+//	  printf("temp_median=%lf\n", entry->temp_median);
+//	  printf("regionID=%lf\n", entry->regionID);
           } else {  // concat a json like string..
 	      printf("{\"X\":%.4f,\"Y\":%.4f,\"Z\":%.2f,", 
 	           entry->coor[0], entry->coor[1], entry->coor[2]);
