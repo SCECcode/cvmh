@@ -565,7 +565,7 @@ int vx_getcoord(vx_entry_t *entry) {
 */ 
 int vx_getcoord_private(vx_entry_t *entry, int enhanced) {
 
-fprintf(stderr,"###---> calling vx_getcoord_private..\n");
+//fprintf(stderr,"###---> calling vx_getcoord_private..\n");
 
   int j;
   double SP[2],SPUTM[2];
@@ -617,7 +617,7 @@ fprintf(stderr,"###---> calling vx_getcoord_private..\n");
     return(1);
     break;
   }
-fprintf(stderr,"###-->> on UTM: %lf %lf %lf \n", entry->coor_utm[0], entry->coor_utm[1], entry->coor_utm[2]);
+//fprintf(stderr,"###-->> on UTM: %lf %lf %lf \n", entry->coor_utm[0], entry->coor_utm[1], entry->coor_utm[2]);
 
   /* Now we have UTM Zone 11 */
   /*** Prevent all to obvious bad coordinates from being displayed */
