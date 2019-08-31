@@ -111,11 +111,11 @@ int vx_setup(const char *data_dir)
   sprintf(GFM_PAR, "%s/%s.vo", data_dir, GFM_NAME);
 
 
-fprintf(stderr,"###%s\n", LR_PAR);
-fprintf(stderr,"###%s\n", HR_PAR);
-fprintf(stderr,"###%s\n", CM_PAR);
-fprintf(stderr,"###%s\n", TO_PAR);
-fprintf(stderr,"###%s\n", GFM_PAR);
+//fprintf(stderr,"###%s\n", LR_PAR);
+//fprintf(stderr,"###%s\n", HR_PAR);
+//fprintf(stderr,"###%s\n", CM_PAR);
+//fprintf(stderr,"###%s\n", TO_PAR);
+//fprintf(stderr,"###%s\n", GFM_PAR);
 
   /**** First we load the LowRes File****/
   if (vx_io_init(LR_PAR) != 0) {
@@ -648,8 +648,6 @@ fprintf(stderr,"###-->> on UTM: %lf %lf %lf \n", entry->coor_utm[0], entry->coor
       do_bkg = True;
     }
 
-    vx_extract_gfm(entry);
-
     /* Convert depth/offset Z coordinate to elevation */
     if (enhanced == True) {
       elev = entry->coor_utm[2];
@@ -663,19 +661,22 @@ fprintf(stderr,"###-->> on UTM: %lf %lf %lf \n", entry->coor_utm[0], entry->coor
       case VX_ZMODE_DEPTH:
 	entry->coor[2] = surface - elev;
 	entry->coor_utm[2] = entry->coor[2];
+ //       fprintf(stderr,"in MODE_DEPTH,  surface %lf elevation %lf using %lf\n", surface, elev, entry->coor[2]);
 	break;
       case VX_ZMODE_ELEVOFF:
 	entry->coor[2] = surface + elev;
 	entry->coor_utm[2] = entry->coor[2];
+//        fprintf(stderr,"in MODE_ELEVOFF,  surface %lf elevation %lf using %lf\n", surface, elev, entry->coor[2]);
 	break;
       default:
 	return(1);
 	break;
       }
       depth = surface - entry->coor_utm[2];
+//      fprintf(stderr,"in OUTSIDE,  depth(surface - entry->coor_utm2) %lf\n", depth);
     }
 
-//XXX    if (enhanced == False) { vx_extract_gfm(entry); }
+    vx_extract_gfm(entry);
 
     if ((do_bkg == False) || ((do_bkg == True) && (callback_bkg == NULL)) || 
 	(enhanced == False)) {
@@ -798,11 +799,12 @@ int vx_extract_gfm(vx_entry_t *entry) {
   int j;
   int gcoor[3];
 
-//fprintf(stderr,"### calling GFM part..\n");
+//fprintf(stderr,"### calling GFM part..gcoor %d %d %d\n", gcoor[0], gcoor[1], gcoor[2]);
   /* Extract from GFM */      
   gcoor[0]=round((entry->coor_utm[0]-gfm_a.O[0])/step_gfm[0]);
   gcoor[1]=round((entry->coor_utm[1]-gfm_a.O[1])/step_gfm[1]);
   gcoor[2]=round((entry->coor_utm[2]-gfm_a.O[2])/step_gfm[2]);
+
 
 //fprintf(stderr,"%lf %lf %lf | %lf %lf %lf\n", gfm_a.O[0], gfm_a.O[1], gfm_a.O[2], step_gfm[0], step_gfm[1], step_gfm[2]);
 
@@ -819,7 +821,7 @@ int vx_extract_gfm(vx_entry_t *entry) {
     memcpy(&(entry->temp_median), &gfmTempMedianbuffer[j], p_gfm_tempMedian.ESIZE);
     memcpy(&(entry->regionID), &gfmRegionIDbuffer[j], p_gfm_regionID.ESIZE);
 
-fprintf(stderr,"### GFM part..%lf %lf\n",entry->temp_median,entry->regionID);
+//fprintf(stderr,"### GFM part..%lf %lf\n",entry->temp_median,entry->regionID);
 
     entry->data_src = VX_SRC_GFM;
   }
