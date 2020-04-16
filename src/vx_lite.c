@@ -42,7 +42,7 @@ void usage() {
   printf("\t-z directs use of dep/elev/off for Z column (default is offset).\n\n");
   printf("\t-l lon,lat,depth.\n\n");
   printf("Output format is:\n");
-  printf("\tX Y Z utmX utmY elevX elevY topo mtop base moho hr/lr/cm cellX cellY cellZ tg vp vs rho\n\n");
+  printf("\tX Y Z utmX utmY elevX elevY topo mtop base moho hr/lr/cm cellX cellY cellZ tg vp vs rho regionID temp\n\n");
   printf("Version: %s\n\n", VERSION);
   exit (0);
 }
@@ -109,10 +109,10 @@ void process_one(vx_entry_t *entry,int json) {
 	       entry->vel_cell[0], entry->vel_cell[1], entry->vel_cell[2]);
 	  printf("%9.2f %9.2f %9.2f ", entry->provenance, entry->vp, entry->vs);
 	  printf("%9.2f ", entry->rho);
-  	  printf("%0.4f ", entry->temp_median);
-  	  printf("%0.0f\n", entry->regionID);
-//	  printf("temp_median=%lf\n", entry->temp_median);
+  	  printf("%0.0f ", entry->regionID);
+  	  printf("%0.4f\n", entry->temp_median);
 //	  printf("regionID=%lf\n", entry->regionID);
+//	  printf("temp_median=%lf\n", entry->temp_median);
           } else {  // concat a json like string..
 	      printf("{\"X\":%.4f,\"Y\":%.4f,\"Z\":%.2f,", 
 	           entry->coor[0], entry->coor[1], entry->coor[2]);
