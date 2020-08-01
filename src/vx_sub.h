@@ -60,7 +60,10 @@ typedef struct vx_entry_t
   float vs;
   double rho;
   float regionID;
-  float temp_median; 
+  float CTM_unsmoothed; 
+  float elevation; 
+  float heatRegionID; 
+  float CTM_smoothed; 
 } vx_entry_t;
 
 
@@ -79,7 +82,10 @@ typedef struct vx_voxel_t
   float vs;
   double rho;
   float regionID;
-  float temp_median; 
+  float CTM_unsmoothed; 
+  float elevation; 
+  float heatRegionID; 
+  float CTM_smoothed; 
 } vx_voxel_t;
 
 

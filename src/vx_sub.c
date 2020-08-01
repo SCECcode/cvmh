@@ -50,7 +50,12 @@ struct property p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
 float step_to[3], step_lr[3], step_hr[3], step_cm[3];
 
 struct axis gfm_a;
-struct property p_gfm_regionID, p_gfm_tempMedian;
+struct property p_gfm_regionID;
+struct property p_gfm_CTM_unsmoothed;
+struct property p_gfm_elevation;
+struct property p_gfm_heatRegionID;
+struct property p_gfm_CTM_smoothed;
+
 float step_gfm[3];
 
 
@@ -69,8 +74,12 @@ static char *hrtbuffer = NULL;
 static char *lrvsbuffer = NULL;
 static char *hrvsbuffer = NULL;
 
-static char *gfmRegionIDbuffer = NULL; //regionID
-static char *gfmTempMedianbuffer = NULL; //temp_median
+static char *gfmregionIDbuffer = NULL;
+static char *gfmCTM_unsmoothedbuffer = NULL;
+static char *gfmelevationbuffer = NULL;
+static char *gfmheatRegionIDbuffer = NULL;
+static char *gfmCTM_smoothedbuffer = NULL;
+
 
 /* Data source labels */
 char *VX_SRC_NAMES[8] = {"nr", "hr", "lr", "cm", "to", "bk", "gt", "gfm"};
@@ -91,7 +100,12 @@ int vx_setup(const char *data_dir)
   tobuffer = mobuffer = babuffer = mtopbuffer = NULL;
   lrtbuffer = cmtbuffer = hrtbuffer = NULL;
   cmvsbuffer = lrvsbuffer = hrvsbuffer = NULL;
-  gfmRegionIDbuffer = gfmTempMedianbuffer = NULL;
+
+  gfmregionIDbuffer = NULL;
+  gfmCTM_unsmoothedbuffer = NULL;
+  gfmelevationbuffer = NULL;
+  gfmheatRegionIDbuffer = NULL;
+  gfmCTM_smoothedbuffer = NULL;
   
   sprintf(gtlpath, "%s/%s", data_dir, DEFAULT_GTL_FILE);
 
@@ -430,32 +444,80 @@ int vx_setup(const char *data_dir)
   vx_io_getpropsize("PROP_ESIZE",1,&p_gfm_regionID.ESIZE);
   vx_io_getpropval("PROP_NO_DATA_VALUE",1,&p_gfm_regionID.NO_DATA_VALUE);
 
-  gfmRegionIDbuffer=(char *)malloc(NCells*p_gfm_regionID.ESIZE);
-  if (gfmRegionIDbuffer == NULL) {
+  gfmregionIDbuffer=(char *)malloc(NCells*p_gfm_regionID.ESIZE);
+  if (gfmregionIDbuffer == NULL) {
     fprintf(stderr, "Failed to allocate GFM regionID buffer\n");
     return(1);
   }
   if (vx_io_loadvolume(data_dir, p_gfm_regionID.FN, 
-		       p_gfm_regionID.ESIZE, NCells, gfmRegionIDbuffer) != 0) {
+		       p_gfm_regionID.ESIZE, NCells, gfmregionIDbuffer) != 0) {
     fprintf(stderr, "Failed to load GFM regionID volume\n");
     return(1);
   } 
+// CTM_unsmoothed
+  sprintf(p_gfm_CTM_unsmoothed.NAME,"CTM_unsmoothed");
+  vx_io_getpropname("PROP_FILE",2,p_gfm_CTM_unsmoothed.FN);
+  vx_io_getpropsize("PROP_ESIZE",2,&p_gfm_CTM_unsmoothed.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",2,&p_gfm_CTM_unsmoothed.NO_DATA_VALUE);
 
-  sprintf(p_gfm_tempMedian.NAME,"temp_median");
-  vx_io_getpropname("PROP_FILE",2,p_gfm_tempMedian.FN);
-  vx_io_getpropsize("PROP_ESIZE",2,&p_gfm_tempMedian.ESIZE);
-  vx_io_getpropval("PROP_NO_DATA_VALUE",2,&p_gfm_tempMedian.NO_DATA_VALUE);
-
-  gfmTempMedianbuffer=(char *)malloc(NCells*p_gfm_tempMedian.ESIZE);
-  if (gfmTempMedianbuffer == NULL) {
-    fprintf(stderr, "Failed to allocate GFM temp_median buffer\n");
+  gfmCTM_unsmoothedbuffer=(char *)malloc(NCells*p_gfm_CTM_unsmoothed.ESIZE);
+  if (gfmCTM_unsmoothedbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM CTM_unsmoothed buffer\n");
     return(1);
   }
-  if (vx_io_loadvolume(data_dir, p_gfm_tempMedian.FN, 
-		       p_gfm_tempMedian.ESIZE, NCells, gfmTempMedianbuffer) != 0) {
-    fprintf(stderr, "Failed to load GFM temp_median volume\n");
+  if (vx_io_loadvolume(data_dir, p_gfm_CTM_unsmoothed.FN, 
+		       p_gfm_CTM_unsmoothed.ESIZE, NCells, gfmCTM_unsmoothedbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM CTM_unsmoothed volume\n");
+    return(1);
+  } 
+// elevation
+  sprintf(p_gfm_elevation.NAME,"elevation");
+  vx_io_getpropname("PROP_FILE",3,p_gfm_elevation.FN);
+  vx_io_getpropsize("PROP_ESIZE",3,&p_gfm_elevation.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",3,&p_gfm_elevation.NO_DATA_VALUE);
+
+  gfmelevationbuffer=(char *)malloc(NCells*p_gfm_elevation.ESIZE);
+  if (gfmelevationbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM elevation buffer\n");
     return(1);
   }
+  if (vx_io_loadvolume(data_dir, p_gfm_elevation.FN, 
+		       p_gfm_elevation.ESIZE, NCells, gfmelevationbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM elevation volume\n");
+    return(1);
+  } 
+// heatRegionID
+  sprintf(p_gfm_heatRegionID.NAME,"heatRegionID");
+  vx_io_getpropname("PROP_FILE",4,p_gfm_heatRegionID.FN);
+  vx_io_getpropsize("PROP_ESIZE",4,&p_gfm_heatRegionID.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",4,&p_gfm_heatRegionID.NO_DATA_VALUE);
+
+  gfmheatRegionIDbuffer=(char *)malloc(NCells*p_gfm_heatRegionID.ESIZE);
+  if (gfmheatRegionIDbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM heatRegionID buffer\n");
+    return(1);
+  }
+  if (vx_io_loadvolume(data_dir, p_gfm_heatRegionID.FN, 
+		       p_gfm_heatRegionID.ESIZE, NCells, gfmheatRegionIDbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM heatRegionID volume\n");
+    return(1);
+  } 
+// CTM_smoothed
+  sprintf(p_gfm_CTM_smoothed.NAME,"CTM_smoothed");
+  vx_io_getpropname("PROP_FILE",5,p_gfm_CTM_smoothed.FN);
+  vx_io_getpropsize("PROP_ESIZE",5,&p_gfm_CTM_smoothed.ESIZE);
+  vx_io_getpropval("PROP_NO_DATA_VALUE",5,&p_gfm_CTM_smoothed.NO_DATA_VALUE);
+
+  gfmCTM_smoothedbuffer=(char *)malloc(NCells*p_gfm_CTM_smoothed.ESIZE);
+  if (gfmCTM_smoothedbuffer == NULL) {
+    fprintf(stderr, "Failed to allocate GFM CTM_smoothed buffer\n");
+    return(1);
+  }
+  if (vx_io_loadvolume(data_dir, p_gfm_CTM_smoothed.FN, 
+		       p_gfm_CTM_smoothed.ESIZE, NCells, gfmCTM_smoothedbuffer) != 0) {
+    fprintf(stderr, "Failed to load GFM CTM_smoothed volume\n");
+    return(1);
+  } 
 
   vx_io_finalize();
 
@@ -514,6 +576,12 @@ int vx_cleanup()
   free(hrtbuffer);
   free(lrvsbuffer);
   free(hrvsbuffer);
+
+  free(gfmregionIDbuffer);
+  free(gfmCTM_unsmoothedbuffer);
+  free(gfmelevationbuffer);
+  free(gfmheatRegionIDbuffer);
+  free(gfmCTM_smoothedbuffer);
 
   vx_zmode = VX_ZMODE_ELEV;
   vx_use_gtl = True;
@@ -816,12 +884,16 @@ int vx_extract_gfm(vx_entry_t *entry) {
     entry->vel_cell[1]= gfm_a.O[1]+gcoor[1]*step_gfm[1];
     entry->vel_cell[2]= gfm_a.O[2]+gcoor[2]*step_gfm[2];
 
-    j=voxbytepos(gcoor,gfm_a.N,p_gfm_tempMedian.ESIZE);
+    j=voxbytepos(gcoor,gfm_a.N,p_gfm_regionID.ESIZE);
 
-    memcpy(&(entry->temp_median), &gfmTempMedianbuffer[j], p_gfm_tempMedian.ESIZE);
-    memcpy(&(entry->regionID), &gfmRegionIDbuffer[j], p_gfm_regionID.ESIZE);
+    memcpy(&(entry->regionID), &gfmregionIDbuffer[j], p_gfm_regionID.ESIZE);
+    memcpy(&(entry->CTM_unsmoothed), &gfmCTM_unsmoothedbuffer[j], p_gfm_regionID.ESIZE);
+    memcpy(&(entry->elevation), &gfmelevationbuffer[j], p_gfm_regionID.ESIZE);
+    memcpy(&(entry->heatRegionID), &gfmheatRegionIDbuffer[j], p_gfm_regionID.ESIZE);
+    memcpy(&(entry->CTM_smoothed), &gfmCTM_smoothedbuffer[j], p_gfm_regionID.ESIZE);
 
-//fprintf(stderr,"### GFM part..%lf %lf\n",entry->temp_median,entry->regionID);
+//fprintf(stderr,"### GFM part..%lf %lf %lf %lf %lf\n", entry->regionID,entry->CTM_unsmoothed,entry->elevation,entry->heatRegionID,entry->CTM_smoothed);
+
 
     entry->data_src = VX_SRC_GFM;
   }
@@ -2211,8 +2283,11 @@ void vx_init_entry(vx_entry_t *entry) {
   entry->provenance = p0.NO_DATA_VALUE;
   entry->vp = entry->vs = entry->rho = p0.NO_DATA_VALUE;
   entry->data_src = VX_SRC_NR;
-  entry->temp_median = p0.NO_DATA_VALUE;
   entry->regionID = p0.NO_DATA_VALUE;
+  entry->CTM_unsmoothed = p0.NO_DATA_VALUE;
+  entry->elevation = p0.NO_DATA_VALUE;
+  entry->heatRegionID = p0.NO_DATA_VALUE;
+  entry->CTM_smoothed = p0.NO_DATA_VALUE;
 
   return;
 }
@@ -2231,8 +2306,11 @@ void vx_init_voxel(vx_voxel_t *voxel) {
   voxel->topo = voxel->mtop = voxel->base = voxel->moho = p0.NO_DATA_VALUE;
   voxel->provenance = p0.NO_DATA_VALUE;
   voxel->vp = voxel->vs = voxel->rho = p0.NO_DATA_VALUE;
-  voxel->temp_median = p0.NO_DATA_VALUE;
   voxel->regionID = p0.NO_DATA_VALUE;
+  voxel->CTM_unsmoothed = p0.NO_DATA_VALUE;
+  voxel->elevation = p0.NO_DATA_VALUE;
+  voxel->heatRegionID = p0.NO_DATA_VALUE;
+  voxel->CTM_smoothed = p0.NO_DATA_VALUE;
 
   return;
 }
