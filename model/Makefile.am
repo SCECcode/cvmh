@@ -16,5 +16,6 @@ install:
 	cp model_top@@ ${prefix}/model
 	cp moho@@ ${prefix}/model
 	cp topo_dem@@ ${prefix}/model
+	cp GFM* ${prefix}/model
 
 clean:
