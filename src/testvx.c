@@ -67,7 +67,7 @@ if (entry.data_src != VX_SRC_NR) {
      fprintf(stderr,"Rho is..%lf\n", entry.rho);
    }
  } else {
-   fprintf(stderr,"XXX datasource is VX_SRC_NR\n");
+   fprintf(stderr,"datasource is VX_SRC_NR\n");
  }
 
   return 1;

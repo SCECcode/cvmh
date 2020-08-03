@@ -110,7 +110,7 @@ void process_one(vx_entry_t *entry,int json) {
 	  printf("%9.2f %9.2f %9.2f ", entry->provenance, entry->vp, entry->vs);
 	  printf("%9.2f ", entry->rho);
   	  printf("%0.0f ", entry->regionID);
-  	  printf("%0.4f", entry->CTM_unsmoothed);
+  	  printf("%0.4f ", entry->CTM_unsmoothed);
   	  printf("%0.0f ", entry->elevation);
   	  printf("%0.0f ", entry->heatRegionID);
   	  printf("%0.4f\n", entry->CTM_smoothed);
@@ -131,7 +131,7 @@ void process_one(vx_entry_t *entry,int json) {
 	      printf("\"CTM_unsmoothed\":%.2f,",entry->CTM_unsmoothed);
 	      printf("\"elevation\":%.2f,",entry->elevation);
 	      printf("\"heatRegionID\":%.0f,",entry->heatRegionID);
-	      printf("\"CTM_smoothed\":%.2f\n",entry->CTM_smoothed);
+	      printf("\"CTM_smoothed\":%.2f }\n",entry->CTM_smoothed);
        }
     }
 }

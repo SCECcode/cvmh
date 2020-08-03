@@ -19,7 +19,7 @@ struct flags
      int BIT_LENGTH;
      int ESIZE;
      int OFFSET;
-     char FN[40];
+     char FN[100];
     };
 
 struct property
@@ -30,7 +30,7 @@ struct property
      int SIGNED;
      char ETYPE[5];
      int OFFSET;
-     char FN[40];
+     char FN[100];
     };
  
      

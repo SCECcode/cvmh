@@ -54,7 +54,7 @@ int vx_io_init(char *fn)
   }
   
   while (vx_io_getline(ip, &buf[0], CMLEN) == 0) {
-//fprintf(stderr,"### getline.. %s\n", buf);
+// fprintf(stderr,"                  ### getline.. %s\n", buf);
     strcpy(vx_props[vx_num_prop++], buf); 
     if (vx_num_prop >= VX_MAX_PROP) {
       fclose(ip);

@@ -1,3 +1,4 @@
+
 /** vx_sub.c - Query interface to GoCAD voxet volumes and GTL. Supports
     queries for material properties and topography. Accepts Geographic Coordinates 
     or UTM Zone 11 coordinates.
@@ -21,7 +22,7 @@
 #include "vx_io.h"
 #include "vx_sub.h"
 
-#define GFM_NAME "GFM_box_10x10x1km_forPhil"
+#define GFM_NAME "GFM_box_10x10x1km_forPhil_CTM"
 
 /* Smoothing parameters for SCEC 1D */
 #define SCEC_SMOOTH_DIST 50.0 // km
@@ -423,8 +424,9 @@ int vx_setup(const char *data_dir)
   vx_io_finalize();
 
   /**** Now we load the GFM File *****/
+// fprintf(stderr,"XXX  -> %s\n", GFM_PAR);
   if (vx_io_init(GFM_PAR) != 0) {
-    fprintf(stderr, "Failed to load GFM param file %s\n", CM_PAR);
+    fprintf(stderr, "Failed to load GFM param file %s\n", GFM_PAR);
     return(1);
   }
 
@@ -438,6 +440,8 @@ int vx_setup(const char *data_dir)
 
   NCells=gfm_a.N[0]*gfm_a.N[1]*gfm_a.N[2];
 
+//  fprintf(stderr,"XXX number of cells.. %d\n",NCells);
+
 // regionID
   sprintf(p_gfm_regionID.NAME,"regionID");
   vx_io_getpropname("PROP_FILE",1,p_gfm_regionID.FN);
@@ -449,11 +453,13 @@ int vx_setup(const char *data_dir)
     fprintf(stderr, "Failed to allocate GFM regionID buffer\n");
     return(1);
   }
+
   if (vx_io_loadvolume(data_dir, p_gfm_regionID.FN, 
 		       p_gfm_regionID.ESIZE, NCells, gfmregionIDbuffer) != 0) {
     fprintf(stderr, "Failed to load GFM regionID volume\n");
     return(1);
   } 
+
 // CTM_unsmoothed
   sprintf(p_gfm_CTM_unsmoothed.NAME,"CTM_unsmoothed");
   vx_io_getpropname("PROP_FILE",2,p_gfm_CTM_unsmoothed.FN);
@@ -470,6 +476,7 @@ int vx_setup(const char *data_dir)
     fprintf(stderr, "Failed to load GFM CTM_unsmoothed volume\n");
     return(1);
   } 
+
 // elevation
   sprintf(p_gfm_elevation.NAME,"elevation");
   vx_io_getpropname("PROP_FILE",3,p_gfm_elevation.FN);
@@ -486,6 +493,7 @@ int vx_setup(const char *data_dir)
     fprintf(stderr, "Failed to load GFM elevation volume\n");
     return(1);
   } 
+
 // heatRegionID
   sprintf(p_gfm_heatRegionID.NAME,"heatRegionID");
   vx_io_getpropname("PROP_FILE",4,p_gfm_heatRegionID.FN);
@@ -497,11 +505,13 @@ int vx_setup(const char *data_dir)
     fprintf(stderr, "Failed to allocate GFM heatRegionID buffer\n");
     return(1);
   }
+
   if (vx_io_loadvolume(data_dir, p_gfm_heatRegionID.FN, 
 		       p_gfm_heatRegionID.ESIZE, NCells, gfmheatRegionIDbuffer) != 0) {
     fprintf(stderr, "Failed to load GFM heatRegionID volume\n");
     return(1);
   } 
+
 // CTM_smoothed
   sprintf(p_gfm_CTM_smoothed.NAME,"CTM_smoothed");
   vx_io_getpropname("PROP_FILE",5,p_gfm_CTM_smoothed.FN);
@@ -867,14 +877,14 @@ int vx_extract_gfm(vx_entry_t *entry) {
   int j;
   int gcoor[3];
 
-//fprintf(stderr,"### calling GFM part..gcoor %d %d %d\n", gcoor[0], gcoor[1], gcoor[2]);
   /* Extract from GFM */      
   gcoor[0]=round((entry->coor_utm[0]-gfm_a.O[0])/step_gfm[0]);
   gcoor[1]=round((entry->coor_utm[1]-gfm_a.O[1])/step_gfm[1]);
   gcoor[2]=round((entry->coor_utm[2]-gfm_a.O[2])/step_gfm[2]);
 
+//fprintf(stderr,"XXX  calling GFM part..gcoor %d %d %d\n", gcoor[0], gcoor[1], gcoor[2]);
+//fprintf(stderr,"XXX  gfm, %lf %lf %lf  step, %lf %lf %lf\n", gfm_a.O[0], gfm_a.O[1], gfm_a.O[2], step_gfm[0], step_gfm[1], step_gfm[2]);
 
-//fprintf(stderr,"%lf %lf %lf | %lf %lf %lf\n", gfm_a.O[0], gfm_a.O[1], gfm_a.O[2], step_gfm[0], step_gfm[1], step_gfm[2]);
 
   if(gcoor[0]>=0&&gcoor[1]>=0&&gcoor[2]>=0&&
 	 gcoor[0]<gfm_a.N[0]&&gcoor[1]<gfm_a.N[1]&&gcoor[2]<gfm_a.N[2]) {
@@ -884,7 +894,12 @@ int vx_extract_gfm(vx_entry_t *entry) {
     entry->vel_cell[1]= gfm_a.O[1]+gcoor[1]*step_gfm[1];
     entry->vel_cell[2]= gfm_a.O[2]+gcoor[2]*step_gfm[2];
 
+//fprintf(stderr,"XXX >> vel_cell %lf %lf %lf \n",entry->vel_cell[0],entry->vel_cell[1], entry->vel_cell[2]);
+// fprintf(stderr,"XXX ESIZE..%d\n",p_gfm_regionID.ESIZE);
+
     j=voxbytepos(gcoor,gfm_a.N,p_gfm_regionID.ESIZE);
+
+//fprintf(stderr,"XXX j index..%d(%d)\n",j,p_gfm_regionID.ESIZE);
 
     memcpy(&(entry->regionID), &gfmregionIDbuffer[j], p_gfm_regionID.ESIZE);
     memcpy(&(entry->CTM_unsmoothed), &gfmCTM_unsmoothedbuffer[j], p_gfm_regionID.ESIZE);
