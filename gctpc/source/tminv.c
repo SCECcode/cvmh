@@ -48,7 +48,7 @@ static long ind;		/* sphere flag value			*/
 
 /* Initialize the Transverse Mercator (TM) projection
   -------------------------------------------------------------*/
-tminvint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north)
+long tminvint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north)
 
 double r_maj;			/* major axis			*/
 double r_min;			/* minor axis			*/
@@ -99,7 +99,7 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
           if a change is implemented, also make the change to UTMINV.c
   --------------------------------------------------------------*/
-tminv(x, y, lon, lat)
+long tminv(x, y, lon, lat)
 double x;		/* (I) X projection coordinate 			*/
 double y;		/* (I) Y projection coordinate 			*/
 double *lon;		/* (O) Longitude 				*/

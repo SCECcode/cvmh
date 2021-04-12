@@ -53,7 +53,12 @@ int test_init_entry()
   if (test_assert_double(entry.coor_utm[2], PLACEHOLDER) != 0) {
     return(1);
   }
+/* ??? vx_sub.h only delcared 2 of them *
   if (test_assert_float(entry.elev_cell[2], PLACEHOLDER) != 0) {
+    return(1);
+  }
+*/
+  if (test_assert_float(entry.elev_cell[1], PLACEHOLDER) != 0) {
     return(1);
   }
 
@@ -110,7 +115,12 @@ int test_init_voxel()
     }
   }
 
+  /* ??? only 2 was declared
   if (test_assert_float(voxel.elev_cell[2], PLACEHOLDER) != 0) {
+    return(1);
+  }
+  */
+  if (test_assert_float(voxel.elev_cell[1], PLACEHOLDER) != 0) {
     return(1);
   }
 

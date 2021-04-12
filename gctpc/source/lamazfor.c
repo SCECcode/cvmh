@@ -26,6 +26,7 @@ ALGORITHM REFERENCES
 3.  "Software Documentation for GCTP General Cartographic Transformation
     Package", U.S. Geological Survey National Mapping Division, May 1982.
 *******************************************************************************/
+#include <stdio.h>
 #include "cproj.h"
 
 /* Variables common to all subroutines in this code file
@@ -40,7 +41,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Lambert Azimuthal Equal Area projection
   ------------------------------------------------------*/
-lamazforint(r, center_long, center_lat,false_east,false_north) 
+long lamazforint(r, center_long, center_lat,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
 double center_lat;		/* (I) Center latitude 			*/
@@ -68,7 +69,7 @@ return(OK);
 
 /* Lambert Azimuthal Equal Area forward equations--mapping lat,long to x,y
   -----------------------------------------------------------------------*/
-lamazfor(lon, lat, x, y)
+long lamazfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

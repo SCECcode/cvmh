@@ -37,7 +37,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the HAMMER projection
   -------------------------------*/
-haminvint(r, center_long,false_east,false_north) 
+long haminvint(r, center_long,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -64,7 +64,7 @@ return(OK);
 
 /* HAMMER inverse equations--mapping x,y to lat/long
   ------------------------------------------------*/
-haminv(x, y, lon, lat)
+long haminv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate */
 double y;			/* (O) Y projection coordinate */
 double *lon;			/* (I) Longitude */

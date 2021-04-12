@@ -36,7 +36,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-alberforint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
+long alberforint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
 
 double r_maj;			/* major axis				*/
 double r_min;			/* minor axis				*/
@@ -109,7 +109,7 @@ return(OK);
 
 /* Albers Conical Equal Area forward equations--mapping lat,long to x,y
   -------------------------------------------------------------------*/
-alberfor(lon, lat, x, y)
+long alberfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

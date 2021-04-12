@@ -42,7 +42,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Lambert Azimuthal Equal Area projection
   ------------------------------------------------------*/
-lamazinvint(r, center_long, center_lat,false_east,false_north) 
+long lamazinvint(r, center_long, center_lat,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
 double center_lat;		/* (I) Center latitude 			*/
@@ -70,7 +70,7 @@ return(OK);
 
 /* Lambert Azimuthal Equal Area inverse equations--mapping x,y to lat,long 
   -----------------------------------------------------------------------*/
-lamazinv(x, y, lon, lat)
+long lamazinv(x, y, lon, lat)
 double x;		/* (I) X projection coordinate */
 double y;		/* (I) Y projection coordinate */
 double *lon;		/* (O) Longitude */

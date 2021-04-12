@@ -34,7 +34,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Sinusoidal projection
   ------------------------------------*/
-sinforint(r, center_long,false_east,false_north) 
+long sinforint(r, center_long,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
 double false_east;		/* x offset in meters			*/
@@ -58,7 +58,7 @@ return(OK);
 
 /* Sinusoidal forward equations--mapping lat,long to x,y
   -----------------------------------------------------*/
-sinfor(lon, lat, x, y)
+long sinfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

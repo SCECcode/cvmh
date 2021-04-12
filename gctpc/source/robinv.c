@@ -42,7 +42,7 @@ static double xlr[21];
 
 /* Initialize the ROBINSON projection
   ---------------------------------*/
-robinvint(r, center_long,false_east,false_north) 
+long robinvint(r, center_long,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -113,7 +113,7 @@ return(OK);
 
 /* Robinson inverse equations--mapping x,y to lat/long
   ------------------------------------------------------------*/
-robinv(x, y, lon, lat)
+long robinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate */
 double y;			/* (O) Y projection coordinate */
 double *lon;			/* (I) Longitude */

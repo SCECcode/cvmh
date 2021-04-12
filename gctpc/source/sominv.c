@@ -21,6 +21,7 @@ ALGORITHM REFERENCES
 2.  "Software Documentation for GCTP General Cartographic Transformation
     Package", U.S. Geological Survey National Mapping Division, May 1982.
 *******************************************************************************/
+#include <stdio.h>
 #include "cproj.h"
 #define LANDSAT_RATIO 0.5201613
 
@@ -30,7 +31,7 @@ double adjust_lon();
 static double false_easting;
 static double false_northing;
 
-sominvint(r_major,r_minor,satnum,path,alf_in,lon,false_east,false_north,time,
+long sominvint(r_major,r_minor,satnum,path,alf_in,lon,false_east,false_north,time,
 	  start1,flag)
 
 double	r_major;		/* major axis				*/
@@ -150,7 +151,7 @@ c3=sumc3/45.0;
 return(OK);
 }
 
-sominv(y, x, lon, lat)
+long sominv(y, x, lon, lat)
  
 double x;               /* (I) X projection coordinate */
 double y;               /* (I) Y projection coordinate */
@@ -245,4 +246,5 @@ sq=sqrt(xj*xj+s*s);
 fc=s*(h+xj)/sq;
 *fc1=fc*cos(*dlam);
 *fc3=fc*cos(3.0* *dlam);
+return(OK);
 }

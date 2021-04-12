@@ -34,7 +34,7 @@ static double false_northing;   /* y offset                             */
 
 /* Initialize the Wagner VII projection
   ------------------------------------*/
-wviiinvint(r, center_long,false_east,false_north) 
+long wviiinvint(r, center_long,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) */
 double center_long;		/* (I) Center longitude */
 double false_east;    		/* x offset                             */
@@ -58,7 +58,7 @@ return(OK);
 
 /* Wagner VII inverse equations--mapping x,y to lat,long 
   -----------------------------------------------------*/
-wviiinv(x, y, lon, lat)
+long wviiinv(x, y, lon, lat)
 
 double x;		/* (I) X projection coordinate */
 double y;		/* (I) Y projection coordinate */

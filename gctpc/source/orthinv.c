@@ -34,7 +34,7 @@ static double cos_p14;		/* cos of center latitude		*/
 
 /* Initialize the Orthographic projection
   -------------------------------------*/
-orthinvint(r_maj,center_lon,center_lat,false_east,false_north) 
+long orthinvint(r_maj,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double center_lon;		/* center longitude		*/
@@ -66,7 +66,7 @@ return(OK);
 
 /* Orthographic inverse equations--mapping x,y to lat/long
   ------------------------------------------------------*/
-orthinv(x, y, lon, lat)
+long orthinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

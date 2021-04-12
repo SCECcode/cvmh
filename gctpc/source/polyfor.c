@@ -36,7 +36,7 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the POLYCONIC projection
   ----------------------------------*/
-polyforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
+long polyforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double r_min;			/* minor axis			*/
@@ -79,7 +79,7 @@ return(OK);
 
 /* Polyconic forward equations--mapping lat,long to x,y
   ---------------------------------------------------*/
-polyfor(lon, lat, x, y)
+long polyfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

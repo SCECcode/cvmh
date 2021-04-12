@@ -45,7 +45,7 @@ static double sinaz,cosaz;
 
 /* Initialize the Oblique Mercator  projection
   ------------------------------------------*/
-omerinvint(r_maj,r_min,scale_fact,azimuth,lon_orig,lat_orig,false_east,
+long omerinvint(r_maj,r_min,scale_fact,azimuth,lon_orig,lat_orig,false_east,
 	    false_north,lon1,lat1,lon2,lat2,mode) 
 
 double r_maj;			/* major axis			*/
@@ -210,7 +210,7 @@ return(OK);
 
 /* Oblique Mercator inverse equations--mapping x,y to lat/long
   ----------------------------------------------------------*/
-omerinv(x, y, lon, lat)
+long omerinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

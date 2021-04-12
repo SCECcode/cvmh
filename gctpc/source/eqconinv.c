@@ -40,7 +40,7 @@ static double rh;
 
 /* Initialize the Equidistant Conic projection
   ------------------------------------------*/
-eqconinvint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
+long eqconinvint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
 	    mode)
 
 double r_maj;			/* major axis			*/
@@ -132,7 +132,7 @@ return(OK);
 
 /* Equidistant Conic inverse equations--mapping x,y to lat/long
   -----------------------------------------------------------*/
-eqconinv(x, y, lon, lat)
+long eqconinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

@@ -46,7 +46,7 @@ static double ind;		/* spherical flag			*/
 
 /* Initialize the Transverse Mercator (TM) projection
   -------------------------------------------------*/
-tmforint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north) 
+long tmforint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double r_min;			/* minor axis			*/
@@ -99,7 +99,7 @@ return(OK);
    Note:  The algorithm for TM is exactly the same as UTM and therefore
 	  if a change is implemented, also make the change to UTMFOR.c
   --------------------------------------------------------------*/
-tmfor(lon, lat, x, y)
+long tmfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

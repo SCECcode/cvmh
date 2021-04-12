@@ -45,7 +45,7 @@ static double ind;		/* spherical flag			*/
 
 /* Initialize the Universal Transverse Mercator (UTM) projection
   -------------------------------------------------------------*/
-utmforint(r_maj,r_min,scale_fact,zone)
+long utmforint(r_maj,r_min,scale_fact,zone)
 
 double r_maj;			/* major axis				*/
 double r_min;			/* minor axis				*/
@@ -96,7 +96,7 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
 	  if a change is implemented, also make the change to TMFOR.c
   -----------------------------------------------------------------------*/
-utmfor(lon, lat, x, y)
+long utmfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

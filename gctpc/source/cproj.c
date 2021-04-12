@@ -334,7 +334,7 @@ double tsfnz(eccent,phi,sinphi)
 
 /* Function to return the sign2 of an argument
   ------------------------------------------*/
-sign2(x) double x; { if (x < 0.0) return(-1); else return(1);}
+double sign2(x) double x; { if (x < 0.0) return(-1); else return(1);}
 
 /* Function to adjust a longitude angle to range from -180 to 180 radians
    added if statments 

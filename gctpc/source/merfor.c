@@ -37,7 +37,7 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the Mercator projection
   -------------------------------------------------*/
-merforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
+long merforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double r_min;			/* minor axis			*/
@@ -76,7 +76,7 @@ return(OK);
 
 /* Mercator forward equations--mapping lat,long to x,y
   --------------------------------------------------*/
-merfor(lon, lat, x, y)
+long merfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

@@ -28,6 +28,7 @@ S. Nelson		Jun, 1993	Added inline code.
 
 *******************************************************************************/
 #include <stdio.h>
+#include <string.h>
 #include "cproj.h"
 
 #define TRUE 1
@@ -44,7 +45,7 @@ static char err_file[256];
 
 /* initialize output device
 -------------------------*/
-init(ipr,jpr,efile,pfile)
+long init(ipr,jpr,efile,pfile)
 
 long ipr;		/* flag for printing errors (0,1,or 2)		*/
 long jpr;		/* flag for printing parameters (0,1,or 2)	*/
@@ -123,7 +124,7 @@ else
 return(0);
 }
 
-close_file()
+void close_file()
 {
 /*if (fptr_e != NULL)
    fclose(fptr_e);
@@ -133,7 +134,7 @@ if (fptr_p != NULL)
 
 /* Functions to report projection parameters
   -----------------------------------------*/
-ptitle(A) char *A; 
+void ptitle(A) char *A; 
       {  
       if (terminal_p)
            printf("\n%s PROJECTION PARAMETERS:\n\n",A); 
@@ -145,7 +146,7 @@ ptitle(A) char *A;
 	   }
       }
 
-radius(A) double A;
+void radius(A) double A;
       {
       if (terminal_p)
          printf("   Radius of Sphere:     %lf meters\n",A); 
@@ -157,7 +158,7 @@ radius(A) double A;
 	 }
       }
 
-radius2(A,B) double A,B;
+void radius2(A,B) double A,B;
       {
       if (terminal_p)
          {
@@ -173,7 +174,7 @@ radius2(A,B) double A,B;
          }
       }
 
-cenlon(A) double A;
+void cenlon(A) double A;
    { 
    if (terminal_p)
        printf("   Longitude of Center:     %lf degrees\n",A*R2D);
@@ -185,7 +186,7 @@ cenlon(A) double A;
        }
    }
  
-cenlonmer(A) double A;
+void cenlonmer(A) double A;
    { 
    if (terminal_p)
      printf("   Longitude of Central Meridian:     %lf degrees\n",A*R2D);
@@ -197,7 +198,7 @@ cenlonmer(A) double A;
      }
    }
 
-cenlat(A) double A;
+void cenlat(A) double A;
    {
    if (terminal_p)
       printf("   Latitude  of Center:     %lf degrees\n",A*R2D);
@@ -209,7 +210,7 @@ cenlat(A) double A;
       }
    }
 
-origin(A) double A;
+void origin(A) double A;
    {
    if (terminal_p)
       printf("   Latitude of Origin:     %lf degrees\n",A*R2D);
@@ -220,7 +221,7 @@ origin(A) double A;
       fclose(fptr_p);
       }
    }
-stanparl(A,B) double A,B;
+void stanparl(A,B) double A,B;
    {
    if (terminal_p)
       {
@@ -236,7 +237,7 @@ stanparl(A,B) double A,B;
       }
    }
 
-stparl1(A) double A;
+void stparl1(A) double A;
    {
    if (terminal_p)
       {
@@ -250,7 +251,7 @@ stparl1(A) double A;
       }
    }
 
-offsetp(A,B)  double A,B;
+void offsetp(A,B)  double A,B;
    {
    if (terminal_p)
       {
@@ -266,7 +267,7 @@ offsetp(A,B)  double A,B;
       }      
    }
 
-genrpt(A,S) double A; char *S;
+void genrpt(A,S) double A; char *S;
    {
    if (terminal_p)
       printf("   %s %lf\n", S, A);
@@ -277,18 +278,18 @@ genrpt(A,S) double A; char *S;
       fclose(fptr_p);
       }
    }
-genrpt_long(A,S) long A; char *S;
+void genrpt_long(A,S) long A; char *S;
    {
    if (terminal_p)
-      printf("   %s %d\n", S, A);
+      printf("   %s %ld\n", S, A);
    if (file_p)
       {
       fptr_p = (FILE *)fopen(parm_file,"a");
-      fprintf(fptr_p,"   %s %d\n", S, A);
+      fprintf(fptr_p,"   %s %ld\n", S, A);
       fclose(fptr_p);
       }
    }
-pblank() 
+void pblank() 
    {
    if (terminal_p)
       printf("\n");
@@ -302,7 +303,7 @@ pblank()
 
 /* Function to report errors 
   -------------------------*/
-p_error(what, where) 
+void p_error(what, where) 
    char *what;
    char *where; 
    {

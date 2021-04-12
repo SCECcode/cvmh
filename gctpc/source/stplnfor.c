@@ -50,7 +50,7 @@ static long NAD83[134] = {101,102,5010,5300,201,202,203,301,302,401,402,403,
 		5001,5002,5003,5004,5005,5006,5007,5008,5009,5200,0000,5400};                                             
 /* Initialize the State Plane projection
   ------------------------------------*/
-stplnforint( zone,sphere,fn27,fn83)
+long stplnforint( zone,sphere,fn27,fn83)
 
 long   zone;
 long   sphere;
@@ -104,7 +104,7 @@ if (zone > 0)
    }
 if (ind == -1)
    {
-   sprintf(buf,"Illegal zone #%4d  for spheroid #%4d",zone,sphere);
+   sprintf(buf,"Illegal zone #%4ld  for spheroid #%4ld",zone,sphere);
    p_error(buf,"state-init");
    return(21);
    }
@@ -126,7 +126,7 @@ fclose(ptr);
   
 if (id <= 0)
      {
-     sprintf(buf,"Illegal zone #%4d  for spheroid #%4d",zone,sphere);
+     sprintf(buf,"Illegal zone #%4ld  for spheroid #%4ld",zone,sphere);
      p_error(buf,"state-init");
      return(21);
      }
@@ -218,7 +218,7 @@ return(OK);
 
 /* State plane forward equations--mapping lat,long to x,y
   -----------------------------------------------------*/
-stplnfor(lon, lat, x, y)
+long stplnfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

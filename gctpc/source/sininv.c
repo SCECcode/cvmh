@@ -34,7 +34,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Sinusoidal projection
   ------------------------------------*/
-sininvint(r, center_long,false_east,false_north) 
+long sininvint(r, center_long,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
 double false_east;		/* x offset in meters			*/
@@ -58,7 +58,7 @@ return(OK);
 
 /* Sinusoidal inverse equations--mapping x,y to lat,long 
   -----------------------------------------------------*/
-sininv(x, y, lon, lat)
+long sininv(x, y, lon, lat)
 double x;		/* (I) X projection coordinate */
 double y;		/* (I) Y projection coordinate */
 double *lon;		/* (O) Longitude */

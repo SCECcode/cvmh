@@ -37,7 +37,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Van Der Grinten projection
   ----------------------------------------*/
-vandgforint(r, center_long,false_east,false_north) 
+long vandgforint(r, center_long,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -62,7 +62,7 @@ return(OK);
 
 /* Van Der Grinten forward equations--mapping lat,long to x,y
   ---------------------------------------------------------*/
-vandgfor(lon, lat, x, y)
+long vandgfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

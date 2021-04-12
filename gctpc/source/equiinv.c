@@ -32,7 +32,7 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the Equirectangular projection
   ----------------------------------------*/
-equiinvint(r_maj,center_lon,lat1,false_east,false_north) 
+long equiinvint(r_maj,center_lon,lat1,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double center_lon;		/* center longitude		*/
@@ -63,7 +63,7 @@ return(OK);
 
 /* Equirectangular inverse equations--mapping x,y to lat/long
   ---------------------------------------------------------*/
-equiinv(x, y, lon, lat)
+long equiinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

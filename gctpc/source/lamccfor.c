@@ -39,7 +39,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Lambert Conformal conic projection
   ------------------------------------------------*/
-lamccforint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
+long lamccforint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
 
 double c_lat;                   /* center latitude                      */
 double c_lon;                   /* center longitude                     */
@@ -112,7 +112,7 @@ return(OK);
 }
 /* Lambert Conformal conic forward equations--mapping lat,long to x,y
   -----------------------------------------------------------------*/
-lamccfor(lon, lat, x, y)
+long lamccfor(lon, lat, x, y)
 double lon;                     /* (I) Longitude                */
 double lat;                     /* (I) Latitude                 */
 double *x;                      /* (O) X projection coordinate  */

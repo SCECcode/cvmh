@@ -43,7 +43,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the General Vertical Near-Side Perspective projection
   ---------------------------------------------------------------*/
-gvnspforint(r, h,center_long, center_lat,false_east,false_north) 
+long gvnspforint(r, h,center_long, center_lat,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double h;			/* height above sphere			*/
@@ -76,7 +76,7 @@ return(OK);
 /* General Vertical Near-Side Perspective forward equations--mapping 
    lat,long to x,y
   ----------------------------------------------------------------*/
-gvnspfor(lon, lat, x, y)
+long gvnspfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

@@ -34,7 +34,7 @@ static double cos_p14;		/* cos of center latitude		*/
 
 /* Initialize the Orthographic projection
   -------------------------------------*/
-orthforint(r_maj,center_lon,center_lat,false_east,false_north) 
+long orthforint(r_maj,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double center_lon;		/* center longitude		*/
@@ -67,7 +67,7 @@ return(OK);
 
 /* Orthographic forward equations--mapping lat,long to x,y
   ---------------------------------------------------*/
-orthfor(lon, lat, x, y)
+long orthfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

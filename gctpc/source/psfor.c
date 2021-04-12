@@ -40,7 +40,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Polar Stereographic projection
   --------------------------------------------*/
-psforint(r_maj,r_min,c_lon,c_lat,false_east,false_north) 
+long psforint(r_maj,r_min,c_lon,c_lat,false_east,false_north) 
 
 double c_lon;				/* center longitude		*/
 double c_lat;				/* center latitude		*/
@@ -94,7 +94,7 @@ return(OK);
 
 /* Polar Stereographic forward equations--mapping lat,long to x,y
   --------------------------------------------------------------*/
-psfor(lon, lat, x, y)
+long psfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

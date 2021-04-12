@@ -34,7 +34,7 @@ static double cos_p10;		/* cos of center latitude		*/
 
 /* Initialize the Stereographic projection
   --------------------------------------*/
-sterinvint(r_maj,center_lon,center_lat,false_east,false_north) 
+long sterinvint(r_maj,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double center_lon;		/* center longitude		*/
@@ -68,7 +68,7 @@ return(OK);
 
 /* Stereographic inverse equations--mapping x,y to lat/long
   -------------------------------------------------------*/
-sterinv(x, y, lon, lat)
+long sterinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

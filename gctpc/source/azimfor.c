@@ -20,6 +20,7 @@ ALGORITHM REFERENCES
     U.S. Geological Survey Professional Paper 1453 , United State Government
     Printing Office, Washington D.C., 1989.
 *******************************************************************************/
+#include <stdio.h>
 #include "cproj.h"
 
 /* Variables common to all subroutines in this code file
@@ -36,7 +37,7 @@ static double cos_p12;		/* cos of center latitude		*/
 
 /* Initialize the Azimuthal projection
   ----------------------------------*/
-azimforint(r_maj,center_lon,center_lat,false_east,false_north) 
+long azimforint(r_maj,center_lon,center_lat,false_east,false_north) 
 
 double r_maj;			/* major axis			*/
 double center_lon;		/* center longitude		*/
@@ -70,7 +71,7 @@ return(OK);
 
 /* Azimuthal forward equations--mapping lat,long to x,y
   ---------------------------------------------------*/
-azimfor(lon, lat, x, y)
+long azimfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

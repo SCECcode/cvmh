@@ -39,7 +39,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Polar Stereographic projection
   --------------------------------------------*/
-psinvint(r_maj,r_min,c_lon,c_lat,false_east,false_north)
+long psinvint(r_maj,r_min,c_lon,c_lat,false_east,false_north)
 
 double c_lon;				/* center longitude		*/
 double c_lat;				/* center latitude		*/
@@ -94,7 +94,7 @@ return(OK);
 
 /* Polar Stereographic inverse equations--mapping x,y to lat/long
   --------------------------------------------------------------*/
-psinv(x, y, lon, lat)
+long psinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

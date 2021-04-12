@@ -41,7 +41,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the General Vertical Near-Side Perspective projection
   ---------------------------------------------------------------*/
-gvnspinvint(r, h,center_long, center_lat,false_east,false_north) 
+long gvnspinvint(r, h,center_long, center_lat,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double h;			/* height above sphere			*/
@@ -74,7 +74,7 @@ return(OK);
 /* General Vertical Near-Side Perspective inverse equations--mapping 
    x,y to lat/long
   ----------------------------------------------------------------*/
-gvnspinv(x, y, lon, lat)
+long gvnspinv(x, y, lon, lat)
 
 double x;			/* (O) X projection coordinate */
 double y;			/* (O) Y projection coordinate */

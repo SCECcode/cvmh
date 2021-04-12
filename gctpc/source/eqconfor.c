@@ -40,7 +40,7 @@ static double rh;
 
 /* Initialize the Equidistant Conic projection
   ------------------------------------------*/
-eqconforint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
+long eqconforint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
 	    mode)
 
 double r_maj;			/* major axis			*/
@@ -132,7 +132,7 @@ return(OK);
 
 /* Equidistant Conic forward equations--mapping lat,long to x,y
   -----------------------------------------------------------*/
-eqconfor(lon, lat, x, y)
+long eqconfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

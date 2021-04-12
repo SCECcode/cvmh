@@ -44,7 +44,7 @@ static double sinaz,cosaz;
 
 /* Initialize the Oblique Mercator  projection
   ------------------------------------------*/
-omerforint(r_maj,r_min,scale_fact,azimuth,lon_orig,lat_orig,false_east,
+long omerforint(r_maj,r_min,scale_fact,azimuth,lon_orig,lat_orig,false_east,
 	    false_north,lon1,lat1,lon2,lat2,mode) 
 
 double r_maj;			/* major axis			*/
@@ -211,7 +211,7 @@ return(OK);
 
 /* Oblique Mercator forward equations--mapping lat,long to x,y
   ----------------------------------------------------------*/
-omerfor(lon, lat, x, y)
+long omerfor(lon, lat, x, y)
 double lon;			/* (I) Longitude 		*/
 double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/

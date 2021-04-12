@@ -34,7 +34,7 @@ static double feast[6];		/* False easting, one for each region */
 
 /* Initialize the Interrupted Mollweide projection
   --------------------------------------------*/
-imolwinvint(r) 
+long imolwinvint(r) 
 double r; 			/* (I) Radius of the earth (sphere) */
 {
 /* Place parameters in static storage for common use
@@ -66,7 +66,7 @@ radius(r);
 return(OK);
 }
 
-imolwinv(x, y, lon, lat)
+long imolwinv(x, y, lon, lat)
 double x;		/* (I) X projection coordinate */
 double y;		/* (I) Y projection coordinate */
 double *lon;		/* (O) Longitude */

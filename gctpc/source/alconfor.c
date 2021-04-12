@@ -45,7 +45,7 @@ static long n;
 
 /* Initialize the ALASKA CONFORMAL projection
   -----------------------------------------*/
-alconforint(r_maj,r_min,false_east,false_north) 
+long alconforint(r_maj,r_min,false_east,false_north) 
 
 double r_maj; 			/* Major axis			 	*/
 double r_min; 			/* Minor axis			 	*/
@@ -102,7 +102,7 @@ return(OK);
 
 /* ALASKA CONFORMAL forward equations--mapping lat,long to x,y
   ----------------------------------------------------------*/
-alconfor(lon, lat, x, y)
+long alconfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

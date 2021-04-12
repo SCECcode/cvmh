@@ -38,7 +38,7 @@ static double cos_lat_o;
 static double false_easting;
 static double false_northing;
 
-obleqinvint(r, center_long, center_lat, shape_m, shape_n, angle,false_east,
+long obleqinvint(r, center_long, center_lat, shape_m, shape_n, angle,false_east,
 	    false_north)
 double r;
 double center_long;
@@ -78,7 +78,7 @@ sincos(lat_o, &sin_lat_o, &cos_lat_o);
 return(OK);
 }
 
-obleqinv(x, y, lon, lat)
+long obleqinv(x, y, lon, lat)
 
 double x;		/* (I) X projection coordinate */
 double y;		/* (I) Y projection coordinate */

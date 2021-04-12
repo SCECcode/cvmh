@@ -32,7 +32,7 @@ static double false_northing;	/* y offset				*/
 
 /* Initialize the Wagner IV projection
   ------------------------------------*/
-wivforint(r, center_long,false_east,false_north) 
+long wivforint(r, center_long,false_east,false_north) 
 double r; 			/* (I) Radius of the earth (sphere) */
 double center_long;		/* (I) Center longitude */
 double false_east;		/* x offset				*/
@@ -56,7 +56,7 @@ return(OK);
 
 /* Wagner IV forward equations--mapping lat,long to x,y
   ----------------------------------------------------*/
-wivfor(lon, lat, x, y)
+long wivfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

@@ -40,7 +40,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Gnomonic projection
   ---------------------------------*/
-gnominvint(r, center_long, center_lat,false_east,false_north) 
+long gnominvint(r, center_long, center_lat,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -69,7 +69,7 @@ return(OK);
 
 /* Gnomonic inverse equations--mapping x,y to lat/long
   --------------------------------------------------*/
-gnominv(x, y, lon, lat)
+long gnominv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate */
 double y;			/* (O) Y projection coordinate */
 double *lon;			/* (I) Longitude */

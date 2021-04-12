@@ -37,7 +37,7 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Miller Cylindrical projection
   -------------------------------------------*/
-millforint(r, center_long,false_east,false_north) 
+long millforint(r, center_long,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -62,7 +62,7 @@ return(OK);
 
 /* Miller Cylindrical forward equations--mapping lat,long to x,y
   ------------------------------------------------------------*/
-millfor(lon, lat, x, y)
+long millfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

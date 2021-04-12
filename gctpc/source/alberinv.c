@@ -40,7 +40,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-alberinvint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
+long alberinvint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
 
 double r_maj;                   /* major axis                           */
 double r_min;                   /* minor axis                           */
@@ -113,7 +113,7 @@ return(OK);
 
 /* Albers Conical Equal Area inverse equations--mapping x,y to lat/long
   -------------------------------------------------------------------*/
-alberinv(x, y, lon, lat)
+long alberinv(x, y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/

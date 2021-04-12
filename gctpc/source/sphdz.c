@@ -73,7 +73,6 @@ ALGORITHM REFERENCES
     U.S. Geological Survey Professional Paper 1453 , United State Government
     Printing Office, Washington D.C., 1989.
 *******************************************************************************/
-
 #include "cproj.h"
 #include "proj.h"
 
@@ -95,7 +94,7 @@ static double minor[20] = {6356583.8, 6356514.86955, 6356078.96284, 6356772.2,
 /* Finds the correct ellipsoid axis
 ---------------------------------*/
 
-sphdz(isph,parm,r_major,r_minor,radius)
+long sphdz(isph,parm,r_major,r_minor,radius)
 
 long isph;		/* spheroid code number (incorrectly referred to
 			   as datum code throughout GCTPc) */

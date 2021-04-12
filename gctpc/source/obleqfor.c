@@ -36,7 +36,7 @@ static double cos_lat_o;
 static double false_easting;
 static double false_northing;
 
-obleqforint(r, center_long, center_lat, shape_m, shape_n, angle, false_east,
+long obleqforint(r, center_long, center_lat, shape_m, shape_n, angle, false_east,
             false_north)
 
 double r;
@@ -77,7 +77,7 @@ sincos(lat_o, &sin_lat_o, &cos_lat_o);
 return(OK);
 }
 
-obleqfor(lon, lat, x, y)
+long obleqfor(lon, lat, x, y)
 
 double lon;		/* (I) Longitude */
 double lat;		/* (I) Latitude */

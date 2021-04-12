@@ -39,7 +39,7 @@ static double xlr[21];
 
 /* Initialize the ROBINSON projection
   ---------------------------------*/
-robforint(r, center_long,false_east,false_north) 
+long robforint(r, center_long,false_east,false_north) 
 
 double r; 			/* (I) Radius of the earth (sphere) 	*/
 double center_long;		/* (I) Center longitude 		*/
@@ -110,7 +110,7 @@ return(OK);
 
 /* Robinson forward equations--mapping lat,long to x,y
   ------------------------------------------------------------*/
-robfor(lon, lat, x, y)
+long robfor(lon, lat, x, y)
 double lon;			/* (I) Longitude */
 double lat;			/* (I) Latitude */
 double *x;			/* (O) X projection coordinate */

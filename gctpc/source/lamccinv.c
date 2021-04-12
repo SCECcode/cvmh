@@ -38,7 +38,7 @@ ALGORITHM REFERENCES
 
 /* Initialize the Lambert Conformal Conic projection
   ------------------------------------------------*/
-lamccinvint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
+long lamccinvint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
 
 double c_lat;				/* center latitude		*/
 double c_lon;				/* center longitude		*/
@@ -114,7 +114,7 @@ return(OK);
 
 /* Lambert Conformal Conic inverse equations--mapping x,y to lat/long
   -----------------------------------------------------------------*/
-lamccinv(x , y, lon, lat)
+long lamccinv(x , y, lon, lat)
 double x;			/* (O) X projection coordinate 	*/
 double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/
