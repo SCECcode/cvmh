@@ -1,7 +1,7 @@
 # GNU Automake config
 
 EXTRA_DIST = cvmh/base@@ cvmh/*.gts cvmh/CVM_* cvmh/cvm_vs30* \
-	cvmh/interfaces.vo cvmh/model_top@@ cvmh/moho@@ cvmh/topo_dem@@
+	cvmh/interfaces.vo cvmh/model_top@@ cvmh/moho@@ cvmh/topo_dem@@ cvmh/tsurf
 
 all:
 
@@ -16,5 +16,6 @@ install:
 	cp cvmh/model_top@@ ${prefix}/model
 	cp cvmh/moho@@ ${prefix}/model
 	cp cvmh/topo_dem@@ ${prefix}/model
+	cp -r cvmh/tsurf ${prefix}/model
 
 clean:
