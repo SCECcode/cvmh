@@ -52,6 +52,6 @@ fi
 CFLAGS="$CFLAGS"
 LDFLAGS="$LDFLAGS -lm"
 
-AC_CONFIG_FILES([Makefile aux-config/Makefile doc/Makefile scripts/autoconf/Makefile scripts/docgen/Makefile scripts/grid/Makefile scripts/interpolate/Makefile scripts/misc/Makefile scripts/ts2gts/Makefile scripts/viz/Makefile gctpc/Makefile gctpc/source/Makefile src/Makefile model/Makefile model/tsurf/Makefile test/Makefile test/inputs/Makefile test/ref/Makefile])
+AC_CONFIG_FILES([Makefile aux-config/Makefile doc/Makefile scripts/autoconf/Makefile scripts/docgen/Makefile scripts/grid/Makefile scripts/interpolate/Makefile scripts/misc/Makefile scripts/ts2gts/Makefile scripts/viz/Makefile gctpc/Makefile gctpc/source/Makefile src/Makefile model/Makefile test/Makefile test/inputs/Makefile test/ref/Makefile])
 
 AC_OUTPUT

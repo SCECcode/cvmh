@@ -4,7 +4,7 @@ EXTRA_DIST = configure
 
 SUBDIRS = aux-config doc scripts/autoconf scripts/docgen scripts/grid \
 	scripts/interpolate scripts/misc scripts/ts2gts scripts/viz \
-	gctpc gctpc/source src model model/tsurf test test/inputs test/ref
+	gctpc gctpc/source src model test test/inputs test/ref
 
 INCLUDES = $(default_includes)
 

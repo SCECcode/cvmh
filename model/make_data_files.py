@@ -89,7 +89,6 @@ def main():
     for ff in fflist :
         fname = mdir + "/" +ff
         url = path + "/" + fname
-        print(url, fname)
         download_urlfile(url,fname)
 
     print("\nDone!")
