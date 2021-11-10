@@ -215,8 +215,8 @@ int runVX(const char *bindir, const char *cvmdir,
     return(1);
   } else if (pid == 0) {
     /* Change dir to cvmdir */
-    if (chdir(cvmdir) != 0) {
-      printf("FAIL: Error changing dir in runfortran\n");
+    if (chdir(bindir) != 0) {
+      printf("FAIL: Error changing dir in runVX\n");
       return(1);
     }
 
