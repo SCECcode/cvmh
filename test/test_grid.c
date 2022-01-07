@@ -23,9 +23,9 @@ int test_vx_grid()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-grid.in");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test-grid.in");
   sprintf(outfile, "%s/%s", currentdir, "test-vx-grid-extract.out");
-  sprintf(reffile, "%s/%s", currentdir, "./ref/test-extract.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-extract.ref");
 
   if (test_assert_int(runVX(BIN_DIR, MODEL_DIR,infile, outfile), 0) != 0) {
     printf("vx failure\n"); 
@@ -57,9 +57,9 @@ int test_vx_lite_grid_emul()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-grid.in");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test-grid.in");
   sprintf(outfile, "%s/%s", currentdir, "test-vx-lite-grid-extract-emul.out");
-  sprintf(reffile, "%s/%s", currentdir, "./ref/test-extract-vxlite.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-extract-vxlite.ref");
 
   if (test_assert_int(runVXLite(BIN_DIR, MODEL_DIR, infile, outfile, 
 				MODE_EMUL), 0) != 0) {
@@ -91,9 +91,9 @@ int test_vx_lite_grid_depth()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-grid-depth.in");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test-grid-depth.in");
   sprintf(outfile, "%s/%s", currentdir, "test-vx-lite-grid-extract-depth.out");
-  sprintf(reffile, "%s/%s", currentdir, "./ref/test-extract-vxlite-depth.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-extract-vxlite-depth.ref");
 
   if (test_assert_int(runVXLite(BIN_DIR, MODEL_DIR, infile, outfile, 
 				MODE_DEPTH), 0) != 0) {
@@ -125,12 +125,10 @@ int test_vx_lite_grid_offset()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test-grid-offset.in");
-  sprintf(outfile, "%s/%s", currentdir, 
-	  "test-vx-lite-grid-extract-offset.out");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test-grid-offset.in");
+  sprintf(outfile, "%s/%s", currentdir, "test-vx-lite-grid-extract-offset.out");
   /* Use same reference file as depth */
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-extract-vxlite-offset.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-extract-vxlite-offset.ref");
 
   if (test_assert_int(runVXLite(BIN_DIR, MODEL_DIR, infile, outfile, 
 				MODE_NONE), 0) != 0) {

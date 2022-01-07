@@ -438,14 +438,16 @@ int suite_vx_sub(const char *xmldir)
   suite.tests[7].elapsed_time = 0.0;
 
   if (test_run_suite(&suite) != 0) {
+    free(suite.tests);
     fprintf(stderr, "Failed to execute tests\n");
     return(1);
   }
+  free(suite.tests);
 
-  if (xmldir != NULL) {
+  if (xmldir) {
     sprintf(logfile, "%s/%s.xml", xmldir, suite.suite_name);
     lf = init_log(logfile);
-    if (lf == NULL) {
+    if (!lf) {
       fprintf(stderr, "Failed to initialize logfile\n");
       return(1);
     }
@@ -457,8 +459,6 @@ int suite_vx_sub(const char *xmldir)
 
     close_log(lf);
   }
-
-  free(suite.tests);
 
   return 0;
 }
