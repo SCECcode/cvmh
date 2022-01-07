@@ -1,3 +1,31 @@
+2022-01-07 Brad Aagaard <baagaard@usgs.gov>
+
+	* Improve portability (runs on macOS and Linux) by redoing
+	configure.ac and Makefile.am files to make better use of
+	autotools, including using libtool to build libraries. Software is
+	configured, built, installed, and tested via "configure", "make",
+	"make install", and "make check".
+
+	* Use curl instead of Python to download model data files. Install
+	data files directory to installation data directory. This also
+	alleviates needing to include the model data files in the
+	distribution tarball. The model data files are installed to
+	"$prefix/share/cvmh/model/cvmh" (this facilitates installation as
+	part of the UCVM software).
+
+	* Update vx program to use a command line argument to specify
+	location of model data files instead of hardwiring path to ".".
+
+	* Update vx and vxlite unit tests to use system() instead of
+	execl(). Output exact command to be run and do not remove input
+	and output files (removed by 'make clean') to facilitate
+	debugging.
+
+	* Change name of gctpc library from "libgeo" to "libgctpc" to
+	avoid potential conflicts with other software.
+
+	* Consolidate "scripts" subdirectories.
+
 2015-02-11  Andreas Plesch <andreas_plesch@harvard.edu> and
 	David Gill <davidgil@usc.edu>
 
@@ -18,12 +46,12 @@
 		Brocher (2005). This resulted mostly in no change but fixed some cells
 		(about 8) which were close to the southern edge and had no-data or
 		negative values.
-		
+
 2011-09-01  Patrick Small <patrices@usc.edu>
 
 	* Moved code distribution to use GNU build system
 	* Minor bug fixes and enhancements to query code
-	
+
 2011-06-01  Andreas Plesch <andreas_plesch@harvard.edu>
 
 	* Revised Moho, open Santa Maria basin to W, smooth transition at S 
@@ -37,7 +65,7 @@
 	* Addition of C API for querying CVM-H
 	* Addition of updated query command line tool vx_lite and horizontal 
 	slice extractor vx_slice
-	
+
 2009-10-01  Andreas Plesch <andreas_plesch@harvard.edu>
 
 	* Minor update of Moho surface in CM, corresponding update to changed 
@@ -59,12 +87,12 @@
 	* Changed density scaling to Nafe-Drake (Brocher, 2005)
 
 2008-09-01  Andreas Plesch <andreas_plesch@harvard.edu>
-	
+
 	* Fixed vs in buffer zone, used model vp/vs, not interpolated vs,  in 
 	core zone to be consistent with vp there.
 
 2008-08-01  Andreas Plesch <andreas_plesch@harvard.edu>
-	
+
 	* Enlarged area to fit terashake box, added model vs in all voxets, no 
 	tt file creation.
 
