@@ -197,45 +197,16 @@ int vx_test_bkg(vx_entry_t *entry, vx_request_t req_type)
 int runVX(const char *bindir, const char *cvmdir, 
 	  const char *infile, const char *outfile)
 {
-  char currentdir[128];
-  char runpath[128];
+  char cmd[1024];
 
-  sprintf(runpath, "%s/run_vx.sh", bindir);
-
-  printf("Running cmd: vx %s %s\n", infile, outfile);
-
-  /* Save current directory */
-  getcwd(currentdir, 128);
-  
-  /* Fork process */
-  pid_t pid;
-  pid = fork();
-  if (pid == -1) {
-    perror("fork");
-    return(1);
-  } else if (pid == 0) {
-    /* Change dir to cvmdir */
-    if (chdir(bindir) != 0) {
-      printf("FAIL: Error changing dir in runVX\n");
-      return(1);
+  sprintf(cmd, "%s/vx -m %s < %s > %s", bindir, cvmdir, infile, outfile);
+  printf("Running cmd: %s\n", cmd);
+    if (system(cmd) < 0) {
+      printf("FAIL: Error occurred while running vx command.");
+      return 1;
     }
 
-    execl(runpath, runpath, infile, outfile, (char *)0);
-    perror("execl"); /* shall never get to here */
-    printf("FAIL: CVM exited abnormally\n");
-    return(1);
-  } else {
-    int status;
-    waitpid(pid, &status, 0);
-    if (WIFEXITED(status)) {
-      return(0);
-    } else {
-      printf("FAIL: CVM exited abnormally\n");
-      return(1);
-    }
-  }
-
-  return(0);
+  return 0;
 }
 
 
@@ -243,14 +214,10 @@ int runVXLite(const char *bindir, const char *cvmdir,
 	      const char *infile, const char *outfile,
 	      int mode)
 {
-  char currentdir[128];
   char flags[128];
+  char cmd[1024];
 
-  char runpath[128];
-
-  sprintf(runpath, "./run_vx_lite.sh");
-
-  sprintf(flags, "-m %s ", cvmdir);
+  sprintf(flags, "");
   if ((mode & 0xFFFF) == MODE_EMUL) {
     strcat(flags, "-z elev");
   }
@@ -258,58 +225,19 @@ int runVXLite(const char *bindir, const char *cvmdir,
       strcat(flags, "-z dep");
   }
   if ((mode & 0xFFFF) == MODE_SCEC) {
-    if (strlen(flags) > 0) {
       strcat(flags, " -s");
-    } else {
-      strcat(flags, "-s");
-    }
   }
   if ((mode & 0xFFFF) == MODE_NOGTL) {
-    if (strlen(flags) > 0) {
       strcat(flags, " -g");
-    } else {
-      strcat(flags, "-g");
-    }
   }
-
-  printf("Running cmd: vx_lite %s %s %s\n", flags, infile, outfile);
-
-  /* Save current directory */
-  getcwd(currentdir, 128);
   
-  /* Fork process */
-  pid_t pid;
-  pid = fork();
-  if (pid == -1) {
-    perror("fork");
-    printf("FAIL: unable to fork\n");
-    return(1);
-  } else if (pid == 0) {
+  sprintf(cmd, "%s/vx_lite -m %s %s < %s > %s", bindir, cvmdir, flags, infile, outfile);
 
-    /* Change dir to bindir */
-    if (chdir(bindir) != 0) {
-      printf("FAIL: Error changing dir in runfortran\n");
-      return(1);
+  printf("Running cmd: %s\n", cmd);
+    if (system(cmd) < 0) {
+      printf("FAIL: Error occurred while running vx_lite command.");
+      return 1;
     }
 
-    if (strlen(flags) == 0) {
-      execl(runpath, runpath, infile, outfile, (char *)0);
-    } else {
-      execl(runpath, runpath, flags, infile, outfile, (char *)0);
-    }
-    perror("execl"); /* shall never get to here */
-    printf("FAIL: CVM exited abnormally\n");
-    return(1);
-  } else {
-    int status;
-    waitpid(pid, &status, 0);
-    if (WIFEXITED(status)) {
-      return(0);
-    } else {
-      printf("FAIL: CVM exited abnormally\n");
-      return(1);
-    }
-  }
-
-  return(0);
+    return 0;
 }
