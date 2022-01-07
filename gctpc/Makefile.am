@@ -1,9 +1,8 @@
 # GNU Automake config
 
-EXTRA_DIST = announce.txt README
+SUBDIRS = \
+	source
 
-all:
-
-install:
-
-clean:
+EXTRA_DIST = \
+	announce.txt \
+	README
