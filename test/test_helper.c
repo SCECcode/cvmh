@@ -96,8 +96,8 @@ int get_surf_values(float *surf_values)
   //surf_values[3] = 449.989990;
   surf_values[4] = 780.433289;
   //surf_values[4] = 749.989990;
-  surf_values[5] = 99.369789;
-  surf_values[6] = 99.369789;
+  surf_values[5] = 99.3797913;// 99.369789;
+  surf_values[6] = 99.3797913;//99.369789;
   surf_values[7] = 93.892632;
   //surf_values[7] = 49.990002;
 
