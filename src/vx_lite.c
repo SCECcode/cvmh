@@ -34,7 +34,6 @@ void usage() {
   printf("Output format is:\n");
   printf("\tX Y Z utmX utmY elevX elevY topo mtop base moho hr/lr/cm cellX cellY cellZ tg vp vs rho\n\n");
   printf("Version: %s\n\n", VERSION);
-  exit (0);
 }
 
 extern char *optarg;

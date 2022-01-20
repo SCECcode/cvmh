@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
+#include <getopt.h>
 #include "voxet.h"
 #include "proj.h"
 #include "cproj.h"
@@ -44,6 +45,25 @@ struct property p0,p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13;
 
 int voxbytepos(int *, int* ,int);
 
+/* Usage function */
+void usage() {
+printf("     vx6.2 - Copyright M. Peter Suess 2006, A. Plesch 2009\n");
+printf("Harvard University, University of Tuebingen\n");
+printf("Extract velocities from a simple GOCAD voxet\n");
+printf("\tusage: vx [-m dir] [-h] < file.in\n");
+printf("Flags:\n");
+printf("\t-h print usage\n");
+printf("\t-m directory containing model files (default is '.').\n");
+printf("vx accepts geographic coordinates and \n");
+printf("UTM Zone 11, NAD27, coordinates in X Y Z columns.\n");
+printf("Output is:\n");
+printf("X Y Z utmX utmY elevX elevY topo mtop base moho hr/lr/cm cellX cellY cellZ tg vp vs rho\n");
+}
+
+
+extern char *optarg;
+extern int optind, opterr, optopt;
+
 int main (int argc, char *argv[])
 {
   int NCells,i,j;
@@ -65,8 +85,7 @@ double SP[2],SPUTM[2];
 //char line[120];
 char res[4]="nr\0";
 char filename[CMLEN];
-
-char MODEL_DIR[CMLEN] = ".";
+char modeldir[CMLEN];
 
 char LR_PAR[CMLEN]="CVM_LR.vo";
 FILE *LALR;
@@ -90,24 +109,30 @@ FILE *LAMO;
 char BA_PAR[CMLEN]="base.vo";
 FILE *LABA;
 */
+  int opt;
+  
+  strcpy(modeldir, ".");
+ 
+  /* Parse options */
+  while ((opt = getopt(argc, argv, "m:h")) != -1) {
+    switch (opt) {
+    case 'm':
+      strcpy(modeldir, optarg);
+      break;
+    case 'h':
+      usage();
+      exit(0);
+      break;
+    default: /* '?' */
+      usage();
+      exit(1);
+    }
+  }
 
-if(argv[1])
-if(!strcmp(argv[1], "-h"))
-{
-printf("     vx6.2 - Copyright M. Peter Suess 2006, A. Plesch 2009\n");
-printf("Harvard University, University of Tuebingen\n");
-printf("Extract velocities from a simple GOCAD voxet\n");
-printf("     usage: vx < file.in\n");
-printf("vx accepts geographic coordinates and \n");
-printf("UTM Zone 11, NAD27, coordinates in X Y Z columns.\n");
-printf("Output is:\n");
-printf("X Y Z utmX utmY elevX elevY topo mtop base moho hr/lr/cm cellX cellY cellZ tg vp vs rho\n");
-exit(0);
-}
-
+ 
 /**** First we load the LowRes File****/
 
-sprintf(filename, "%s/%s", MODEL_DIR, LR_PAR);
+sprintf(filename, "%s/%s", modeldir, LR_PAR);
 LALR = fopen(filename, "r");
 if (LALR == NULL) {
 fprintf(stderr, "Failed to open model file %s\n", filename);
@@ -139,7 +164,7 @@ GetPropVal(LALR,"PROP_NO_DATA_VALUE",1,&p0.NO_DATA_VALUE);
 //printf("filename lr: %s\n", p0.FN);
 
 lrbuffer=(char *)malloc(NCells*p0.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p0.FN);
+sprintf(filename, "%s/%s", modeldir, p0.FN);
 LoadVolume(filename,p0.ESIZE,lrbuffer);
 
 // and the tags
@@ -152,7 +177,7 @@ LoadVolume(filename,p0.ESIZE,lrbuffer);
 // printf("lrt name: %s\n", p7.FN);
 
  lrtbuffer=(char *)malloc(NCells*p7.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p7.FN);
+ sprintf(filename, "%s/%s", modeldir, p7.FN);
  LoadVolume(filename,p7.ESIZE,lrtbuffer);
 
 // and vs
@@ -165,11 +190,11 @@ LoadVolume(filename,p0.ESIZE,lrbuffer);
 //printf("lrt name: %s\n", p11.FN);
 
  lrvsbuffer=(char *)malloc(NCells*p11.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p11.FN);
+ sprintf(filename, "%s/%s", modeldir, p11.FN);
  LoadVolume(filename,p11.ESIZE,lrvsbuffer);
 
 /**** Now we load the HighRes File *****/
-sprintf(filename, "%s/%s", MODEL_DIR, HR_PAR);
+sprintf(filename, "%s/%s", modeldir, HR_PAR);
 LAHR = fopen(filename, "r");
 
 GetVec(LAHR,"AXIS_O",hr_a.O);
@@ -191,7 +216,7 @@ GetPropVal(LAHR,"PROP_NO_DATA_VALUE",1,&p2.NO_DATA_VALUE);
 //printf("hr esize: %d", p2.ESIZE);
 
 hrbuffer=(char *)malloc(NCells*p2.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p2.FN);
+sprintf(filename, "%s/%s", modeldir, p2.FN);
 LoadVolume(filename,p2.ESIZE,hrbuffer);
 
 // and the tags
@@ -204,7 +229,7 @@ LoadVolume(filename,p2.ESIZE,hrbuffer);
  //printf("hrt name: %s\n", p9.FN);
 
  hrtbuffer=(char *)malloc(NCells*p9.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p9.FN);
+ sprintf(filename, "%s/%s", modeldir, p9.FN);
  LoadVolume(filename,p9.ESIZE,hrtbuffer);
 
 // and vs
@@ -217,11 +242,11 @@ LoadVolume(filename,p2.ESIZE,hrbuffer);
 // printf("hrt name: %s\n", p12.FN);
 
  hrvsbuffer=(char *)malloc(NCells*p12.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p12.FN);
+ sprintf(filename, "%s/%s", modeldir, p12.FN);
  LoadVolume(filename,p12.ESIZE,hrvsbuffer);
  
 /**** Now we load the CrustMantle File *****/
-sprintf(filename, "%s/%s", MODEL_DIR, CM_PAR);
+sprintf(filename, "%s/%s", modeldir, CM_PAR);
 LACM = fopen(filename, "r");
 
 GetVec(LACM,"AXIS_O",cm_a.O);
@@ -243,7 +268,7 @@ GetPropVal(LACM,"PROP_NO_DATA_VALUE",1,&p3.NO_DATA_VALUE);
 //printf("cm esize: %d", p3.ESIZE);
 
 cmbuffer=(char *)malloc(NCells*p3.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p3.FN);
+sprintf(filename, "%s/%s", modeldir, p3.FN);
 LoadVolume (filename, p3.ESIZE, cmbuffer);
 
 // and the flags
@@ -254,7 +279,7 @@ LoadVolume (filename, p3.ESIZE, cmbuffer);
  GetPropVal(LACM,"PROP_NO_DATA_VALUE",2,&p8.NO_DATA_VALUE);
 
  cmtbuffer=(char *)malloc(NCells*p8.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p8.FN);
+ sprintf(filename, "%s/%s", modeldir, p8.FN);
  LoadVolume (filename, p8.ESIZE, cmtbuffer);
 
 // and vs
@@ -265,11 +290,11 @@ LoadVolume (filename, p3.ESIZE, cmbuffer);
  GetPropVal(LACM,"PROP_NO_DATA_VALUE",3,&p10.NO_DATA_VALUE);
 
  cmvsbuffer=(char *)malloc(NCells*p10.ESIZE);
- sprintf(filename, "%s/%s", MODEL_DIR, p10.FN);
+ sprintf(filename, "%s/%s", modeldir, p10.FN);
  LoadVolume (filename, p10.ESIZE, cmvsbuffer);
 
 /**** Now we load the topo, moho, base, model top File *****/
-sprintf(filename, "%s/%s", MODEL_DIR, TO_PAR);
+sprintf(filename, "%s/%s", modeldir, TO_PAR);
 LATO = fopen(filename, "r");
 
 GetVec(LATO,"AXIS_O",to_a.O);
@@ -293,7 +318,7 @@ GetPropVal(LATO,"PROP_NO_DATA_VALUE",1,&p4.NO_DATA_VALUE);
 //printf("to esize: %d", p4.ESIZE);
 
 tobuffer=(char *)malloc(NCells*p4.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p4.FN);
+sprintf(filename, "%s/%s", modeldir, p4.FN);
 LoadVolume (filename, p4.ESIZE, tobuffer);
 
 // moho
@@ -306,7 +331,7 @@ GetPropVal(LATO,"PROP_NO_DATA_VALUE",3,&p5.NO_DATA_VALUE);
 //printf("mo esize: %d", p5.ESIZE);
 
 mobuffer=(char *)malloc(NCells*p5.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p5.FN);
+sprintf(filename, "%s/%s", modeldir, p5.FN);
 LoadVolume (filename, p5.ESIZE, mobuffer);
 
 // basement
@@ -319,7 +344,7 @@ GetPropVal(LATO,"PROP_NO_DATA_VALUE",2,&p6.NO_DATA_VALUE);
 //printf("ba esize: %d", p6.ESIZE);
 
 babuffer=(char *)malloc(NCells*p6.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p6.FN);
+sprintf(filename, "%s/%s", modeldir, p6.FN);
 LoadVolume (filename, p6.ESIZE, babuffer);
 
 // top elevation of model
@@ -332,7 +357,7 @@ GetPropVal(LATO,"PROP_NO_DATA_VALUE",4,&p13.NO_DATA_VALUE);
 //printf("ba esize: %d", p6.ESIZE);
 
 mtopbuffer=(char *)malloc(NCells*p13.ESIZE);
-sprintf(filename, "%s/%s", MODEL_DIR, p13.FN);
+sprintf(filename, "%s/%s", modeldir, p13.FN);
 LoadVolume (filename, p13.ESIZE, mtopbuffer);
 
 /* now let's start with searching .... */

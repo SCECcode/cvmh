@@ -81,21 +81,22 @@ int test_run_suite(suite_t *suite)
   struct timeval start, end;
 
   int i;
+  int err = 0;
 
   for (i = 0; i < suite->num_tests; i++) {
     gettimeofday(&start,NULL);
     if ((suite->tests[i].test_func)() != 0) {
       suite->tests[i].result = 1;
+      err = 1;
     } else {
       suite->tests[i].result = 0;
     }
     gettimeofday(&end,NULL);
     suite->tests[i].elapsed_time = (end.tv_sec - start.tv_sec) * 1.0 +
       (end.tv_usec - start.tv_usec) / 1000000.0;
-
   }
 
-  return(0);
+  return err;
 }
 
 

@@ -12,7 +12,8 @@ int main (int argc, char *argv[])
 {
 
   char *xmldir;
-
+  int err = 0;
+  
   if (argc == 2) {  
     xmldir = argv[1];
   } else {
@@ -20,7 +21,7 @@ int main (int argc, char *argv[])
   }
 
   /* Run test suites */
-  suite_grid(xmldir);
+  err |= suite_grid(xmldir);
 
-  return 0;
+  return err;
 }

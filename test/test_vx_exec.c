@@ -24,10 +24,9 @@ int test_vx_points()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test.in");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test.in");
   sprintf(outfile, "%s/%s", currentdir, "test-8-point-vx-extract-elev.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-8-point-vx-extract-elev.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-8-point-vx-extract-elev.ref");
 
   if (test_assert_int(save_test_points(infile), 0) != 0) {
     return(1);
@@ -41,9 +40,6 @@ int test_vx_points()
   if (test_assert_file(outfile, reffile) != 0) {
     return(1);
   }
-
-  unlink(infile);
-  unlink(outfile);
 
   printf("PASS\n");
   return(0);
@@ -72,14 +68,16 @@ int suite_vx_exec(const char *xmldir)
   suite.tests[0].elapsed_time = 0.0;
 
   if (test_run_suite(&suite) != 0) {
+    free(suite.tests);
     fprintf(stderr, "Failed to execute tests\n");
     return(1);
   }
+  free(suite.tests);
 
-  if (xmldir != NULL) {
+  if (xmldir) {
     sprintf(logfile, "%s/%s.xml", xmldir, suite.suite_name);
     lf = init_log(logfile);
-    if (lf == NULL) {
+    if (!lf) {
       fprintf(stderr, "Failed to initialize logfile\n");
       return(1);
     }
@@ -92,7 +90,6 @@ int suite_vx_exec(const char *xmldir)
     close_log(lf);
   }
 
-  free(suite.tests);
 
   return 0;
 }

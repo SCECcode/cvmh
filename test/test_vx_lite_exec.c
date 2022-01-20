@@ -24,11 +24,9 @@ int test_vx_lite_points_emulation()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test.in");
-  sprintf(outfile, "%s/%s", currentdir, 
-	  "test-8-point-vx-lite-extract-elev.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-8-point-vx-extract-elev.ref");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test.in");
+  sprintf(outfile, "%s/%s", currentdir, "test-8-point-vx-lite-extract-elev.out");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-8-point-vx-extract-elev.ref");
 
   if (test_assert_int(save_test_points(infile), 0) != 0) {
     return(1);
@@ -44,9 +42,6 @@ int test_vx_lite_points_emulation()
   if (test_assert_file(outfile, reffile) != 0) {
     return(1);
   }
-
-  unlink(infile);
-  unlink(outfile);
 
   printf("PASS\n");
   return(0);
@@ -66,11 +61,9 @@ int test_vx_lite_points_depth()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test.in");
-  sprintf(outfile, "%s/%s", currentdir, 
-	  "test-8-point-vx-lite-extract-depth.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-8-point-vx-extract-depth.ref");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test.in");
+  sprintf(outfile, "%s/%s", currentdir, "test-8-point-vx-lite-extract-depth.out");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-8-point-vx-extract-depth.ref");
 
   if (test_assert_int(save_test_points(infile), 0) != 0) {
     printf("save test point failure\n");
@@ -89,9 +82,6 @@ int test_vx_lite_points_depth()
     return(1);
   }
 
-  unlink(infile);
-  unlink(outfile);
-
   printf("PASS\n");
   return(0);
 }
@@ -109,10 +99,9 @@ int test_vx_lite_points_scec()
   /* Save current directory */
   getcwd(currentdir, 128);
 
-  sprintf(infile, "%s/%s", currentdir, "./inputs/test.in");
+  sprintf(infile, "%s/%s", currentdir, "inputs/test.in");
   sprintf(outfile, "%s/%s", currentdir, "test-8-point-vx-lite-extract-scec.out");
-  sprintf(reffile, "%s/%s", currentdir, 
-	  "./ref/test-8-point-vx-extract-scec.ref");
+  sprintf(reffile, "%s/%s", currentdir, "ref/test-8-point-vx-extract-scec.ref");
 
   if (test_assert_int(save_test_points(infile), 0) != 0) {
     printf("save test point failure\n");
@@ -130,9 +119,6 @@ int test_vx_lite_points_scec()
     printf("diff failure\n");
     return(1);
   }
-
-  unlink(infile);
-  unlink(outfile);
 
   printf("PASS\n");
   return(0);
