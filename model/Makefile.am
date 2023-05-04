@@ -1,21 +1,21 @@
 # GNU Automake config
 
-EXTRA_DIST = base@@ *.gts CVM_* cvm_vs30* interfaces.vo model_top@@ \
-	moho@@ topo_dem@@
+EXTRA_DIST = cvmh/base@@ cvmh/*.gts cvmh/CVM_* cvmh/cvm_vs30* cvmh/interfaces.vo cvmh/model_top@@ \
+	cvmh/moho@@ cvmh/topo_dem@@
 
 all:
 
 install:
 	mkdir -p ${prefix}/model
-	cp base@@ ${prefix}/model
-	cp *.gts ${prefix}/model
-	cp CVM_* ${prefix}/model
-	cp CVMSM_* ${prefix}/model
-	cp cvm_vs30* ${prefix}/model
-	cp interfaces.vo ${prefix}/model
-	cp model_top@@ ${prefix}/model
-	cp moho@@ ${prefix}/model
-	cp topo_dem@@ ${prefix}/model
-	cp GFM* ${prefix}/model
+	cp cvmh/base@@ ${prefix}/model
+	cp cvmh/*.gts ${prefix}/model
+	cp cvmh/CVM_* ${prefix}/model
+	cp cvmh/CVMSM_* ${prefix}/model
+	cp cvmh/cvm_vs30* ${prefix}/model
+	cp cvmh/interfaces.vo ${prefix}/model
+	cp cvmh/model_top@@ ${prefix}/model
+	cp cvmh/moho@@ ${prefix}/model
+	cp cvmh/topo_dem@@ ${prefix}/model
+	cp cvmh/GFM* ${prefix}/model
 
 clean:
