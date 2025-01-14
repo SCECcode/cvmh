@@ -1,3 +1,8 @@
+2025-01-13 Mei-Hui Su <mei@usc.edu>
+	* Update configure.ac and model/Makefile.am to use
+          CVM_LARGEDATA_DIR environment variable location for accessing
+          cvmh's src dataset and then soft link to the UCVM_INSTALL_PATH/model/cvmh/model/cvmh 
+
 2015-02-11  Andreas Plesch <andreas_plesch@harvard.edu> and
 	David Gill <davidgil@usc.edu>
 

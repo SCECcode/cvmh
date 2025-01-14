@@ -4,6 +4,8 @@ AC_INIT(cvmh, 11.9.0)
 AC_CONFIG_AUX_DIR([./aux-config])
 AM_INIT_AUTOMAKE()
 AC_PROG_RANLIB
+AC_PROG_MKDIR_P
+AC_PROG_LN_S
 
 # Determine MPI/CC compiler
 : ${CFLAGS=""}
@@ -13,7 +15,6 @@ AC_PROG_CC
 if test "x$ac_compiler_gnu" = "xno"; then
 AC_MSG_ERROR(["GNU C compiler or MPI wrapper based on GNU is required. Please check your programming environment."])
 fi
-
 
 # Parse command-line arguments
 AC_ARG_WITH([gts],
@@ -48,6 +49,19 @@ if test "x$with_gts" = xyes; then
 else
    AM_CONDITIONAL(VX_ENABLE_GTS, false)
 fi
+
+
+##CVMH_LARGETDATA_DIR=$CVM_LARGETDATA_DIR/model/cvmh
+if test x"$CVM_LARGEDATA_DIR" != x; then
+   # test directory existence
+   CVMH_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cvmh
+   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cvmh/CVM_CM.vo, [], [AC_MSG_ERROR(["CVMH data not found in cvm_largedata_dir"])])
+   AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
+   AC_SUBST(CVMH_LARGEDATA_DIR)
+else
+   AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)
+fi
+
 
 CFLAGS="$CFLAGS"
 LDFLAGS="$LDFLAGS -lm"

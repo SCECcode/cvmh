@@ -6,7 +6,11 @@ EXTRA_DIST = cvmh/base@@ cvmh/*.gts cvmh/CVM_* cvmh/cvm_vs30* \
 all:
 
 install:
-	mkdir -p ${prefix}/model
+if WITH_CVMH_LARGEDATA_DIR
+	$(MKDIR_P) ${prefix}/model
+	$(LN_S) $(CVMH_LARGEDATA_DIR) ${prefix}/model
+else
+	$(MKDIR_P) ${prefix}/model
 	cp cvmh/base@@ ${prefix}/model
 	cp cvmh/*.gts ${prefix}/model
 	cp cvmh/CVM_* ${prefix}/model
@@ -17,5 +21,8 @@ install:
 	cp cvmh/moho@@ ${prefix}/model
 	cp cvmh/topo_dem@@ ${prefix}/model
 	cp -r cvmh/tsurf ${prefix}/model
+endif
 
 clean:
+	echo "clean"
+
