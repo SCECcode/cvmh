@@ -51,11 +51,13 @@ else
 fi
 
 
+##check optional large data path 
 ##CVMH_LARGETDATA_DIR=$CVM_LARGETDATA_DIR/model/cvmh
 if test x"$CVM_LARGEDATA_DIR" != x; then
    # test directory existence
    CVMH_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cvmh
-   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cvmh/CVM_CM.vo, [], [AC_MSG_ERROR(["CVMH data not found in cvm_largedata_dir"])])
+# In docker container building.. this is nto accessible  yet
+#   AC_CHECK_FILE($CVM_LARGEDATA_DIR/model/cvmh/CVM_CM.vo, [], [AC_MSG_ERROR(["CVMH data not found in cvm_largedata_dir"])])
    AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
    AC_SUBST(CVMH_LARGEDATA_DIR)
 else
