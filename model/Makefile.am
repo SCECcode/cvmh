@@ -8,7 +8,7 @@ all:
 install:
 if WITH_CVMH_LARGEDATA_DIR
 	$(MKDIR_P) ${prefix}/model
-	$(LN_S) $(CVMH_LARGEDATA_DIR) ${prefix}/model
+	$(LN_S) -f $(CVMH_LARGEDATA_DIR) ${prefix}/model
 else
 	$(MKDIR_P) ${prefix}/model
 	cp cvmh/base@@ ${prefix}/model
