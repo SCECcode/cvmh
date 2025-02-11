@@ -4,6 +4,11 @@ EXTRA_DIST = cvmh/base@@ cvmh/*.gts cvmh/CVM_* cvmh/cvm_vs30* \
 	cvmh/interfaces.vo cvmh/model_top@@ cvmh/moho@@ cvmh/topo_dem@@ cvmh/tsurf
 
 all:
+if WITH_CVMH_LARGEDATA_DIR
+	echo "USING WITH_CVMH_LARGEDATA_DIR in cvmh"
+else
+	./make_data_files.py
+endif
 
 install:
 if WITH_CVMH_LARGEDATA_DIR
