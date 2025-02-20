@@ -11,12 +11,14 @@
 #define MAX_TEST_NAME 32
 
 /* Location of binaries */
+#if !defined(BIN_DIR)
 #define BIN_DIR "../src"
-
+#endif
 
 /* Location of model files */
+#if !defined(MODEL_DIR)
 #define MODEL_DIR "../model/cvmh"
-
+#endif
 
 /* Test  datatype */
 typedef struct test_t {

@@ -1,52 +1,51 @@
 # GNU Automake config
 
-bin_PROGRAMS = unittest accepttest
+SUBDIRS = \
+	inputs \
+	ref
 
+TESTS = unittest accepttest
+
+check_PROGRAMS = unittest accepttest
+
+unittest_SOURCES = \
+	unittest.c \
+	unittest_defs.c \
+	test_helper.c \
+	test_vx_sub.c \
+	test_vx_exec.c \
+	test_vx_lite_exec.c
+unittest_LDADD = $(top_builddir)/src/libvxapi.la $(top_builddir)/gctpc/source/libgctpc.la
+
+accepttest_SOURCES = \
+	accepttest.c \
+	unittest_defs.c \
+	test_helper.c \
+	test_grid.c
+accepttest_LDADD = $(top_builddir)/src/libvxapi.la $(top_builddir)/gctpc/source/libgctpc.la
+
+noinst_HEADERS = \
+	test_grid.h \
+	test_helper.h \
+	test_vx_exec.h \
+	test_vx_lite_exec.h \
+	test_vx_sub.h \
+	unittest_defs.h
 
 # General compiler/linker flags
-AM_CFLAGS = -Wall -O3 -std=c99 -D_LARGEFILE_SOURCE \
-	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -I../src
-AM_LDFLAGS = ${LDFLAGS} -L../src -lvxapi -L../gctpc/source -lgeo -lm
+AM_CFLAGS = -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DBIN_DIR=\"$(prefix)/bin\" -DMODEL_DIR=\"$(datadir)/model/cvmh\"
+AM_CPPFLAGS =-I$(top_srcdir)/src
 
-# Dist sources
-unittest_SOURCES = *.c *.h
-accepttest_SOURCES = *.c *.h
+# Test output files
+noinst_TMP = \
+	test-8-point-vx-extract-elev.out \
+	test-8-point-vx-lite-extract-depth.out \
+	test-8-point-vx-lite-extract-elev.out \
+	test-8-point-vx-lite-extract-scec.out
 
-.PHONY = run_unit run_accept
-
-all: $(bin_PROGRAMS)
-
-
-############################################
-# Executables
-############################################
-
-unittest: unittest.o unittest_defs.o test_helper.o test_vx_sub.o \
-	test_vx_exec.o test_vx_lite_exec.o
-	$(CC) -o $@ $^ $(AM_LDFLAGS)
-
-accepttest: accepttest.o unittest_defs.o test_helper.o test_grid.o
-	$(CC) -o $@ $^ $(AM_LDFLAGS)
-
-test: $(bin_PROGRAMS)
+clean-data:
+	$(RM) $(RM_FLAGS) $(noinst_TMP)
+clean-local: clean-data
 
 
-############################################
-# Special build targets
-############################################
-
-install:
-
-run_unit: unittest
-	./unittest
-
-run_accept: accepttest
-	./accepttest
-
-check: unittest accepttest
-	./unittest
-	./accepttest
-
-clean:
-	rm -rf *~ *.o $(bin_PROGRAMS)
-
+# End of file

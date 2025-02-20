@@ -1,16 +1,12 @@
 # GNU Automake config
 
-EXTRA_DIST = configure
+SUBDIRS = \
+	gctpc \
+	src \
+	model \
+	test \
+	doc \
+	scripts
 
-SUBDIRS = aux-config doc scripts/autoconf scripts/docgen scripts/grid \
-	scripts/interpolate scripts/misc scripts/ts2gts scripts/viz \
-	gctpc gctpc/source src model test test/inputs test/ref
 
-INCLUDES = $(default_includes)
-
-# CruiseControl compatibility declarations
-.PHONY = run_unit run_accept
-run_unit:
-	cd test;$(MAKE) run_unit
-run_accept:
-	cd test;$(MAKE) run_accept
+# End of file

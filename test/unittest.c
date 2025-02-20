@@ -12,7 +12,8 @@
 int main (int argc, char *argv[])
 {
   char *xmldir;
-
+  int err = 0;
+  
   if (argc == 2) {  
     xmldir = argv[1];
   } else {
@@ -20,9 +21,9 @@ int main (int argc, char *argv[])
   }
 
   /* Run test suites */
-  suite_vx_sub(xmldir);
-  suite_vx_exec(xmldir);
-  suite_vx_lite_exec(xmldir);
+  err |= suite_vx_sub(xmldir);
+  err |= suite_vx_exec(xmldir);
+  err |= suite_vx_lite_exec(xmldir);
 
-  return 0;
+  return err;
 }
