@@ -1,49 +1,82 @@
 # GNU Automake config
 
-# General compiler flags
-AM_CFLAGS = -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-
-bin_PROGRAMS = vx vx_lite vx_slice
-
-pkginclude_HEADERS = \
-	coor_para.h \
-	cproj.h \
-	params.h \
-	proj.h \
-	scec1d.h \
-	utils.h \
-	voxet.h \
-	vs30_gtl.h \
-	vx_io.h \
-	vx_sub.h
-
-lib_LTLIBRARIES = libvxapi.la
-
-libvxapi_la_SOURCES = \
-	vx_sub.c \
-	scec1d.c \
-	vs30_gtl.c \
-	vx_io.c \
-	utils.c
-
-libvxapi_la_LIBADD = $(abs_top_builddir)/gctpc/source/libgctpc.la
-
-vx_SOURCES = vx.c
-vx_LDADD = libvxapi.la $(abs_top_builddir)/gctpc/source/libgctpc.la
-
-vx_lite_SOURCES = vx_lite.c
-vx_lite_LDADD = libvxapi.la $(abs_top_builddir)/gctpc/source/libgctpc.la
-
-vx_slice_SOURCES = vx_slice.c
-vx_slice_LDADD = libvxapi.la $(abs_top_builddir)/gctpc/source/libgctpc.la
+lib_LIBRARIES = libvxapi.a libcvmh.a libcvmh.so
+bin_PROGRAMS = vx vx_lite vx_slice run_vx.sh run_vx_lite.sh
+include_HEADERS = vx_sub.h cvmh.h
 
 # Optional cvmdst program
 if VX_ENABLE_GTS
 bin_PROGRAMS += cvmdst
-cvmdst_SOURCES = cvm_dst.c
-cvmdst_LDADD = $(abs_top_builddir)/gctpc/source/libgctpc.la
-cvmdst_LDFLAGS = $(GTS_LDFLAGS)
 endif
 
+# General compiler/linker flags
+AM_CFLAGS = -Wall -O3 -std=c99 -D_LARGEFILE_SOURCE \
+	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -fPIC
+AM_LDFLAGS = ${LDFLAGS} -L../gctpc/source -lgctpc -lm
 
-# End of file
+# Dist sources
+libcvmh_a_SOURCES = vx_sub.c vx_io.c cvmh.c
+vx_lite_cvmh_SOURCES = vx_lite_cvmh.c
+vx_cvmh_SOURCES = cvmh.c vx_cvmh.c
+
+libvxapi_a_SOURCES = vx_sub.c scec1d.c vs30_gtl.c vx_io.c utils.c 
+vx_SOURCES = vx.c
+vx_slice_SOURCES = vx_slice.c
+vx_lite_SOURCES = vx_lite.c
+run_vx_sh_SOURCES = run_vx.sh
+run_vx_lite_sh_SOURCES = run_vx_lite.sh
+
+if VX_ENABLE_GTS
+cvmdst_SOURCES = cvm_dst.c
+endif
+
+all: $(lib_LIBRARIES) $(bin_PROGRAMS)
+
+
+############################################
+# Executables
+############################################
+
+libcvmh.a: vx_sub.o vx_io.o utils.o cvmh_static.o vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
+	$(AR) rcs $@ $^
+
+libcvmh.so: vx_sub.o vx_io.o utils.o cvmh.o vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
+	$(CC) -shared $(AM_CFLAGS) -o libcvmh.so $^ $(AM_LDFLAGS)
+
+vx: vx.o
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
+
+vx_lite: vx_lite.o libvxapi.a
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
+
+vx_slice: vx_slice.o libvxapi.a
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
+
+run_vx.sh:
+
+run_vx_lite.sh:
+
+cvmdst: cvm_dst.o
+	$(CC) -o $@ $^ $(AM_LDFLAGS)
+
+cvmh_static.o: cvmh.c
+	$(CC) -o $@ -c $^ $(AM_CFLAGS)
+
+libvxapi: vx_sub.o vx_io.o utils.o 
+	$(AR) rcs $@ $^
+
+cvmh.o: cvmh.c
+	$(CC) -fPIC -DDYNAMIC_LIBRARY -o $@ -c $^ $(AM_CFLAGS)
+
+install:
+	mkdir -p ${prefix}
+	mkdir -p ${prefix}/lib
+	mkdir -p ${prefix}/include
+	cp libcvmh.so ${prefix}/lib
+	cp libcvmh.a ${prefix}/lib
+	cp cvmh.h ${prefix}/include
+
+clean:
+	rm -f *~ *.a *.o vx$(EXEEXT) vx_lite$(EXEEXT) \
+	vx_slice$(EXEEXT) cvmdst$(EXEEXT)
+

@@ -1,14 +1,14 @@
 # GNU Automake config
 
-lib_LTLIBRARIES = libgctpc.la
+lib_LIBRARIES = libgctpc.a
 
 # Set compiler/linker flags
-AM_CFLAGS = -D_GNU_SOURCE -fno-builtin
+AM_CFLAGS = -D_GNU_SOURCE -fno-builtin -fPIC
 AM_LDFLAGS = $(LDFLAGS)
 
 
 # Dist sources
-libgctpc_la_SOURCES = \
+libgctpc_a_SOURCES = \
 	gctp.c \
 	alberfor.c \
 	alberinv.c \

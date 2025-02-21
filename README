@@ -2,8 +2,9 @@ CVM-H 15.1.0 README
 
 To install this package on your computer, please run the following commands:
 
+libtoolize
 aclocal
-automake --add-missing
+automake --add-missing -f
 autoconf
 ./configure --prefix=folder/to/install/to
 cd model; ./make_data_files.py -d cvmh1511 -u uid
