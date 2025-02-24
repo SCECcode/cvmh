@@ -18,6 +18,7 @@
 #include "params.h"
 #include "vx_sub.h"
 
+int debug=0;
 
 /* Usage function */
 void usage() {
@@ -124,6 +125,18 @@ int main (int argc, char *argv[])
       /* Query the point */
       vx_getcoord(&entry);
 
+if(debug) {
+  printf("\nX||lonlat(%.6f %.6f %.4f)\n",
+               entry.coor[0], entry.coor[1], entry.coor[2]);
+  /* AP: Let's provide the computed UTM coordinates as well */
+  printf("X||utm(%.2f %.2f)\n", entry.coor_utm[0], entry.coor_utm[1]);
+  printf("X||elev_cell(%10.2f %11.2f)\n", entry.elev_cell[0], entry.elev_cell[1]);
+  printf("X||topo(%.2f) mtop(%.2f) base(%.2f) moho(%.2f)\n", entry.topo, entry.mtop, entry.base, entry.moho);
+  printf("X||src(%s) vel_cell(%.2f %.2f %.2f) provenance(%.2f)\n", VX_SRC_NAMES[entry.data_src],
+            entry.vel_cell[0], entry.vel_cell[1], entry.vel_cell[2], entry.provenance);
+  printf("X||vp(%.4f) vs(%.4f) rho(%.4f)\n", entry.vp, entry.vs, entry.rho);
+}
+
       /*** Prevent all to obvious bad coordinates from being displayed */
       if (entry.coor[1]<10000000) {
 	//printf("%14.6f %15.6f %9.2f ", 
@@ -149,3 +162,11 @@ int main (int argc, char *argv[])
 
   return 0;
 }
+
+
+/*******************  Example  ******
+r:
+./vx_lite -g -m /var/www/html/UCVM_test/web/model/UCVM_TARGET/model/cvmh/data/cvmh -z elev < indata
+indata: 
+-118 34 0
+************************************/

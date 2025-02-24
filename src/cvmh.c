@@ -53,47 +53,55 @@ int cvmh_zmode = VX_ZMODE_DEPTH;
  * @return Success or failure, if initialization was successful.
  */
 int cvmh_init(const char *dir, const char *label) {
-	char configbuf[512];
+    char configbuf[512];
 
-	// Initialize variables.
-	cvmh_configuration = calloc(1, sizeof(cvmh_configuration_t));
-	cvmh_velocity_model = calloc(1, sizeof(cvmh_model_t));
-	cvmh_config_string = calloc(CVMH_CONFIG_MAX, sizeof(char));
-        cvmh_config_string[0]='\0';
+    // Initialize variables.
+    cvmh_configuration = calloc(1, sizeof(cvmh_configuration_t));
+    cvmh_velocity_model = calloc(1, sizeof(cvmh_model_t));
+    cvmh_config_string = calloc(CVMH_CONFIG_MAX, sizeof(char));
+    cvmh_config_string[0]='\0';
 
-	// Configuration file location when built with UCVM
-	sprintf(configbuf, "%s/model/%s/data/config", dir, label);
+    // Configuration file location when built with UCVM
+    sprintf(configbuf, "%s/model/%s/data/config", dir, label);
 
-	// Read the configuration file.
-	if (cvmh_read_configuration(configbuf, cvmh_configuration) != UCVM_CODE_SUCCESS) {
+    // Read the configuration file.
+    if (cvmh_read_configuration(configbuf, cvmh_configuration) != UCVM_CODE_SUCCESS) {
 
            // Try another, when is running in standalone mode..
-	   sprintf(configbuf, "%s/data/config", dir);
-	   if (cvmh_read_configuration(configbuf, cvmh_configuration) != UCVM_CODE_SUCCESS) {
-               cvmh_print_error("No configuration file was found to read from.");
-               return UCVM_CODE_ERROR;
-               } else {
-	       // Set up the data directory.
-	       sprintf(cvmh_data_directory, "%s/data/%s", dir, cvmh_configuration->model_dir);
-           }
+       sprintf(configbuf, "%s/data/config", dir);
+       if (cvmh_read_configuration(configbuf, cvmh_configuration) != UCVM_CODE_SUCCESS) {
+           cvmh_print_error("No configuration file was found to read from.");
+           return UCVM_CODE_ERROR;
            } else {
-	   // Set up the data directory.
-	   sprintf(cvmh_data_directory, "%s/model/%s/data/%s", dir, label, cvmh_configuration->model_dir);
-        }
+           // Set up the data directory.
+               sprintf(cvmh_data_directory, "%s/data/%s", dir, cvmh_configuration->model_dir);
+       }
+       } else {
+       // Set up the data directory.
+            sprintf(cvmh_data_directory, "%s/model/%s/data/%s", dir, label, cvmh_configuration->model_dir);
+    }
 
-        /* Init vx */
-        if (vx_setup(cvmh_data_directory) != 0) {
+    /* Init vx */
+    if (vx_setup(cvmh_data_directory) != 0) {
           return UCVM_CODE_ERROR;
-        }
+    }
 
-        /* setup config_string  interp=0 or interp= 1*/
-        sprintf(cvmh_config_string,"config = %s, interp = %d\n",configbuf, cvmh_configuration->interp);
-        cvmh_config_sz=2;
+    /* setup config_string  interp=0 or interp= 1*/
+    sprintf(cvmh_config_string,"config = %s, interp = %d\n",configbuf, cvmh_configuration->interp);
+    cvmh_config_sz=2;
 
-	// Let everyone know that we are initialized and ready for business.
-	cvmh_is_initialized = 1;
+    if(cvmh_configuration->bkg) {
+       vx_register_scec();
+       } else { 
+           vx_register_bkg(NULL);
+    }
 
-	return UCVM_CODE_SUCCESS;
+    vx_setgtl(cvmh_configuration->gtl);
+
+    // Let everyone know that we are initialized and ready for business.
+    cvmh_is_initialized = 1;
+
+    return UCVM_CODE_SUCCESS;
 }
 
 /**  
@@ -295,14 +303,14 @@ int cvmh_finalize() {
 #else
         vx_cleanup();
 #endif
-	cvmh_is_initialized = 0;
+    cvmh_is_initialized = 0;
 
-	free(cvmh_configuration);
-	free(cvmh_velocity_model);
-	free(cvmh_config_string);
-	cvmh_config_sz=0;
+    free(cvmh_configuration);
+    free(cvmh_velocity_model);
+    free(cvmh_config_string);
+    cvmh_config_sz=0;
 
-	return UCVM_CODE_SUCCESS;
+    return UCVM_CODE_SUCCESS;
 }
 
 /**
@@ -347,52 +355,59 @@ int cvmh_config(char **config, int *sz)
  * @return Success or failure, depending on if file was read successfully.
  */
 int cvmh_read_configuration(char *file, cvmh_configuration_t *config) {
-	FILE *fp = fopen(file, "r");
-	char key[40];
-	char value[80];
-	char line_holder[128];
+    FILE *fp = fopen(file, "r");
+    char key[40];
+    char value[80];
+    char line_holder[128];
 
-	// If our file pointer is null, an error has occurred. Return fail.
-	if (fp == NULL) {
-		return UCVM_CODE_ERROR;
-	}
+    // If our file pointer is null, an error has occurred. Return fail.
+    if (fp == NULL) {
+        return UCVM_CODE_ERROR;
+    }
 
         config->interp=0;
 
-	// Read the lines in the configuration file.
-	while (fgets(line_holder, sizeof(line_holder), fp) != NULL) {
-		if (line_holder[0] != '#' && line_holder[0] != ' ' && line_holder[0] != '\n') {
-			sscanf(line_holder, "%s = %s", key, value);
+    // Read the lines in the configuration file.
+    while (fgets(line_holder, sizeof(line_holder), fp) != NULL) {
+        if (line_holder[0] != '#' && line_holder[0] != ' ' && line_holder[0] != '\n') {
+            sscanf(line_holder, "%s = %s", key, value);
 
-			// Which variable are we editing?
-			if (strcmp(key, "utm_zone") == 0)
-  				config->utm_zone = atoi(value);
-			if (strcmp(key, "model_dir") == 0)
-				sprintf(config->model_dir, "%s", value);
-			if (strcmp(key, "interp") == 0)
-  				config->interp = atoi(value);
-		}
-	}
+            // Which variable are we editing?
+            if(cvmh_ucvm_debug) fprintf(stderr,"X|| %s is %s\n", key, value);
+	    
+            if (strcmp(key, "utm_zone") == 0) { config->utm_zone = atoi(value); }
+            if (strcmp(key, "model_dir") == 0) { sprintf(config->model_dir, "%s", value); }
+            if (strcmp(key, "interp") == 0) { config->interp = atoi(value); }
+            if (strcmp(key, "use_gtl") == 0) {
+                config->gtl = 0;
+                if(strcmp(value,"True") == 0) { config->gtl = 1; }
+            }
+            if (strcmp(key, "use_1d_bkg") == 0) {
+                config->bkg = 0;
+                if(strcmp(value,"True") == 0 ) { config->bkg = 1; }
+            }
+        }
+    }
 
-	// Have we set up all configuration parameters?
-	if (config->utm_zone == 0 || config->model_dir[0] == '\0' ) {
-		cvmh_print_error("One configuration parameter not specified. Please check your configuration file.");
-		return UCVM_CODE_ERROR;
-	}
+    // Have we set up all configuration parameters?
+    if (config->utm_zone == 0 || config->model_dir[0] == '\0' ) {
+        cvmh_print_error("One configuration parameter not specified. Please check your configuration file.");
+        return UCVM_CODE_ERROR;
+    }
 
-	fclose(fp);
+    fclose(fp);
 
-	return UCVM_CODE_SUCCESS;
+    return UCVM_CODE_SUCCESS;
 }
 
 /*
  * @param err The error string to print out to stderr.
  */
 void cvmh_print_error(char *err) {
-	fprintf(stderr, "An error has occurred while executing CVMH. The error was:\n\n");
-	fprintf(stderr, "%s", err);
-	fprintf(stderr, "\n\nPlease contact software@scec.org and describe both the error and a bit\n");
-	fprintf(stderr, "about the computer you are running CVMH on (Linux, Mac, etc.).\n");
+    fprintf(stderr, "An error has occurred while executing CVMH. The error was:\n\n");
+    fprintf(stderr, "%s", err);
+    fprintf(stderr, "\n\nPlease contact software@scec.org and describe both the error and a bit\n");
+    fprintf(stderr, "about the computer you are running CVMH on (Linux, Mac, etc.).\n");
 }
 
 // The following functions are for dynamic library mode. If we are compiling
@@ -407,7 +422,7 @@ void cvmh_print_error(char *err) {
  */
 int model_init(const char *dir, const char *label) {
 
-	return cvmh_init(dir, label);
+    return cvmh_init(dir, label);
 }
 
 /**
@@ -419,7 +434,7 @@ int model_init(const char *dir, const char *label) {
  * @return Success or fail.
  */
 int model_query(cvmh_point_t *points, cvmh_properties_t *data, int numpoints) {
-	return cvmh_query(points, data, numpoints);
+    return cvmh_query(points, data, numpoints);
 }
 
 /**
@@ -431,7 +446,7 @@ int model_query(cvmh_point_t *points, cvmh_properties_t *data, int numpoints) {
  * @return Success or fail.
  */
 int model_setparam(int id, int param, int val) {
-	return cvmh_setparam(id, param, val);
+    return cvmh_setparam(id, param, val);
 }
 
 /**
@@ -440,7 +455,7 @@ int model_setparam(int id, int param, int val) {
  * @return Success
  */
 int model_finalize() {
-	return cvmh_finalize();
+    return cvmh_finalize();
 }
 
 /**
@@ -451,7 +466,7 @@ int model_finalize() {
  * @return Zero
  */
 int model_version(char *ver, int len) {
-	return cvmh_version(ver, len);
+    return cvmh_version(ver, len);
 }
 
 /**

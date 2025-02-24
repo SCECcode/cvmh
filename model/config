@@ -5,3 +5,7 @@ utm_zone = 11
 model_dir = cvmh 
 model_data_path  = https://g-c662a6.a78b8.36fe.data.globus.org/ucvm/models
 
+## default is True
+use_gtl = False
+## use SCEC 1D background if set to True
+use_1d_bkg = False

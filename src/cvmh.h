@@ -63,6 +63,10 @@ typedef struct cvmh_configuration_t {
 	char model_dir[1000];
         /** interp */
 	int interp;
+        /** gtl - default=True*/
+	int gtl;
+        /** use scec 1d backgorund - default=True*/
+	int bkg;
 
 } cvmh_configuration_t;
 
