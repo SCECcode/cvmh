@@ -271,14 +271,8 @@ fprintf(stderr," **** in HERE looking for a new surface ..\n");
         }
       }
 
-/** XXX ??? from old src/ucvm/...
-if (entry.data_src == VX_SRC_NR) {
-    datagap = 1;
-}
-**/
-
       // 1 is bad, 0 is good and anything not in HR region/ie cvmh 
-      if(rc || entry.data_src != VX_SRC_HR) { 
+      if(rc || entry.data_src == VX_SRC_NR) { 
         data[i].vp=-1;
         data[i].vs=-1;
         data[i].rho=-1;
@@ -286,7 +280,7 @@ if (entry.data_src == VX_SRC_NR) {
           data[i].vp=entry.vp;
           data[i].vs=entry.vs;
           data[i].rho=entry.rho;
-      }
+       }	   
 
   }
   return UCVM_CODE_SUCCESS;
