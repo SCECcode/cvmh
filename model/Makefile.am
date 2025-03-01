@@ -12,23 +12,19 @@ endif
 
 install:
 if WITH_CVMH_LARGEDATA_DIR
-	$(MKDIR_P) ${prefix}/data
-	$(LN_S) -f $(CVMH_LARGEDATA_DIR) ${prefix}/data/cvmh
+	if [ ! -d "${prefix}/data/cvmh" ]; then \
+		$(MKDIR_P) ${prefix}/data; \
+		$(LN_S) -f $(CVMH_LARGEDATA_DIR) ${prefix}/data/cvmh; \
+		echo "USING WITH_CVMH_LARGEDATA_DIR in cvmh"; \
+	fi
 	cp config ${prefix}/data
-	echo "USING WITH_CVMH_LARGEDATA_DIR in cvmh"
 else
-	$(MKDIR_P) ${prefix}/data/cvmh
+	if [ ! -d "${prefix}/data/cvmh" ]; then \
+		$(MKDIR_P) ${prefix}/data; \
+		mv cvmh ${prefix}/data; \
+		$(LN_S) -f ${prefix}/data/cvmh .; \
+	fi
 	cp config ${prefix}/data
-	cp cvmh/base@@ ${prefix}/data/cvmh
-	cp cvmh/*.gts ${prefix}/data/cvmh
-	cp cvmh/CVM_* ${prefix}/data/cvmh
-	cp cvmh/CVMSM_* ${prefix}/data/cvmh
-	cp cvmh/cvm_vs30* ${prefix}/data/cvmh
-	cp cvmh/interfaces.vo ${prefix}/data/cvmh
-	cp cvmh/model_top@@ ${prefix}/data/cvmh
-	cp cvmh/moho@@ ${prefix}/data/cvmh
-	cp cvmh/topo_dem@@ ${prefix}/data/cvmh
-	cp -r cvmh/tsurf ${prefix}/data/cvmh
 endif
 
 clean:
