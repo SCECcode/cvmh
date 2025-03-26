@@ -3,6 +3,11 @@
 Southern California Velocity Model developed by Harvard Structural Geology Group
 with optional geotechnical layer
 
+The SCEC CVM-H velocity model describes seismic P- and S-wave velocities and densities,
+and is comprised of basin structures embedded in tomographic and teleseismic crust and 
+upper mantle models. This latest release of the CVM-H (15.1.1) represents the integration 
+of various model components, including fully 3D waveform tomographic results.
+
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
