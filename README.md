@@ -1,5 +1,9 @@
 # CVM-H
 
+[![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org
+/licenses/BSD-3-Clause)
+
+
 Southern California Velocity Model developed by Harvard Structural Geology Group
 with optional geotechnical layer
 
@@ -11,7 +15,7 @@ of various model components, including fully 3D waveform tomographic results.
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
-version 19.4.0 or higher.
+version 25.x or higher.
 
 ## Contact the authors
 
@@ -22,8 +26,7 @@ do I link the library properly?). Questions regarding the model's
 science (e.g. on what paper is the CVMH based?) should be directed
 to the model's authors, located in the AUTHORS file.
 
-
-CVM-H 15.1.0 README
+## To build in standalone mode
 
 To install this package on your computer, please run the following commands:
 
@@ -37,7 +40,4 @@ make
 make install
 
 For documentation, please see http://scec.usc.edu/scecpedia/CVM-H.
-
-If you have questions, please contact software@scec.org and we will be happy to assist
-you in installing this software.
 
