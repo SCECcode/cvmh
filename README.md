@@ -29,6 +29,7 @@ to the model's authors, located in the AUTHORS file.
 
 To install this package on your computer, please run the following commands:
 
+<pre>
   libtoolize
   aclocal
   automake --add-missing -f
@@ -37,6 +38,7 @@ To install this package on your computer, please run the following commands:
   cd model; ./make_data_files.py -d cvmh1511 -u uid
   make
   make install
+</pre>
 
 For documentation, please see http://scec.usc.edu/scecpedia/CVM-H.
 
