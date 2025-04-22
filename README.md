@@ -29,14 +29,14 @@ to the model's authors, located in the AUTHORS file.
 
 To install this package on your computer, please run the following commands:
 
-libtoolize
-aclocal
-automake --add-missing -f
-autoconf
-./configure --prefix=folder/to/install/to
-cd model; ./make_data_files.py -d cvmh1511 -u uid
-make
-make install
+  libtoolize
+  aclocal
+  automake --add-missing -f
+  autoconf
+  ./configure --prefix=folder/to/install/to
+  cd model; ./make_data_files.py -d cvmh1511 -u uid
+  make
+  make install
 
 For documentation, please see http://scec.usc.edu/scecpedia/CVM-H.
 
