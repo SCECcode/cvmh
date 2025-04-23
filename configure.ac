@@ -93,7 +93,7 @@ if test x"$CVM_LARGEDATA_DIR" != x; then
        else
          AC_CHECK_FILE([$CVMH_LARGEDATA_DIR/CVM_CM.vo], 
                  [AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true) AC_SUBST(CVMH_LARGEDATA_DIR)],
-                 AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)])
+                 [AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)])
    fi
 else
    AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)
