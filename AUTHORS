@@ -1,11 +1,15 @@
+All correspondance regarding SCEC CVM-H should be directed to software@scec.org.
+Any scientific questions regarding this model should be directed to the 
+researchers behind this model.
+
 Andreas Plesch <andreas_plesch@harvard.edu>
 Carl Tape <carltape@fas.harvard.edu>
 John Shaw <shaw@eps.harvard.edu>
 Patrick Small <patrices@usc.edu>
 David Gill <davidgil@usc.edu>
 
-All correspondance regarding SCEC CVM-H should be directed to software@scec.org,
-including suggestions, feature requests, and bug reports.
+The data and code for this model is based off of the following paper:
 
-
-
+Shaw, J. H., et al. (2015), Unified structural representation of the southern 
+      California crust and upper mantle, Earth Planet. Sci. Lett., 415, 1–15,
+      doi:10.1016/j.epsl.2015.01.016
