@@ -88,10 +88,10 @@ if test x"$CVM_LARGEDATA_DIR" != x; then
    CVMH_LARGEDATA_DIR=$CVM_LARGEDATA_DIR/model/cvmh
 # In docker container building.. this is nto accessible  yet
    if test x"$CVM_IN_DOCKER" != x; then
-         AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
-         AC_SUBST(CVMH_LARGEDATA_DIR])
-       else
-         AC_CHECK_FILE([$CVMH_LARGEDATA_DIR/CVM_CM.vo], 
+     AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true)
+     AC_SUBST(CVMH_LARGEDATA_DIR)
+   else
+     AC_CHECK_FILE([$CVMH_LARGEDATA_DIR/CVM_CM.vo], 
                  [AM_CONDITIONAL([WITH_CVMH_LARGEDATA_DIR], true) AC_SUBST(CVMH_LARGEDATA_DIR)],
                  [AM_CONDITIONAL(WITH_CVMH_LARGEDATA_DIR, false)])
    fi
