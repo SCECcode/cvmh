@@ -1,6 +1,8 @@
 # CVM-H
 
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
+![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cvmh)
+[![cvmh-ucvm-ci Actions Status](https://github.com/SCECcode/cvmh/workflows/cvmh-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmh/actions)
 
 
 Southern California Velocity Model developed by Harvard Structural Geology Group
@@ -30,10 +32,9 @@ to the model's authors, located in the AUTHORS file.
 To install this package on your computer, please run the following commands:
 
 <pre>
-  libtoolize
-  aclocal
-  automake --add-missing -f
+  aclocal -I m4
   autoconf
+  automake --add-missing -f
   ./configure --prefix=folder/to/install/to
   cd model; ./make_data_files.py -d cvmh1511 -u uid
   make

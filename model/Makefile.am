@@ -7,7 +7,9 @@ all:
 if WITH_CVMH_LARGEDATA_DIR
 	echo "USING WITH_CVMH_LARGEDATA_DIR in cvmh"
 else
-	./make_data_files.py
+	if [ ! -d "cvmh" ]; then \
+		./make_data_files.py; \
+	fi
 endif
 
 install:
