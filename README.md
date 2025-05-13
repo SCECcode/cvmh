@@ -32,6 +32,7 @@ to the model's authors, located in the AUTHORS file.
 To install this package on your computer, please run the following commands:
 
 <pre>
+  libtoolize
   aclocal -I m4
   autoconf
   automake --add-missing -f

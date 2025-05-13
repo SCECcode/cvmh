@@ -19,7 +19,7 @@ int test_vx_points()
   char reffile[128];
   char currentdir[128];
 
-  printf("Test: vx executable\n");
+  printf("\nTest: vx executable\n");
 
   /* Save current directory */
   getcwd(currentdir, 128);

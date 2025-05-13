@@ -1,6 +1,6 @@
 # GNU Automake config
 
-lib_LIBRARIES = libvxapi.a libcvmh.a libcvmh.so
+lib_LIBRARIES = libvxapi.a libcvmh.a
 bin_PROGRAMS = vx vx_lite vx_slice run_vx.sh run_vx_lite.sh
 include_HEADERS = vx_sub.h cvmh.h
 
@@ -30,7 +30,7 @@ if VX_ENABLE_GTS
 cvmdst_SOURCES = cvm_dst.c
 endif
 
-all: $(lib_LIBRARIES) $(bin_PROGRAMS)
+all: $(bin_PROGRAMS) $(lib_LIBRARIES) libcvmh.so
 
 
 ############################################
@@ -43,20 +43,19 @@ libcvmh.a: vx_sub.o vx_io.o utils.o cvmh_static.o vx_sub.o scec1d.o vs30_gtl.o v
 libcvmh.so: vx_sub.o vx_io.o utils.o cvmh.o vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
 	$(CC) -shared $(AM_CFLAGS) -o libcvmh.so $^ $(AM_LDFLAGS)
 
-vx: vx.o
+vx$(EXEEXT): vx.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
-vx_lite: vx_lite.o libvxapi.a
+vx_lite$(EXEEXT): vx_lite.o libvxapi.a
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
-vx_slice: vx_slice.o libvxapi.a
+vx_slice$(EXEEXT): vx_slice.o libvxapi.a
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
-run_vx.sh:
+#run_vx.sh:
+#run_vx_lite.sh:
 
-run_vx_lite.sh:
-
-cvmdst: cvm_dst.o
+cvmdst$(EXEEXT): cvm_dst.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
 cvmh_static.o: cvmh.c
@@ -72,9 +71,12 @@ install:
 	mkdir -p ${prefix}
 	mkdir -p ${prefix}/lib
 	mkdir -p ${prefix}/include
+	mkdir -p ${prefix}/bin
 	cp libcvmh.so ${prefix}/lib
 	cp libcvmh.a ${prefix}/lib
 	cp cvmh.h ${prefix}/include
+	cp vx_lite ${prefix}/bin
+	cp vx ${prefix}/bin
 
 clean:
 	rm -f *~ *.a *.o vx$(EXEEXT) vx_lite$(EXEEXT) \

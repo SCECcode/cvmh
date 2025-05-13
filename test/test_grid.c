@@ -18,7 +18,7 @@ int test_vx_grid()
   char reffile[128];
   char currentdir[128];
 
-  printf("Test: vx executable w/ large grid\n");
+  printf("\nTest: vx executable w/ large grid\n");
 
   /* Save current directory */
   getcwd(currentdir, 128);
@@ -52,7 +52,7 @@ int test_vx_lite_grid_emul()
   char reffile[128];
   char currentdir[128];
 
-  printf("Test: vx_lite executable w/ large grid in emulation mode\n");
+  printf("\nTest: vx_lite executable w/ large grid in emulation mode\n");
 
   /* Save current directory */
   getcwd(currentdir, 128);
@@ -86,7 +86,7 @@ int test_vx_lite_grid_depth()
   char reffile[128];
   char currentdir[128];
 
-  printf("Test: vx_lite executable w/ large grid in depth mode\n");
+  printf("\nTest: vx_lite executable w/ large grid in depth mode\n");
 
   /* Save current directory */
   getcwd(currentdir, 128);
@@ -120,7 +120,7 @@ int test_vx_lite_grid_offset()
   char reffile[128];
   char currentdir[128];
 
-  printf("Test: vx_lite executable w/ large grid in elev offset mode\n");
+  printf("\nTest: vx_lite executable w/ large grid in elev offset mode\n");
 
   /* Save current directory */
   getcwd(currentdir, 128);

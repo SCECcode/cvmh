@@ -12,7 +12,7 @@
 
 int test_setup()
 {
-  printf("Test: vx_setup() and vx_cleanup()\n");
+  printf("\nTest: vx_setup() and vx_cleanup()\n");
 
   if (test_assert_int(vx_setup(MODEL_DIR), 0) != 0) {
     return(1);
@@ -32,7 +32,7 @@ int test_init_entry()
   vx_entry_t entry;
   int j;
 
-  printf("Test: vx_init_entry()\n");
+  printf("\nTest: vx_init_entry()\n");
 
   memset(&entry, 1, sizeof(vx_entry_t));
 
@@ -100,7 +100,7 @@ int test_init_voxel()
   vx_voxel_t voxel;
   int j;
 
-  printf("Test: vx_init_voxel()\n");
+  printf("\nTest: vx_init_voxel()\n");
 
   memset(&voxel, 1, sizeof(vx_voxel_t));
 
@@ -164,7 +164,7 @@ int test_getsurface()
   vx_coord_t coord_types[MAX_TEST_POINTS];
   float surf_values[MAX_TEST_POINTS];
 
-  printf("Test: vx_getsurface()\n");
+  printf("\nTest: vx_getsurface()\n");
 
   get_test_points(x, y, z, coord_types);
   get_surf_values(surf_values);
@@ -204,7 +204,7 @@ int test_query_no_1d()
   float vp_values[MAX_TEST_POINTS], vs_values[MAX_TEST_POINTS];
   double rho_values[MAX_TEST_POINTS];
 
-  printf("Test: vx_getcoord() w/o SCEC 1D\n");
+  printf("\nTest: vx_getcoord() w/o SCEC 1D\n");
 
   get_test_points(x, y, z, coord_types);
   get_mat_props(vp_values, vs_values, rho_values, VX_TEST_DATASET_NOBKG);
@@ -251,7 +251,7 @@ int test_query_1d()
   float vp_values[MAX_TEST_POINTS], vs_values[MAX_TEST_POINTS];
   double rho_values[MAX_TEST_POINTS];
 
-  printf("Test: vx_getcoord() w/ SCEC 1D\n");
+  printf("\nTest: vx_getcoord() w/ SCEC 1D\n");
 
   get_test_points(x, y, z, coord_types);
   get_mat_props(vp_values, vs_values, rho_values, VX_TEST_DATASET_BKG);
@@ -292,7 +292,7 @@ int test_register_bkg()
 {
   vx_entry_t entry;
 
-  printf("Test: vx_register_bkg()\n");
+  printf("\nTest: vx_register_bkg()\n");
 
   if (test_assert_int(vx_setup(MODEL_DIR), 0) != 0) {
     return(1);
@@ -334,7 +334,7 @@ int test_query_nogtl()
   float vp_values[MAX_TEST_POINTS], vs_values[MAX_TEST_POINTS];
   double rho_values[MAX_TEST_POINTS];
 
-  printf("Test: vx_getcoord() w/ no GTL\n");
+  printf("\nTest: vx_getcoord() w/ no GTL\n");
 
   get_test_points(x, y, z, coord_types);
   get_mat_props(vp_values, vs_values, rho_values, VX_TEST_DATASET_NOGTL);
