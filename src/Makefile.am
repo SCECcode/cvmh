@@ -30,7 +30,7 @@ if VX_ENABLE_GTS
 cvmdst_SOURCES = cvm_dst.c
 endif
 
-all: $(bin_PROGRAMS) $(lib_LIBRARIES) libcvmh.so
+all: $(bin_PROGRAMS) $(lib_LIBRARIES) libcvmh.so libvxapi.so
 
 
 ############################################
@@ -41,19 +41,16 @@ libcvmh.a: vx_sub.o vx_io.o utils.o cvmh_static.o vx_sub.o scec1d.o vs30_gtl.o v
 	$(AR) rcs $@ $^
 
 libcvmh.so: vx_sub.o vx_io.o utils.o cvmh.o vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o
-	$(CC) -shared $(AM_CFLAGS) -o libcvmh.so $^ $(AM_LDFLAGS)
+	$(CC) -shared -o libcvmh.so $^ $(AM_LDFLAGS)
 
 vx$(EXEEXT): vx.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
-vx_lite$(EXEEXT): vx_lite.o libvxapi.a
+vx_lite$(EXEEXT): vx_lite.o libvxapi.so
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
 
-vx_slice$(EXEEXT): vx_slice.o libvxapi.a
+vx_slice$(EXEEXT): vx_slice.o libvxapi.so
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
-
-#run_vx.sh:
-#run_vx_lite.sh:
 
 cvmdst$(EXEEXT): cvm_dst.o
 	$(CC) -o $@ $^ $(AM_LDFLAGS)
@@ -61,8 +58,12 @@ cvmdst$(EXEEXT): cvm_dst.o
 cvmh_static.o: cvmh.c
 	$(CC) -o $@ -c $^ $(AM_CFLAGS)
 
-libvxapi: vx_sub.o vx_io.o utils.o 
+libvxapi.a: vx_sub.o vx_io.o utils.o 
 	$(AR) rcs $@ $^
+
+libvxapi.so: vx_sub.o scec1d.o vs30_gtl.o vx_io.o utils.o 
+	$(CC) -shared -o libvxapi.so $^ $(AM_LDFLAGS)
+
 
 cvmh.o: cvmh.c
 	$(CC) -fPIC -DDYNAMIC_LIBRARY -o $@ -c $^ $(AM_CFLAGS)

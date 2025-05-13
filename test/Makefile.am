@@ -14,7 +14,7 @@ unittest_SOURCES = \
 	test_vx_exec.c \
 	test_vx_lite_exec.c
 #unittest_LDADD = $(top_builddir)/src/libvxapi.la $(top_builddir)/gctpc/source/libgctpc.la
-unittest_LDADD = $(top_builddir)/src/libvxapi.a $(top_builddir)/gctpc/source/libgctpc.a
+unittest_LDADD = $(top_builddir)/src/libvxapi.so $(top_builddir)/gctpc/source/libgctpc.so
 
 accepttest_SOURCES = \
 	accepttest.c \
@@ -22,7 +22,7 @@ accepttest_SOURCES = \
 	test_helper.c \
 	test_grid.c
 #accepttest_LDADD = $(top_builddir)/src/libvxapi.la $(top_builddir)/gctpc/source/libgctpc.la
-accepttest_LDADD = $(top_builddir)/src/libvxapi.a $(top_builddir)/gctpc/source/libgctpc.a
+accepttest_LDADD = $(top_builddir)/src/libvxapi.so $(top_builddir)/gctpc/source/libgctpc.so
 
 noinst_HEADERS = \
 	test_grid.h \
