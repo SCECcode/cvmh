@@ -75,6 +75,8 @@ install:
 	mkdir -p ${prefix}/bin
 	cp libcvmh.so ${prefix}/lib
 	cp libcvmh.a ${prefix}/lib
+	cp libvxapi.so ${prefix}/lib
+	cp libvxapi.a ${prefix}/lib
 	cp cvmh.h ${prefix}/include
 	cp vx_lite ${prefix}/bin
 	cp vx ${prefix}/bin
