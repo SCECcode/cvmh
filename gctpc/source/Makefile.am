@@ -6,7 +6,7 @@ lib_LIBRARIES = libgctpc.a
 all: libgctpc.a libgctpc.so
 
 # Set compiler/linker flags
-AM_CFLAGS = -D_GNU_SOURCE -fno-builtin -fPIC
+AM_CFLAGS = $(CFLAGS) -D_GNU_SOURCE -fno-builtin -fPIC
 AM_LDFLAGS = $(LDFLAGS)
 
 # Dist sources
