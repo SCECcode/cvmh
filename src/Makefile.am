@@ -1,6 +1,7 @@
 # GNU Automake config
 
 lib_LIBRARIES = libvxapi.a libcvmh.a
+
 bin_PROGRAMS = vx vx_lite vx_slice run_vx.sh run_vx_lite.sh
 include_HEADERS = vx_sub.h cvmh.h
 
@@ -16,10 +17,12 @@ AM_LDFLAGS = ${LDFLAGS} -L../gctpc/source -lgctpc -lm
 
 # Dist sources
 libcvmh_a_SOURCES = vx_sub.c vx_io.c cvmh.c
+
 vx_lite_cvmh_SOURCES = vx_lite_cvmh.c
 vx_cvmh_SOURCES = cvmh.c vx_cvmh.c
 
 libvxapi_a_SOURCES = vx_sub.c scec1d.c vs30_gtl.c vx_io.c utils.c 
+
 vx_SOURCES = vx.c
 vx_slice_SOURCES = vx_slice.c
 vx_lite_SOURCES = vx_lite.c

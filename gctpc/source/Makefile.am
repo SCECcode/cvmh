@@ -3,7 +3,6 @@
 lib_LIBRARIES = libgctpc.a 
 
 .PHONY: all
-all: libgctpc.a libgctpc.so
 
 # Set compiler/linker flags
 AM_CFLAGS = $(CFLAGS) -D_GNU_SOURCE -fno-builtin -fPIC
@@ -24,26 +23,8 @@ libgctpc_a_SOURCES = \
 	cproj.c report.c lamccfor.c lamccinv.c paksz.c untfz.c \
 	sphdz.c br_gctp.c
 
-libgctpc_so_sources = \
-	gctp.o alberfor.o alberinv.o alconfor.o alconinv.o azimfor.o \
-	aziminv.o eqconfor.o eqconinv.o equifor.o equiinv.o gnomfor.o \
-	gnominv.o goodfor.o goodinv.o gvnspfor.o gvnspinv.o hamfor.o \
-	haminv.o imolwfor.o imolwinv.o lamazfor.o lamazinv.o merfor.o \
-	merinv.o millfor.o millinv.o molwfor.o molwinv.o obleqfor.o  \
-	obleqinv.o omerfor.o omerinv.o orthfor.o orthinv.o polyfor.o \
-	polyinv.o psfor.o psinv.o robfor.o robinv.o sinfor.o sininv.o \
-	somfor.o sominv.o sterfor.o sterinv.o stplnfor.o stplninv.o \
-	tmfor.o tminv.o utmfor.o utminv.o vandgfor.o vandginv.o \
-	wivfor.o wivinv.o wviifor.o wviiinv.o for_init.o inv_init.o \
-	cproj.o report.o lamccfor.o lamccinv.o paksz.o untfz.o \
-	sphdz.o br_gctp.o
-
-
 noinst_HEADERS = \
 	cproj.h \
 	proj.h
-
-libgctpc.so: $(libgctpc_so_sources)
-	$(CC) -shared -o libgctpc.so $^ $(AM_LDFLAGS)
 
 # End of file
