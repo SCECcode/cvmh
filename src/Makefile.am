@@ -12,7 +12,7 @@ endif
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -Wall -O3 -std=c99 -D_LARGEFILE_SOURCE \
 	-D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -fPIC
-AM_LDFLAGS = ${LDFLAGS} -L../gctpc/source -lgctpc -lm
+AM_LDFLAGS = ${LDFLAGS} -L${prefix}/lib -lgctpc -lm
 
 # Dist sources
 libcvmh_a_SOURCES = vx_sub.c vx_io.c cvmh.c

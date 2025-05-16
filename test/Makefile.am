@@ -13,14 +13,14 @@ unittest_SOURCES = \
 	test_vx_sub.c \
 	test_vx_exec.c \
 	test_vx_lite_exec.c
-unittest_LDADD = $(top_builddir)/src/libvxapi.so $(top_builddir)/gctpc/source/libgctpc.so
+#unittest_LDADD = $(top_builddir)/gctpc/source/libgctpc.so $(top_builddir)/src/libvxapi.so 
 
 accepttest_SOURCES = \
 	accepttest.c \
 	unittest_defs.c \
 	test_helper.c \
 	test_grid.c
-accepttest_LDADD = $(top_builddir)/src/libvxapi.so $(top_builddir)/gctpc/source/libgctpc.so
+#accepttest_LDADD = $(top_builddir)/gctpc/source/libgctpc.so $(top_builddir)/src/libvxapi.so 
 
 noinst_HEADERS = \
 	test_grid.h \
@@ -32,8 +32,9 @@ noinst_HEADERS = \
 
 
 # General compiler/linker flags
-AM_CFLAGS = -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DBIN_DIR=\"$(prefix)/bin\" -DMODEL_DIR=\"$(prefix)/data/cvmh\"
+AM_CFLAGS = ${CFLAGS} -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DBIN_DIR=\"$(prefix)/bin\" -DMODEL_DIR=\"$(prefix)/data/cvmh\"
 AM_CPPFLAGS =-I$(top_srcdir)/src
+AM_LDFLAGS = ${LDFLAGS} -L${prefix}/lib -lgctpc -lvxapi
 
 # Test output files
 noinst_TMP = \
