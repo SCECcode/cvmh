@@ -34,7 +34,7 @@ noinst_HEADERS = \
 # General compiler/linker flags
 AM_CFLAGS = ${CFLAGS} -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64 -DBIN_DIR=\"$(prefix)/bin\" -DMODEL_DIR=\"$(prefix)/data/cvmh\"
 AM_CPPFLAGS =-I$(top_srcdir)/src
-AM_LDFLAGS = ${LDFLAGS} -L${prefix}/lib -lgctpc -lvxapi
+AM_LDFLAGS = ${LDFLAGS} -L$(top_builddir)/gctpc/source -lgctpc -L$(top_builddir)/src -lvxapi
 
 # Test output files
 noinst_TMP = \
