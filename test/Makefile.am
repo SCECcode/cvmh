@@ -52,10 +52,10 @@ all: $(bin_PROGRAMS)
 # Executables
 ############################################
 
-run_unit: run_unit
+run_unit: unittest
 	./run_unit
 
-run_accept: run_accept
+run_accept: accepttest
 	./run_accept
 
 clean-data:
