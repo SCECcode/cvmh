@@ -6,6 +6,8 @@ if [ $tmp == 'Darwin' ]; then
 ##for macOS, make sure have automake/aclocal
   brew install automake
   brew reinstall gcc
+  brew install libtool
+  export PATH="/opt/homebrew/opt/libtool/libexec/gnubin:$PATH"
 fi
 
 libtoolize
