@@ -1,12 +1,12 @@
 #!/bin/bash
 
-if [[ -z "${UCVM_INSTALL_PATH}" ]]; then
-  if [[ -f "${UCVM_INSTALL_PATH}/model/cvmh/lib" ]]; then
-    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/cvmh/lib ./unittest
+if [[ ! -z "${UCVM_INSTALL_PATH}" ]]; then
+  if [[ -d "${UCVM_INSTALL_PATH}/model/cvmh/lib" ]]; then
+    env DYLD_LIBRARY_PATH=${UCVM_INSTALL_PATH}/model/cvmh/lib:${DYLD_LIBRARY_PATH} ./unittest
     exit
   fi
 fi
 
-env DYLD_LIBRARY_PATH=../src ./unittest
+env DYLD_LIBRARY_PATH=../src:${DYLD_LIBRARY_PATH} ./unittest
 
 
