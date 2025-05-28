@@ -6,7 +6,6 @@ on:
 
 jobs:
   cvmh-build-ucvm-linux:
-    if: false
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -58,6 +57,8 @@ jobs:
       shell: bash
 
   cvmh-build-ucvm-mac:
+    if: ${{ success() }}
+    needs: [cvmh-build-ucvm-linux]
     runs-on: macos-latest
     strategy:
       matrix:
@@ -107,13 +108,13 @@ jobs:
     - name: test cvmh under ucvm
       run: (cd $RUNNER_WORKSPACE/cvmh/ucvm; source $UCVM_INSTALL_PATH/conf/ucvm_env.sh; ./.github/scripts/ucvm-test.sh)
       shell: bash
-    - name: Start SSH debug with tmate
-      if: ${{ failure() }}
-      uses: mxschmitt/action-tmate@v3
-      with:
-        limit-access-to-actor: true
-    - name: sleep to keep runner alive
-      run: sleep 3600
+#   - name: Start SSH debug with tmate
+#     if: ${{ failure() }}
+#     uses: mxschmitt/action-tmate@v3
+#     with:
+#       limit-access-to-actor: true
+#   - name: sleep to keep runner alive
+#     run: sleep 3600
 
 
 
