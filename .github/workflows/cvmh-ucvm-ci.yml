@@ -2,8 +2,8 @@ name: cvmh-ucvm-ci
 
 on:
   push:
-##    branches: [ main ]
-    branches: [ foofoo ]
+    branches: [ main ]
+##    branches: [ foofoo ]
 
 jobs:
   cvmh-build-ucvm-linux:
