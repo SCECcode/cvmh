@@ -2,6 +2,7 @@ name: cvmh-ucvm-ci
 
 on:
   push:
+##    branches: [ main ]
     branches: [ foofoo ]
 
 jobs:
@@ -20,7 +21,7 @@ jobs:
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
-        ref: testMei
+        ref: main
         path: ucvm
     - id: build-ucvm
       name: build ucvm
@@ -73,7 +74,7 @@ jobs:
       uses: actions/checkout@v2
       with: 
         repository: 'SCECcode/UCVM'
-        ref: testMei
+        ref: main
         path: ucvm
     - id: build-ucvm
       name: build ucvm
