@@ -1,5 +1,7 @@
 # CVM-H
 
+<a href="https://github.com/sceccode/cvmh.git"><img src="https://github.com/sceccode/cvmh/wiki/images/cvmh_logo.png"></a>
+
 [![License](https://img.shields.io/badge/License-BSD_3--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 ![GitHub repo size](https://img.shields.io/github/repo-size/sceccode/cvmh)
 [![cvmh-ucvm-ci Actions Status](https://github.com/SCECcode/cvmh/workflows/cvmh-ucvm-ci/badge.svg)](https://github.com/SCECcode/cvmh/actions)
