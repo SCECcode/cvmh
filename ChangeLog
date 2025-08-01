@@ -1,3 +1,6 @@
+2025-07-31 Mei-Hui Su <mei@usc.edu>
+        * v1.0 for UCVM v25.7
+
 2025-01-13 Mei-Hui Su <mei@usc.edu>
 	* Update configure.ac and model/Makefile.am to use
           CVM_LARGEDATA_DIR environment variable location for accessing
