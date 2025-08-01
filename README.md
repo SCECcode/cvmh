@@ -15,6 +15,8 @@ and is comprised of basin structures embedded in tomographic and teleseismic cru
 upper mantle models. This latest release of the CVM-H (15.1.1) represents the integration 
 of various model components, including fully 3D waveform tomographic results.
 
+Shaw, J. H., et al. (2015), Unified structural representation of the southern California crust and upper mantle, Earth Planet. Sci. Lett., 415, 1–15, doi:10.1016/j.epsl.2015.01.016
+
 ## Installation
 
 This package is intended to be installed as part of the UCVM framework,
