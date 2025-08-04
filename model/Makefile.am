@@ -33,7 +33,7 @@ clean:
 	echo "clean"
 
 #MODEL=cvmh
-#MODEL_URL=https://g-c662a6.a78b8.36fe.data.globus.org/ucvm/models/CVMH/cvmh
+#MODEL_URL=https://g-3a9041.a78b8.36fe.data.globus.org/ucvm/models/CVMH/cvmh
 #MODEL_DIR=$(datadir)/model/$(MODEL)
 #
 #model_files = \
