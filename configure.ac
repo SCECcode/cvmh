@@ -48,6 +48,20 @@ LT_INIT
 AC_PROG_INSTALL
 AC_PROG_MKDIR_P
 
+dnl Detect Host OS for macOS/Darwin specific CFLAGS
+AC_CANONICAL_HOST
+case "$host_os" in
+    darwin*)
+        is_mac=yes
+        CFLAGS="$CFLAGS -std=gnu89 -Wno-deprecated-non-prototype -Wno-implicit-function-declaration"
+        ;;
+    *)
+        is_mac=no
+        ;;
+esac
+AM_CONDITIONAL([IS_MAC], [test "x$is_mac" = "xyes"])
+
+
 dnl CURL (used to download model files)
 AC_PATH_PROG(CURL, curl)
 if test -z "$CURL" ; then
