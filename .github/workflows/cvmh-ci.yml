@@ -16,7 +16,7 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
     - name: checkout cvmh main
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         ref: main
     - name: build cvmh 
@@ -37,7 +37,7 @@ jobs:
     - name: set UCVM_INSTALL_PATH 
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/target" >> $GITHUB_ENV
     - name: checkout cvmh main
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         ref: main
     - name: build cvmh

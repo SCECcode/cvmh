@@ -18,7 +18,7 @@ jobs:
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmh/target" >> $GITHUB_ENV
 ### build ucvm(main) first 
     - name: get-ucvm 
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         repository: 'SCECcode/UCVM'
         ref: main
@@ -37,7 +37,7 @@ jobs:
       shell: bash
 ### build cvmh from github 
     - name: checkout cvmh main
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: cvmh
     - name: move it to the right location
@@ -71,7 +71,7 @@ jobs:
       run: echo "UCVM_INSTALL_PATH=$RUNNER_WORKSPACE/cvmh/target" >> $GITHUB_ENV
 ### build ucvm(main) first 
     - name: get-ucvm 
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         repository: 'SCECcode/UCVM'
         ref: main
@@ -90,7 +90,7 @@ jobs:
       shell: bash
 ### build cvmh from github 
     - name: checkout cvmh main
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: cvmh
     - name: move it to the right location
