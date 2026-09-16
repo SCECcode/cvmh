@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 ##
 #  Retrieves the actual data files from hypocenter. They are
