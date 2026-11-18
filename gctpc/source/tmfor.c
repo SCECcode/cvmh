@@ -46,18 +46,21 @@ static double ind;		/* spherical flag			*/
 
 /* Initialize the Transverse Mercator (TM) projection
   -------------------------------------------------*/
-long tmforint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double scale_fact;		/* scale factor			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long tmforint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double scale_fact,              /* scale factor			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions	*/
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -99,17 +102,17 @@ return(OK);
    Note:  The algorithm for TM is exactly the same as UTM and therefore
 	  if a change is implemented, also make the change to UTMFOR.c
   --------------------------------------------------------------*/
-long tmfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long tmfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double theta;		/* angle					*/
 double delta_theta;	/* adjusted longitude				*/
-double mlfn();		/* function to compute small m			*/
+double mlfn(double e0, double e1, double e2, double e3, double phi);		/* function to compute small m			*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double al, als;		/* temporary values				*/
 double b;		/* temporary values				*/

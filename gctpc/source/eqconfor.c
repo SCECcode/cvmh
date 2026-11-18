@@ -40,22 +40,24 @@ static double rh;
 
 /* Initialize the Equidistant Conic projection
   ------------------------------------------*/
-long eqconforint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
-	    mode)
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double lat1;			/* latitude of standard parallel*/
-double lat2;			/* latitude of standard parallel*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
-long   mode;			/* which format is present A B	*/
+long eqconforint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double lat1,                    /* latitude of standard parallel*/
+double lat2,                    /* latitude of standard parallel*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north,             /* y offset in meters		*/
+long mode                       /* which format is present A B	*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
-double msfnz();
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions	*/
+double msfnz(double eccent, double sinphi, double cosphi);
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
 double ml1,ml2;
@@ -132,15 +134,15 @@ return(OK);
 
 /* Equidistant Conic forward equations--mapping lat,long to x,y
   -----------------------------------------------------------*/
-long eqconfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long eqconfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
 double ml;
-double mlfn();
-double adjust_lon();
+double mlfn(double e0, double e1, double e2, double e3, double phi);
+double adjust_lon(double x);
 double theta;
 double rh1;
 

@@ -45,13 +45,11 @@ static char err_file[256];
 
 /* initialize output device
 -------------------------*/
-long init(ipr,jpr,efile,pfile)
-
-long ipr;		/* flag for printing errors (0,1,or 2)		*/
-long jpr;		/* flag for printing parameters (0,1,or 2)	*/
-char *efile;		/* name of error file				*/
-char *pfile;		/* name of parameter file			*/
-
+long init(
+long ipr,                       /* flag for printing errors (0,1,or 2)		*/
+long jpr,                       /* flag for printing parameters (0,1,or 2)	*/
+char *efile,                    /* name of error file				*/
+char *pfile                     /* name of parameter file			*/)
 {
 if (ipr == 0)
    {
@@ -134,7 +132,7 @@ if (fptr_p != NULL)
 
 /* Functions to report projection parameters
   -----------------------------------------*/
-void ptitle(A) char *A; 
+void ptitle(char *A)
       {  
       if (terminal_p)
            printf("\n%s PROJECTION PARAMETERS:\n\n",A); 
@@ -146,7 +144,7 @@ void ptitle(A) char *A;
 	   }
       }
 
-void radius(A) double A;
+void radius(double A)
       {
       if (terminal_p)
          printf("   Radius of Sphere:     %lf meters\n",A); 
@@ -158,7 +156,7 @@ void radius(A) double A;
 	 }
       }
 
-void radius2(A,B) double A,B;
+void radius2(double A, double B)
       {
       if (terminal_p)
          {
@@ -174,7 +172,7 @@ void radius2(A,B) double A,B;
          }
       }
 
-void cenlon(A) double A;
+void cenlon(double A)
    { 
    if (terminal_p)
        printf("   Longitude of Center:     %lf degrees\n",A*R2D);
@@ -186,7 +184,7 @@ void cenlon(A) double A;
        }
    }
  
-void cenlonmer(A) double A;
+void cenlonmer(double A)
    { 
    if (terminal_p)
      printf("   Longitude of Central Meridian:     %lf degrees\n",A*R2D);
@@ -198,7 +196,7 @@ void cenlonmer(A) double A;
      }
    }
 
-void cenlat(A) double A;
+void cenlat(double A)
    {
    if (terminal_p)
       printf("   Latitude  of Center:     %lf degrees\n",A*R2D);
@@ -210,7 +208,7 @@ void cenlat(A) double A;
       }
    }
 
-void origin(A) double A;
+void origin(double A)
    {
    if (terminal_p)
       printf("   Latitude of Origin:     %lf degrees\n",A*R2D);
@@ -221,7 +219,7 @@ void origin(A) double A;
       fclose(fptr_p);
       }
    }
-void stanparl(A,B) double A,B;
+void stanparl(double A, double B)
    {
    if (terminal_p)
       {
@@ -237,7 +235,7 @@ void stanparl(A,B) double A,B;
       }
    }
 
-void stparl1(A) double A;
+void stparl1(double A)
    {
    if (terminal_p)
       {
@@ -251,7 +249,7 @@ void stparl1(A) double A;
       }
    }
 
-void offsetp(A,B)  double A,B;
+void offsetp(double A, double B)
    {
    if (terminal_p)
       {
@@ -267,7 +265,7 @@ void offsetp(A,B)  double A,B;
       }      
    }
 
-void genrpt(A,S) double A; char *S;
+void genrpt(double A, char *S)
    {
    if (terminal_p)
       printf("   %s %lf\n", S, A);
@@ -278,7 +276,7 @@ void genrpt(A,S) double A; char *S;
       fclose(fptr_p);
       }
    }
-void genrpt_long(A,S) long A; char *S;
+void genrpt_long(long A, char *S)
    {
    if (terminal_p)
       printf("   %s %ld\n", S, A);
@@ -303,9 +301,7 @@ void pblank()
 
 /* Function to report errors 
   -------------------------*/
-void p_error(what, where) 
-   char *what;
-   char *where; 
+void p_error(char *what, char *where)
    {
    if (terminal_e)
       printf("[%s] %s\n",where,what);

@@ -36,17 +36,20 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the POLYCONIC projection
   ----------------------------------*/
-long polyforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long polyforint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions	*/
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -79,15 +82,15 @@ return(OK);
 
 /* Polyconic forward equations--mapping lat,long to x,y
   ---------------------------------------------------*/
-long polyfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long polyfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
-double mlfn();		/* function to compute small m			*/
-double msfnz();		/* function to compute m			*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
+double mlfn(double e0, double e1, double e2, double e3, double phi);		/* function to compute small m			*/
+double msfnz(double eccent, double sinphi, double cosphi);		/* function to compute m			*/
 double sinphi, cosphi;	/* sin and cos value				*/
 double al;		/* temporary values				*/
 double c;		/* temporary values				*/

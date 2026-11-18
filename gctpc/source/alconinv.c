@@ -45,12 +45,11 @@ static long n;
 
 /* Initialize the ALASKA CONFORMAL projection
   -----------------------------------------*/
-long alconinvint(r_maj,r_min,false_east,false_north) 
-
-double r_maj; 			/* Major axis			 	*/
-double r_min; 			/* Minor axis			 	*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long alconinvint(
+double r_maj,                   /* Major axis			 	*/
+double r_min,                   /* Minor axis			 	*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
 long i;
 double temp;
@@ -102,16 +101,15 @@ return(OK);
 
 /* ALASKA CONFORMAL inverse equations--mapping x,y to lat/long
   ----------------------------------------------------------*/
-long alconinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate */
-double y;			/* (O) Y projection coordinate */
-double *lon;			/* (I) Longitude */
-double *lat;			/* (I) Latitude */
-
+long alconinv(
+double x,                       /* (O) X projection coordinate */
+double y,                       /* (O) Y projection coordinate */
+double *lon,                    /* (I) Longitude */
+double *lat                     /* (I) Latitude */)
 {
 double dlon;
-double adjust_lon();
-double asinz();
+double adjust_lon(double x);
+double asinz(double con);
 double sinlon,coslon;
 double esphi;
 double r;

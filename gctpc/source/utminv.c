@@ -48,15 +48,18 @@ static long ind;		/* sphere flag value			*/
 
 /* Initialize the Universal Transverse Mercator (UTM) projection
   -------------------------------------------------------------*/
-long utminvint(r_maj,r_min,scale_fact,zone)
-
-double r_maj;			/* major axis				*/
-double r_min;			/* minor axis				*/
-double scale_fact;		/* scale factor				*/
-long zone;			/* zone number				*/
+long utminvint(
+double r_maj,                   /* major axis				*/
+double r_min,                   /* minor axis				*/
+double scale_fact,              /* scale factor				*/
+long zone                       /* zone number				*/)
 {
 double temp;			/* temprorary variables			*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn();	/* functions		*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi);	/* functions		*/
 
 if ((abs(zone) < 1) || (abs(zone) > 60))
    {
@@ -100,13 +103,13 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
 	  if a change is implemented, also make the change to TMINV.c
   -----------------------------------------------------------------------*/
-long utminv(x, y, lon, lat)
-double x;		/* (I) X projection coordinate 			*/
-double y;		/* (I) Y projection coordinate 			*/
-double *lon;		/* (O) Longitude 				*/
-double *lat;		/* (O) Latitude 				*/
+long utminv(
+double x,                       /* (I) X projection coordinate 			*/
+double y,                       /* (I) Y projection coordinate 			*/
+double *lon,                    /* (O) Longitude 				*/
+double *lat                     /* (O) Latitude 				*/)
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180 	*/
 double con,phi;		/* temporary angles				*/
 double delta_phi;	/* difference between longitudes		*/
 long i;			/* counter variable				*/
@@ -114,7 +117,7 @@ double sin_phi, cos_phi, tan_phi;	/* sin cos and tangent values	*/
 double c, cs, t, ts, n, r, d, ds;	/* temporary variables		*/
 double f, h, g, temp;			/* temporary variables		*/
 long max_iter = 6;			/* maximun number of iterations	*/
-double asinz();
+double asinz(double con);
 
 /* fortran code for spherical form 
 --------------------------------*/

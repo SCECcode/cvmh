@@ -40,19 +40,18 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-long alberinvint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
-
-double r_maj;                   /* major axis                           */
-double r_min;                   /* minor axis                           */
-double lat1;                    /* first standard parallel              */
-double lat2;                    /* second standard parallel             */
-double lon0;                    /* center longitude                     */
-double lat0;                    /* center lattitude                     */
-double false_east;              /* x offset in meters                   */
-double false_north;             /* y offset in meters                   */
+long alberinvint(
+double r_maj,                   /* major axis                           */
+double r_min,                   /* minor axis                           */
+double lat1,                    /* first standard parallel              */
+double lat2,                    /* second standard parallel             */
+double lon0,                    /* center longitude                     */
+double lat0,                    /* center lattitude                     */
+double false_east,              /* x offset in meters                   */
+double false_north              /* y offset in meters                   */)
 {
-double msfnz();			/* function to compute small m		*/
-double qsfnz();			/* function to compute small q		*/
+double msfnz(double eccent, double sinphi, double cosphi);			/* function to compute small m		*/
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to compute small q		*/
 double sin_po,cos_po;		/* sine and cos values			*/
 double con;			/* temporary variable			*/
 double temp;			/* temporary variable			*/
@@ -113,19 +112,19 @@ return(OK);
 
 /* Albers Conical Equal Area inverse equations--mapping x,y to lat/long
   -------------------------------------------------------------------*/
-long alberinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long alberinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
-double qsfnz();			/* function to calculate q	*/
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to calculate q	*/
 double rh1;			/* height above ellipsoid	*/
 double qs;			/* function q			*/
 double con;			/* temporary sign2 value		*/
 double theta;			/* angle			*/
-double adjust_lon();    /* Function to adjust longitude to -180 - 180   */
-double phi1z ();		/* function to calculate LAT phi	*/
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180   */
+double phi1z(double eccent, double qs, long *flag);		/* function to calculate LAT phi	*/
 long   flag;			/* error flag;			*/
 
 

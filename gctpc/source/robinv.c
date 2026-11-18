@@ -42,12 +42,11 @@ static double xlr[21];
 
 /* Initialize the ROBINSON projection
   ---------------------------------*/
-long robinvint(r, center_long,false_east,false_north) 
-
-double r; 			/* (I) Radius of the earth (sphere) 	*/
-double center_long;		/* (I) Center longitude 		*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long robinvint(
+double r,                       /* (I) Radius of the earth (sphere) 	*/
+double center_long,             /* (I) Center longitude 		*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
 long i;
 
@@ -113,14 +112,13 @@ return(OK);
 
 /* Robinson inverse equations--mapping x,y to lat/long
   ------------------------------------------------------------*/
-long robinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate */
-double y;			/* (O) Y projection coordinate */
-double *lon;			/* (I) Longitude */
-double *lat;			/* (I) Latitude */
-
+long robinv(
+double x,                       /* (O) X projection coordinate */
+double y,                       /* (O) Y projection coordinate */
+double *lon,                    /* (I) Longitude */
+double *lat                     /* (I) Latitude */)
 {
-double adjust_lon();
+double adjust_lon(double x);
 double yy;
 double p2;
 double u,v,t,c;

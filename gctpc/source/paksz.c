@@ -49,10 +49,9 @@ ALGORITHM REFERENCES
 
 /* Convert DMS packed angle into deg 
 ----------------------------------*/
-double paksz(ang,iflg)
-
-double ang;		/* angle which in DMS		*/
-long *iflg;		/* error flag number		*/
+double paksz(
+double ang,                     /* angle which in DMS		*/
+long *iflg                      /* error flag number		*/)
 {
 double fac;		/* sign2 flag			*/
 double deg;		/* degree variable		*/

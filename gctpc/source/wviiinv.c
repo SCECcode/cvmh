@@ -34,11 +34,11 @@ static double false_northing;   /* y offset                             */
 
 /* Initialize the Wagner VII projection
   ------------------------------------*/
-long wviiinvint(r, center_long,false_east,false_north) 
-double r; 			/* (I) Radius of the earth (sphere) */
-double center_long;		/* (I) Center longitude */
-double false_east;    		/* x offset                             */
-double false_north;   		/* y offset                             */
+long wviiinvint(
+double r,                       /* (I) Radius of the earth (sphere) */
+double center_long,             /* (I) Center longitude */
+double false_east,              /* x offset                             */
+double false_north              /* y offset                             */)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -58,15 +58,14 @@ return(OK);
 
 /* Wagner VII inverse equations--mapping x,y to lat,long 
   -----------------------------------------------------*/
-long wviiinv(x, y, lon, lat)
-
-double x;		/* (I) X projection coordinate */
-double y;		/* (I) Y projection coordinate */
-double *lon;		/* (O) Longitude */
-double *lat;		/* (O) Latitude */
+long wviiinv(
+double x,                       /* (I) X projection coordinate */
+double y,                       /* (I) Y projection coordinate */
+double *lon,                    /* (O) Longitude */
+double *lat                     /* (O) Latitude */)
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 */
-double asinz();		/* Function to ensure arcsin is valid */
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180 */
+double asinz(double con);		/* Function to ensure arcsin is valid */
 double temp;		/* Re-used temporary variable */
 double t1, t2, p, c;
 

@@ -32,13 +32,12 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the Equirectangular projection
   ----------------------------------------*/
-long equiforint(r_maj,center_lon,lat1,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double center_lon;		/* center longitude		*/
-double lat1;			/* latitude of true scale	*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long equiforint(
+double r_maj,                   /* major axis			*/
+double center_lon,              /* center longitude		*/
+double lat1,                    /* latitude of true scale	*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 
 /* Place parameters in static storage for common use
@@ -62,13 +61,13 @@ return(OK);
 
 /* Equirectangular forward equations--mapping lat,long to x,y
   ---------------------------------------------------------*/
-long equifor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long equifor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double sinphi, cosphi;	/* sin and cos value				*/
 double dlon;		/* delta longitude value			*/
 double coslon;		/* cos of longitude				*/

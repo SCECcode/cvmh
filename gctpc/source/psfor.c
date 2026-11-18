@@ -40,23 +40,21 @@ ALGORITHM REFERENCES
 
 /* Initialize the Polar Stereographic projection
   --------------------------------------------*/
-long psforint(r_maj,r_min,c_lon,c_lat,false_east,false_north) 
-
-double c_lon;				/* center longitude		*/
-double c_lat;				/* center latitude		*/
-double r_maj;				/* major axis			*/
-double r_min;				/* minor axis			*/
-double false_east;			/* x offset in meters		*/
-double false_north;			/* y offset in meters		*/
-
+long psforint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double c_lon,                   /* center longitude		*/
+double c_lat,                   /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;				/* temporary variable		*/
 double con1;				/* temporary angle		*/
 double sinphi;				/* sin value			*/
 double cosphi;				/* cos value			*/
-double e4fn();				/* function to compute e4	*/
-double msfnz();				/* function to compute m	*/
-double tsfnz();				/* function to compute t	*/
+double e4fn(double x);				/* function to compute e4	*/
+double msfnz(double eccent, double sinphi, double cosphi);				/* function to compute m	*/
+double tsfnz(double eccent, double phi, double sinphi);				/* function to compute t	*/
 
 r_major = r_maj;
 r_minor = r_min;
@@ -94,17 +92,16 @@ return(OK);
 
 /* Polar Stereographic forward equations--mapping lat,long to x,y
   --------------------------------------------------------------*/
-long psfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
-
+long psfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
 double con1;			/* adjusted longitude		*/
 double con2;			/* adjusted latitude		*/
-double adjust_lon();		/* function to adjust longitude	*/
-double tsfnz();			/* function to compute t	*/
+double adjust_lon(double x);		/* function to adjust longitude	*/
+double tsfnz(double eccent, double phi, double sinphi);			/* function to compute t	*/
 double rh;			/* height above ellipsoid	*/
 double sinphi;			/* sin value			*/
 double ts;			/* value of small t		*/

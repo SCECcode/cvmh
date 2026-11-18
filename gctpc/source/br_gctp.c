@@ -1,3 +1,4 @@
+#include <stddef.h>
 
 #ifdef unix
 /*  Fortran bridge routine for the UNIX */
@@ -24,28 +25,25 @@ char fn83[], 	 	/* file name of NAD 1983 parameter file		*/
 long *iflg		/* error flag					*/
 );
 
-void gctp_(incoor,insys,inzone,inparm,inunit,indatum,ipr,efile,jpr,pfile,
-               outcoor, outsys,outzone,outparm,outunit,fn27,fn83,iflg)
-
-double *incoor;
-long *insys;
-long *inzone;
-double *inparm;
-long *inunit;
-long *indatum;
-long *ipr;        /* printout flag for error messages. 0=yes, 1=no*/
-char *efile;
-long *jpr;        /* printout flag for projection parameters 0=yes, 1=no*/
-char *pfile;
-double *outcoor;
-long *outsys;
-long *outzone;
-double *outparm;
-long *outunit;
-char *fn27;
-char *fn83;
-long *iflg;
-
+void gctp_(
+double *incoor,
+long *insys,
+long *inzone,
+double *inparm,
+long *inunit,
+long *indatum,
+long *ipr,                      /* printout flag for error messages. 0=yes, 1=no*/
+char *efile,
+long *jpr,                      /* printout flag for projection parameters 0=yes, 1=no*/
+char *pfile,
+double *outcoor,
+long *outsys,
+long *outzone,
+double *outparm,
+long *outunit,
+char *fn27,
+char *fn83,
+long *iflg)
 {
 long outdatum = 0;
 

@@ -27,29 +27,27 @@ ALGORITHM REFERENCES
 #define LANDSAT_RATIO 0.5201613
 
 static double lon_center,a,b,a2,a4,c1,c3,q,t,u,w,xj,p21,sa,ca,es,s,start;
-static double som_series();
+static double som_series(double *fb, double *fa2, double *fa4, double *fc1, double *fc3, double *dlam);
 static double false_easting;
 static double false_northing;
 
-long somforint(r_major,r_minor,satnum,path,alf_in,lon,false_east,false_north,time,
-	  start1,flag)
-
-double r_major;			/* major axis				*/
-double r_minor;			/* minor axis				*/
-long satnum;			/* Landsat satellite number (1,2,3,4,5) */
-long path;			/* Landsat path number */
-double alf_in;
-double lon;
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
-double time;
-long   start1;
-long   flag;
+long somforint(
+double r_major,                 /* major axis				*/
+double r_minor,                 /* minor axis				*/
+long satnum,                    /* Landsat satellite number (1,2,3,4,5) */
+long path,                      /* Landsat path number */
+double alf_in,
+double lon,
+double false_east,              /* x offset in meters			*/
+double false_north,             /* y offset in meters			*/
+double time,
+long start1,
+long flag)
 {
 long i;
 double alf,e2c,e2s,one_es;
 double dlam,fb,fa2,fa4,fc1,fc3,suma2,suma4,sumc1,sumc3,sumb;
-double adjust_lon();
+double adjust_lon(double x);
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -154,12 +152,11 @@ c3=sumc3/45.0;
 return(OK);
 }
 
-long somfor(lon, lat, y, x)
-
-double lon;		/* (I) Longitude 		*/
-double lat;		/* (I) Latitude 		*/
-double *x;		/* (O) X projection coordinate 	*/
-double *y;		/* (O) Y projection coordinate 	*/
+long somfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *y,                      /* (O) Y projection coordinate 	*/
+double *x                       /* (O) X projection coordinate 	*/)
 {
 long n,i,l;
 double delta_lon;
@@ -253,8 +250,13 @@ return(OK);
 
    Mathematical analysis by John Snyder 6/82
   --------------------------------------------------------------------------*/
-static double som_series(fb,fa2,fa4,fc1,fc3,dlam)
-double *fb,*fa2,*fa4,*fc1,*fc3,*dlam;
+static double som_series(
+double *fb,
+double *fa2,
+double *fa4,
+double *fc1,
+double *fc3,
+double *dlam)
 {
 double sd,sdsq,h,sq,fc;
 

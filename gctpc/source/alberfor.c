@@ -36,19 +36,18 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-long alberforint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
-
-double r_maj;			/* major axis				*/
-double r_min;			/* minor axis				*/
-double lat1;			/* first standard parallel		*/
-double lat2;			/* second standard parallel		*/
-double lon0;			/* center longitude			*/
-double lat0;			/* center lattitude			*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long alberforint(
+double r_maj,                   /* major axis				*/
+double r_min,                   /* minor axis				*/
+double lat1,                    /* first standard parallel		*/
+double lat2,                    /* second standard parallel		*/
+double lon0,                    /* center longitude			*/
+double lat0,                    /* center lattitude			*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
-double msfnz();			/* function to compute small m		*/
-double qsfnz();			/* function to compute small q		*/
+double msfnz(double eccent, double sinphi, double cosphi);			/* function to compute small m		*/
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to compute small q		*/
 double sin_po,cos_po;		/* sin and cos values			*/
 double con;			/* temporary variable			*/
 double es,temp;			/* eccentricity squared and temp var	*/
@@ -109,18 +108,18 @@ return(OK);
 
 /* Albers Conical Equal Area forward equations--mapping lat,long to x,y
   -------------------------------------------------------------------*/
-long alberfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long alberfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
 double sin_phi,cos_phi;		/* sine and cos values		*/
 double qs;			/* small q			*/
 double theta;			/* angle			*/ 
 double rh1;			/* height above ellipsoid	*/
-double qsfnz();			/* function to calculate q	*/
-double adjust_lon();    /* Function to adjust longitude to -180 - 180   */
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to calculate q	*/
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180   */
 
 sincos(lat,&sin_phi,&cos_phi);
 qs = qsfnz(e3,sin_phi,cos_phi);

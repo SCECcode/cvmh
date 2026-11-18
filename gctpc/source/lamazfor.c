@@ -41,12 +41,12 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the Lambert Azimuthal Equal Area projection
   ------------------------------------------------------*/
-long lamazforint(r, center_long, center_lat,false_east,false_north) 
-double r; 			/* (I) Radius of the earth (sphere) 	*/
-double center_long;		/* (I) Center longitude 		*/
-double center_lat;		/* (I) Center latitude 			*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long lamazforint(
+double r,                       /* (I) Radius of the earth (sphere) 	*/
+double center_long,             /* (I) Center longitude 		*/
+double center_lat,              /* (I) Center latitude 			*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -69,13 +69,13 @@ return(OK);
 
 /* Lambert Azimuthal Equal Area forward equations--mapping lat,long to x,y
   -----------------------------------------------------------------------*/
-long lamazfor(lon, lat, x, y)
-double lon;			/* (I) Longitude */
-double lat;			/* (I) Latitude */
-double *x;			/* (O) X projection coordinate */
-double *y;			/* (O) Y projection coordinate */
+long lamazfor(
+double lon,                     /* (I) Longitude */
+double lat,                     /* (I) Latitude */
+double *x,                      /* (O) X projection coordinate */
+double *y                       /* (O) Y projection coordinate */)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double sin_delta_lon;	/* Sine of the delta longitude 			*/
 double cos_delta_lon;	/* Cosine of the delta longitude 		*/

@@ -40,8 +40,8 @@ static long outpj[MAXPROJ + 1];		/* output projection array	*/
 static long outdat[MAXPROJ + 1];	/* output dataum array		*/
 static long outzn[MAXPROJ + 1];		/* output zone array		*/
 static double pdout[MAXPROJ + 1][15]; 	/* output projection parm array	*/
-static long (*for_trans[MAXPROJ + 1])();/* forward function pointer array*/
-static long (*inv_trans[MAXPROJ + 1])();/* inverse function pointer array*/
+static long (*for_trans[MAXPROJ + 1])(double, double, double *, double *);/* forward function pointer array*/
+static long (*inv_trans[MAXPROJ + 1])(double, double, double *, double *);/* inverse function pointer array*/
 
 			/* Table of unit codes as specified by state
 			   laws as of 2/1/92 for NAD 1983 State Plane
@@ -64,30 +64,26 @@ static long NAD83[134] = {101,102,5010,5300,201,202,203,301,302,401,402,403,
                 4502,4601,4602,4701,4702,4801,4802,4803,4901,4902,4903,4904,
                 5001,5002,5003,5004,5005,5006,5007,5008,5009,5200,0000,5400};
 
-void gctp(incoor,insys,inzone,inparm,inunit,indatum,ipr,efile,jpr,pfile,outcoor,
-     outsys,outzone,outparm,outunit,outdatum,fn27,fn83,iflg)
-
-double *incoor;		/* input coordinates				*/
-long *insys;		/* input projection code			*/
-long *inzone;		/* input zone number				*/
-double *inparm;		/* input projection parameter array		*/
-long *inunit;		/* input units					*/
-long *indatum;		/* input datum 					*/
-long *ipr;		/* printout flag for error messages. 0=screen, 1=file,
-			   2=both*/
-char *efile;		/* error file name				*/
-long *jpr;		/* printout flag for projection parameters 0=screen, 
-			   1=file, 2 = both*/
-char *pfile;		/* error file name				*/
-double *outcoor;	/* output coordinates				*/
-long *outdatum;		/* output datum					*/
-long *outsys;		/* output projection code			*/
-long *outzone;		/* output zone					*/
-double *outparm;	/* output projection array			*/
-long *outunit;		/* output units					*/
-char fn27[];		/* file name of NAD 1927 parameter file		*/
-char fn83[]; 	 	/* file name of NAD 1983 parameter file		*/
-long *iflg;		/* error flag					*/
+void gctp(
+double *incoor,                 /* input coordinates				*/
+long *insys,                    /* input projection code			*/
+long *inzone,                   /* input zone number				*/
+double *inparm,                 /* input projection parameter array		*/
+long *inunit,                   /* input units					*/
+long *indatum,                  /* input datum 					*/
+long *ipr,
+char *efile,                    /* error file name				*/
+long *jpr,
+char *pfile,                    /* error file name				*/
+double *outcoor,                /* output coordinates				*/
+long *outsys,                   /* output projection code			*/
+long *outzone,                  /* output zone					*/
+double *outparm,                /* output projection array			*/
+long *outunit,                  /* output units					*/
+long *outdatum,                 /* output datum					*/
+char fn27[],                    /* file name of NAD 1927 parameter file		*/
+char fn83[],                    /* file name of NAD 1983 parameter file		*/
+long *iflg                      /* error flag					*/)
 {
 double x;		/* x coordinate 				*/
 double y;		/* y coordinate					*/
@@ -95,8 +91,8 @@ double factor;		/* conversion factor				*/
 double lon;		/* longitude					*/
 double lat;		/* latitude					*/
 double temp;		/* dummy variable				*/
-double sign2();
-double pakr2dm();
+double sign2(double x);
+double pakr2dm(double pak);
 long i,j;		/* loop counters				*/
 long ininit_flag;	/* input initilization flag			*/
 long outinit_flag;	/* output initilization flag			*/

@@ -37,17 +37,19 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the Mercator projection
   -------------------------------------------------*/
-long merforint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long merforint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(); 	/* 	functions	*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x); 	/* 	functions	*/
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -76,14 +78,14 @@ return(OK);
 
 /* Mercator forward equations--mapping lat,long to x,y
   --------------------------------------------------*/
-long merfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long merfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
-double tsfnz();		/* function to compute t			*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
+double tsfnz(double eccent, double phi, double sinphi);		/* function to compute t			*/
 double ts;		/* small t value				*/
 double sinphi;		/* sin value					*/
 

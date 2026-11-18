@@ -31,11 +31,11 @@ static double false_northing;	/* y offset				*/
 
 /* Initialize the Wagner VII projection
   ------------------------------------*/
-long wviiforint(r, center_long,false_east,false_north) 
-double r; 			/* (I) Radius of the earth (sphere) */
-double center_long;		/* (I) Center longitude */
-double false_east;		/* x offset				*/
-double false_north;		/* y offset				*/
+long wviiforint(
+double r,                       /* (I) Radius of the earth (sphere) */
+double center_long,             /* (I) Center longitude */
+double false_east,              /* x offset				*/
+double false_north              /* y offset				*/)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -55,13 +55,13 @@ return(OK);
 
 /* Wagner VII forward equations--mapping lat,long to x,y
   -----------------------------------------------------*/
-long wviifor(lon, lat, x, y)
-double lon;			/* (I) Longitude */
-double lat;			/* (I) Latitude */
-double *x;			/* (O) X projection coordinate */
-double *y;			/* (O) Y projection coordinate */
+long wviifor(
+double lon,                     /* (I) Longitude */
+double lat,                     /* (I) Latitude */
+double *x,                      /* (O) X projection coordinate */
+double *y                       /* (O) Y projection coordinate */)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 */
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 */
 double delta_lon;	/* Delta longitude (Given longitude - center */
 double sin_lon, cos_lon;
 double s, c0, c1;

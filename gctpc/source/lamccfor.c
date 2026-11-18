@@ -39,16 +39,15 @@ ALGORITHM REFERENCES
 
 /* Initialize the Lambert Conformal conic projection
   ------------------------------------------------*/
-long lamccforint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
-
-double c_lat;                   /* center latitude                      */
-double c_lon;                   /* center longitude                     */
-double lat1;                    /* first standard parallel              */
-double lat2;                    /* second standard parallel             */
-double r_maj;                   /* major axis                           */
-double r_min;                   /* minor axis                           */
-double false_east;              /* x offset in meters                   */
-double false_north;             /* y offset in meters                   */
+long lamccforint(
+double r_maj,                   /* major axis                           */
+double r_min,                   /* minor axis                           */
+double lat1,                    /* first standard parallel              */
+double lat2,                    /* second standard parallel             */
+double c_lon,                   /* center longitude                     */
+double c_lat,                   /* center latitude                      */
+double false_east,              /* x offset in meters                   */
+double false_north              /* y offset in meters                   */)
 {
 double sin_po;                  /* sin value                            */
 double cos_po;                  /* cos value                            */
@@ -59,8 +58,8 @@ double temp;                    /* temporary variable                   */
 double ts0;                     /* small t 0                            */
 double ts1;                     /* small t 1                            */
 double ts2;                     /* small t 2                            */
-double msfnz();                 /* function to compute small m          */
-double tsfnz();                 /* function to compute small t          */
+double msfnz(double eccent, double sinphi, double cosphi);                 /* function to compute small m          */
+double tsfnz(double eccent, double phi, double sinphi);                 /* function to compute small t          */
 r_major = r_maj;
 r_minor = r_min;
 false_northing = false_north;
@@ -112,20 +111,19 @@ return(OK);
 }
 /* Lambert Conformal conic forward equations--mapping lat,long to x,y
   -----------------------------------------------------------------*/
-long lamccfor(lon, lat, x, y)
-double lon;                     /* (I) Longitude                */
-double lat;                     /* (I) Latitude                 */
-double *x;                      /* (O) X projection coordinate  */
-double *y;                      /* (O) Y projection coordinate  */
-
+long lamccfor(
+double lon,                     /* (I) Longitude                */
+double lat,                     /* (I) Latitude                 */
+double *x,                      /* (O) X projection coordinate  */
+double *y                       /* (O) Y projection coordinate  */)
 {
 double con;                     /* temporary angle variable             */
 double rh1;                     /* height above ellipsoid               */
 double sinphi;                  /* sin value                            */
 double theta;                   /* angle                                */
 double ts;                      /* small value t                        */
-double tsfnz();                 /* function to compute small t          */
-double adjust_lon();            /* function to adust the longitude      */
+double tsfnz(double eccent, double phi, double sinphi);                 /* function to compute small t          */
+double adjust_lon(double x);            /* function to adust the longitude      */
 
 con  = fabs( fabs(lat) - HALF_PI);
 if (con > EPSLN)

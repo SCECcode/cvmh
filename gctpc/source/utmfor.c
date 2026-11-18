@@ -45,15 +45,18 @@ static double ind;		/* spherical flag			*/
 
 /* Initialize the Universal Transverse Mercator (UTM) projection
   -------------------------------------------------------------*/
-long utmforint(r_maj,r_min,scale_fact,zone)
-
-double r_maj;			/* major axis				*/
-double r_min;			/* minor axis				*/
-double scale_fact;		/* scale factor				*/
-long   zone;			/* zone number				*/
+long utmforint(
+double r_maj,                   /* major axis				*/
+double r_min,                   /* minor axis				*/
+double scale_fact,              /* scale factor				*/
+long zone                       /* zone number				*/)
 {
 double temp;			/* temporary variable			*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions		*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions		*/
 
 if ((abs(zone) < 1) || (abs(zone) > 60))
    {
@@ -96,17 +99,17 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
 	  if a change is implemented, also make the change to TMFOR.c
   -----------------------------------------------------------------------*/
-long utmfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long utmfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double theta;		/* angle					*/
 double delta_theta;	/* adjusted longitude				*/
-double mlfn();		/* function to compute small m			*/
+double mlfn(double e0, double e1, double e2, double e3, double phi);		/* function to compute small m			*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double al, als;		/* temporary values				*/
 double b;		/* temporary values				*/

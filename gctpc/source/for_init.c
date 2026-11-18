@@ -21,16 +21,15 @@ ALGORITHM REFERENCES
 #include "cproj.h"
 #include "proj.h"
 
-void for_init(outsys,outzone,outparm,outdatum,fn27,fn83,iflg,for_trans)
-
-long outsys;		/* output system code				*/
-long outzone;		/* output zone number				*/
-double *outparm;	/* output array of projection parameters	*/
-long outdatum;		/* output datum					*/
-char *fn27;		/* NAD 1927 parameter file			*/
-char *fn83;		/* NAD 1983 parameter file			*/
-long *iflg;		/* status flag					*/
-long (*for_trans[])();	/* forward function pointer			*/
+void for_init(
+long outsys,                    /* output system code				*/
+long outzone,                   /* output zone number				*/
+double *outparm,                /* output array of projection parameters	*/
+long outdatum,                  /* output datum					*/
+char *fn27,                     /* NAD 1927 parameter file			*/
+char *fn83,                     /* NAD 1983 parameter file			*/
+long *iflg,                     /* status flag					*/
+long (*for_trans[])(double, double, double *, double *)/* forward function pointer			*/)
 {
 long zone;		/* zone number					*/
 double azimuth;		/* azimuth					*/
@@ -55,7 +54,7 @@ double shape_n;		/* constant used for Oblated Equal Area		*/
 long   start;		/* where SOM starts beginning or end		*/
 double time;		/* SOM time					*/
 double radius;		/* radius of sphere				*/
-double paksz();		/* function to convert DMS to DEG		*/
+double paksz(double ang, long *iflg);		/* function to convert DMS to DEG		*/
 long tmpdatum;		/* temporary datum for UTM			*/
 long path;		/* SOM path number				*/
 long satnum;		/* SOM satellite number				*/
@@ -63,36 +62,36 @@ long mode;		/* which initialization method  to use A or B	*/
 
 	/* Function declarations for function pointer use
 	-----------------------------------------------*/
-long utmfor();
-long stplnfor();
-long alberfor();
-long lamccfor();
-long merfor();
-long psfor();
-long polyfor();
-long eqconfor();
-long tmfor();
-long sterfor();
-long lamazfor();
-long azimfor();
-long gnomfor();
-long orthfor();
-long gvnspfor();
-long sinfor();
-long equifor();
-long millfor();
-long vandgfor();
-long omerfor();
-long somfor();
-long hamfor();
-long robfor();
-long goodfor();
-long molwfor();
-long imolwfor();
-long alconfor();
-long wivfor();
-long wviifor();
-long obleqfor();
+long utmfor(double lon, double lat, double *x, double *y);
+long stplnfor(double lon, double lat, double *x, double *y);
+long alberfor(double lon, double lat, double *x, double *y);
+long lamccfor(double lon, double lat, double *x, double *y);
+long merfor(double lon, double lat, double *x, double *y);
+long psfor(double lon, double lat, double *x, double *y);
+long polyfor(double lon, double lat, double *x, double *y);
+long eqconfor(double lon, double lat, double *x, double *y);
+long tmfor(double lon, double lat, double *x, double *y);
+long sterfor(double lon, double lat, double *x, double *y);
+long lamazfor(double lon, double lat, double *x, double *y);
+long azimfor(double lon, double lat, double *x, double *y);
+long gnomfor(double lon, double lat, double *x, double *y);
+long orthfor(double lon, double lat, double *x, double *y);
+long gvnspfor(double lon, double lat, double *x, double *y);
+long sinfor(double lon, double lat, double *x, double *y);
+long equifor(double lon, double lat, double *x, double *y);
+long millfor(double lon, double lat, double *x, double *y);
+long vandgfor(double lon, double lat, double *x, double *y);
+long omerfor(double lon, double lat, double *x, double *y);
+long somfor(double lon, double lat, double *y, double *x);
+long hamfor(double lon, double lat, double *x, double *y);
+long robfor(double lon, double lat, double *x, double *y);
+long goodfor(double lon, double lat, double *x, double *y);
+long molwfor(double lon, double lat, double *x, double *y);
+long imolwfor(double lon, double lat, double *x, double *y);
+long alconfor(double lon, double lat, double *x, double *y);
+long wivfor(double lon, double lat, double *x, double *y);
+long wviifor(double lon, double lat, double *x, double *y);
+long obleqfor(double lon, double lat, double *x, double *y);
 
 /* Initialize forward transformations
 -----------------------------------*/

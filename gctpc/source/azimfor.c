@@ -37,16 +37,18 @@ static double cos_p12;		/* cos of center latitude		*/
 
 /* Initialize the Azimuthal projection
   ----------------------------------*/
-long azimforint(r_maj,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long azimforint(
+double r_maj,                   /* major axis			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(); 	/* 	functions	*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x); 	/* 	functions	*/
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -71,13 +73,13 @@ return(OK);
 
 /* Azimuthal forward equations--mapping lat,long to x,y
   ---------------------------------------------------*/
-long azimfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long azimfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double sinphi, cosphi;	/* sin and cos value				*/
 double dlon;		/* delta longitude value			*/
 double coslon;		/* cos of longitude				*/

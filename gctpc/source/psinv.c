@@ -39,24 +39,22 @@ ALGORITHM REFERENCES
 
 /* Initialize the Polar Stereographic projection
   --------------------------------------------*/
-long psinvint(r_maj,r_min,c_lon,c_lat,false_east,false_north)
-
-double c_lon;				/* center longitude		*/
-double c_lat;				/* center latitude		*/
-double r_maj;				/* major axis			*/
-double r_min;				/* minor axis			*/
-double false_east;			/* x offset in meters		*/
-double false_north;			/* y offset in meters		*/
-
+long psinvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double c_lon,                   /* center longitude		*/
+double c_lat,                   /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;				/* temporary variable		*/
 double con1;				/* temporary angle		*/
 double sinphi;				/* sin value			*/
 double cosphi;				/* cos value			*/
 double es;                     /* eccentricity squared         */
-double e4fn();				/* function to compute e4	*/
-double msfnz();				/* function to compute small m	*/
-double tsfnz();				/* function to compute small t	*/
+double e4fn(double x);				/* function to compute e4	*/
+double msfnz(double eccent, double sinphi, double cosphi);				/* function to compute small m	*/
+double tsfnz(double eccent, double phi, double sinphi);				/* function to compute small t	*/
 
 r_major = r_maj;
 r_minor = r_min;
@@ -94,17 +92,16 @@ return(OK);
 
 /* Polar Stereographic inverse equations--mapping x,y to lat/long
   --------------------------------------------------------------*/
-long psinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
-
+long psinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 double rh;			/* height above ellipsiod	*/
 double ts;			/* small value t		*/
-double phi2z();			/* function to compute phi	*/
-double adjust_lon();		/* function to adjust longitude	*/
+double phi2z(double eccent, double ts, long *flag);			/* function to compute phi	*/
+double adjust_lon(double x);		/* function to adjust longitude	*/
 double temp;			/* temporary variable		*/
 long   flag;			/* error flag			*/
 

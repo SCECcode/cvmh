@@ -35,8 +35,8 @@ static double feast[12];	/* False easting, one for each region */
 
 /* Initialize the Goode`s Homolosine projection
   --------------------------------------------*/
-long goodinvint(r) 
-double r; 			/* (I) Radius of the earth (sphere) */
+long goodinvint(
+double r                        /* (I) Radius of the earth (sphere) */)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -81,13 +81,13 @@ return(OK);
 
 /* Goode`s Homolosine inverse equations--mapping x,y to lat,long 
   -------------------------------------------------------------*/
-long goodinv(x, y, lon, lat)
-double x;		/* (I) X projection coordinate */
-double y;		/* (I) Y projection coordinate */
-double *lon;		/* (O) Longitude */
-double *lat;		/* (O) Latitude */
+long goodinv(
+double x,                       /* (I) X projection coordinate */
+double y,                       /* (I) Y projection coordinate */
+double *lon,                    /* (O) Longitude */
+double *lat                     /* (O) Latitude */)
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 */
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180 */
 double arg;
 double theta;
 double temp;
