@@ -71,9 +71,9 @@ long *inzone,                   /* input zone number				*/
 double *inparm,                 /* input projection parameter array		*/
 long *inunit,                   /* input units					*/
 long *indatum,                  /* input datum 					*/
-long *ipr,                      /* printout flag for error messages. 0=screen, 1=file,
+long *ipr,
 char *efile,                    /* error file name				*/
-long *jpr,                      /* printout flag for projection parameters 0=screen,
+long *jpr,
 char *pfile,                    /* error file name				*/
 double *outcoor,                /* output coordinates				*/
 long *outsys,                   /* output projection code			*/

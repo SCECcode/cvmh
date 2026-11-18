@@ -95,7 +95,7 @@ static double minor[20] = {6356583.8, 6356514.86955, 6356078.96284, 6356772.2,
 ---------------------------------*/
 
 long sphdz(
-long isph,                      /* spheroid code number (incorrectly referred to
+long isph,
 double *parm,                   /* projection parameters			*/
 double *r_major,                /* major axis					*/
 double *r_minor,                /* minor axis					*/
