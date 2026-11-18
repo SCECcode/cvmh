@@ -303,10 +303,8 @@ void pblank()
 
 /* Function to report errors 
   -------------------------*/
-void p_error(what, where) 
-   char *what;
-   char *where; 
-   {
+void p_error(char *what, char *where)
+{
    if (terminal_e)
       printf("[%s] %s\n",where,what);
    if (file_e)

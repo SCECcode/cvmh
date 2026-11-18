@@ -55,7 +55,7 @@ long   mode;			/* which format is present A B	*/
 {
 double temp;			/* temporary variable		*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
-double msfnz();
+/* REMOVED_KR_DECL: double msfnz(); */
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
 double ml1,ml2;
@@ -139,10 +139,10 @@ double *lon;			/* (I) Longitude 		*/
 double *lat;			/* (I) Latitude 		*/
 {
 
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double rh1;
 double ml;
-double phi3z();
+/* REMOVED_KR_DECL: double phi3z(); */
 double con;
 double theta;
 long   flag;

@@ -95,8 +95,8 @@ double factor;		/* conversion factor				*/
 double lon;		/* longitude					*/
 double lat;		/* latitude					*/
 double temp;		/* dummy variable				*/
-double sign2();
-double pakr2dm();
+/* REMOVED_KR_DECL: double sign2(); */
+/* REMOVED_KR_DECL: double pakr2dm(); */
 long i,j;		/* loop counters				*/
 long ininit_flag;	/* input initilization flag			*/
 long outinit_flag;	/* output initilization flag			*/

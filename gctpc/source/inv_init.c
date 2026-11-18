@@ -57,7 +57,7 @@ double shape_m;		/* constant used for Oblated Equal Area		*/
 double shape_n;		/* constant used for Oblated Equal Area		*/
 long   start;		/* start of SOM Beginning or end		*/
 double time;		/* SOM time					*/
-double paksz();		/* function to convert DMS to DEG		*/
+/* REMOVED_KR_DECL: double paksz(); */		/* function to convert DMS to DEG		*/
 long path;		/* SOM path number				*/
 long satnum;		/* SOM satellite number				*/
 long mode;		/* which format is used	A or B			*/
@@ -65,36 +65,36 @@ long tmpdatum;		/* temporary datum for UTM			*/
 
 	/* Function declarations for inverse function pointer
 	---------------------------------------------------*/
-long utminv();
-long stplninv();
-long alberinv();
-long lamccinv();
-long merinv();
-long psinv();
-long polyinv();
-long eqconinv();
-long tminv();
-long sterinv();
-long lamazinv();
-long aziminv();
-long gnominv();
-long orthinv();
-long gvnspinv();
-long sininv();
-long equiinv();
-long millinv();
-long vandginv();
-long omerinv();
-long sominv();
-long haminv();
-long robinv();
-long goodinv();
-long molwinv();
-long imolwinv();
-long alconinv();
-long wivinv();
-long wviiinv();
-long obleqinv();
+/* REMOVED_KR_DECL: long utminv(); */
+/* REMOVED_KR_DECL: long stplninv(); */
+/* REMOVED_KR_DECL: long alberinv(); */
+/* REMOVED_KR_DECL: long lamccinv(); */
+/* REMOVED_KR_DECL: long merinv(); */
+/* REMOVED_KR_DECL: long psinv(); */
+/* REMOVED_KR_DECL: long polyinv(); */
+/* REMOVED_KR_DECL: long eqconinv(); */
+/* REMOVED_KR_DECL: long tminv(); */
+/* REMOVED_KR_DECL: long sterinv(); */
+/* REMOVED_KR_DECL: long lamazinv(); */
+/* REMOVED_KR_DECL: long aziminv(); */
+/* REMOVED_KR_DECL: long gnominv(); */
+/* REMOVED_KR_DECL: long orthinv(); */
+/* REMOVED_KR_DECL: long gvnspinv(); */
+/* REMOVED_KR_DECL: long sininv(); */
+/* REMOVED_KR_DECL: long equiinv(); */
+/* REMOVED_KR_DECL: long millinv(); */
+/* REMOVED_KR_DECL: long vandginv(); */
+/* REMOVED_KR_DECL: long omerinv(); */
+/* REMOVED_KR_DECL: long sominv(); */
+/* REMOVED_KR_DECL: long haminv(); */
+/* REMOVED_KR_DECL: long robinv(); */
+/* REMOVED_KR_DECL: long goodinv(); */
+/* REMOVED_KR_DECL: long molwinv(); */
+/* REMOVED_KR_DECL: long imolwinv(); */
+/* REMOVED_KR_DECL: long alconinv(); */
+/* REMOVED_KR_DECL: long wivinv(); */
+/* REMOVED_KR_DECL: long wviiinv(); */
+/* REMOVED_KR_DECL: long obleqinv(); */
 
 /* Initialize inverse transformations
 -----------------------------------*/

@@ -85,9 +85,9 @@ double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/
 double *y;			/* (O) Y projection coordinate 	*/
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
-double mlfn();		/* function to compute small m			*/
-double msfnz();		/* function to compute m			*/
+/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
+/* REMOVED_KR_DECL: double mlfn(); */		/* function to compute small m			*/
+/* REMOVED_KR_DECL: double msfnz(); */		/* function to compute m			*/
 double sinphi, cosphi;	/* sin and cos value				*/
 double al;		/* temporary values				*/
 double c;		/* temporary values				*/

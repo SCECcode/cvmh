@@ -49,7 +49,7 @@ long   flag;
 long i;
 double alf,e2c,e2s,one_es;
 double dlam,fb,fa2,fa4,fc1,fc3,suma2,suma4,sumc1,sumc3,sumb;
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -253,8 +253,7 @@ return(OK);
 
    Mathematical analysis by John Snyder 6/82
   --------------------------------------------------------------------------*/
-static double som_series(fb,fa2,fa4,fc1,fc3,dlam)
-double *fb,*fa2,*fa4,*fc1,*fc3,*dlam;
+static double som_series(double *fb, double *fa2, double *fa4, double *fc1, double *fc3, double *dlam)
 {
 double sd,sdsq,h,sq,fc;
 

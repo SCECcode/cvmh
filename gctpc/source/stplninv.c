@@ -50,12 +50,7 @@ static long nad83[134] = {101,102,5010,5300,201,202,203,301,302,401,402,403,
 		5001,5002,5003,5004,5005,5006,5007,5008,5009,5200,0000,5400};                                             
 /* Initialize the State Plane projection
   ------------------------------------*/
-long stplninvint( zone,sphere,fn27,fn83)
-
-long   zone;
-long   sphere;
-char   *fn27;
-char   *fn83;
+long stplninvint(long zone, long sphere, char *fn27, char *fn83)
 {
 long ind;
 long i;
@@ -63,8 +58,8 @@ long nadval;
 double table[9];
 char pname[33];
 char buf[100];
-double paksz();
-double pakcz();
+/* REMOVED_KR_DECL: double paksz(); */
+/* REMOVED_KR_DECL: double pakcz(); */
 double r_maj,r_min,scale_fact,center_lon;
 double center_lat,false_east,false_north;
 double azimuth,lat_orig,lon_orig,lon1,lat1,lon2,lat2;

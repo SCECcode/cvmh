@@ -36,16 +36,7 @@ static double cos_lat_o;
 static double false_easting;
 static double false_northing;
 
-long obleqforint(r, center_long, center_lat, shape_m, shape_n, angle, false_east,
-            false_north)
-
-double r;
-double center_long;
-double center_lat;
-double shape_m,shape_n;
-double angle;
-double false_east;
-double false_north;
+long obleqforint(double r, double center_long, double center_lat, double shape_m, double shape_n, double angle, double false_east, double false_north)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/

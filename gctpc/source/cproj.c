@@ -52,9 +52,7 @@ void sincos(val, sin_val, cos_val) double val; double *sin_val; double *cos_val;
 
 /* Function to eliminate roundoff errors in asin
 ----------------------------------------------*/
-double asinz (con)
-
-double con;
+double asinz(double con)
 {
  if (fabs(con) > 1.0)
    {
@@ -69,10 +67,7 @@ double con;
 /* Function to compute the constant small m which is the radius of
    a parallel of latitude, phi, divided by the semimajor axis.
 ---------------------------------------------------------------*/
-double msfnz (eccent,sinphi,cosphi)
-  double eccent;
-  double sinphi;
-  double cosphi;
+double msfnz(double eccent, double sinphi, double cosphi)
 {
 double con;
 
@@ -83,10 +78,7 @@ double con;
 /* Function to compute constant small q which is the radius of a 
    parallel of latitude, phi, divided by the semimajor axis. 
 ------------------------------------------------------------*/
-double qsfnz (eccent,sinphi,cosphi)
-   double eccent;
-   double sinphi;
-   double cosphi;
+double qsfnz(double eccent, double sinphi, double cosphi)
 {
 double con;
 
@@ -115,7 +107,7 @@ double com;
 double sinpi;
 double cospi;
 double phi;
-double asinz();
+/* REMOVED_KR_DECL: double asinz(); */
 long i;
 
       phi = asinz(.5 * qs);
@@ -390,8 +382,7 @@ double e3fn(x) double x;{return(x*x*x*(35.0/3072.0));}
    of the spheroid, x.  This constant is used in the Polar Stereographic
    projection.
 --------------------------------------------------------------------*/
-double e4fn(x)
-double x;
+double e4fn(double x)
 {
  double con;
  double com;

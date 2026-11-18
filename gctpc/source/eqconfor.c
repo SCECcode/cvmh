@@ -55,7 +55,7 @@ long   mode;			/* which format is present A B	*/
 {
 double temp;			/* temporary variable		*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
-double msfnz();
+/* REMOVED_KR_DECL: double msfnz(); */
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
 double ml1,ml2;
@@ -139,8 +139,8 @@ double *x;			/* (O) X projection coordinate 	*/
 double *y;			/* (O) Y projection coordinate 	*/
 {
 double ml;
-double mlfn();
-double adjust_lon();
+/* REMOVED_KR_DECL: double mlfn(); */
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double theta;
 double rh1;
 

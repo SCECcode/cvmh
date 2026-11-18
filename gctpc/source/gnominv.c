@@ -76,10 +76,10 @@ double *lon;			/* (I) Longitude */
 double *lat;			/* (I) Latitude */
 
 {
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double rh;
 double z,sinz,cosz;
-double asinz();
+/* REMOVED_KR_DECL: double asinz(); */
 double con;
 
 

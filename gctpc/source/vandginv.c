@@ -70,7 +70,7 @@ double *lat;			/* (I) Latitude */
 
 {
 double dlon;
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double xx,yy,xys,c1,c2,c3;
 double al,asq;
 double a1;

@@ -120,7 +120,7 @@ double *lon;			/* (I) Longitude */
 double *lat;			/* (I) Latitude */
 
 {
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double yy;
 double p2;
 double u,v,t,c;

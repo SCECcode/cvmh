@@ -118,7 +118,7 @@ double *y;			/* (O) Y projection coordinate */
 
 {
 double dlon;
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double p2;
 long ip1;
 

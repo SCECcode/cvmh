@@ -105,11 +105,11 @@ double lat;			/* (I) Latitude 		*/
 double *x;			/* (O) X projection coordinate 	*/
 double *y;			/* (O) Y projection coordinate 	*/
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
+/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double theta;		/* angle					*/
 double delta_theta;	/* adjusted longitude				*/
-double mlfn();		/* function to compute small m			*/
+/* REMOVED_KR_DECL: double mlfn(); */		/* function to compute small m			*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double al, als;		/* temporary values				*/
 double b;		/* temporary values				*/

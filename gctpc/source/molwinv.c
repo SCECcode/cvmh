@@ -62,7 +62,7 @@ double y;		/* (I) Y projection coordinate */
 double *lon;		/* (O) Longitude */
 double *lat;		/* (O) Latitude */
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 */
+/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 */
 double theta;
 double arg;
 

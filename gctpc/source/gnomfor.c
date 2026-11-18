@@ -76,7 +76,7 @@ double *x;			/* (O) X projection coordinate */
 double *y;			/* (O) Y projection coordinate */
 
 {
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 double dlon;
 double sinphi,cosphi;
 double coslon;

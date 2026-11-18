@@ -106,7 +106,7 @@ double y;		/* (I) Y projection coordinate 			*/
 double *lon;		/* (O) Longitude 				*/
 double *lat;		/* (O) Latitude 				*/
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 	*/
+/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 	*/
 double con,phi;		/* temporary angles				*/
 double delta_phi;	/* difference between longitudes		*/
 long i;			/* counter variable				*/
@@ -114,7 +114,7 @@ double sin_phi, cos_phi, tan_phi;	/* sin cos and tangent values	*/
 double c, cs, t, ts, n, r, d, ds;	/* temporary variables		*/
 double f, h, g, temp;			/* temporary variables		*/
 long max_iter = 6;			/* maximun number of iterations	*/
-double asinz();
+/* REMOVED_KR_DECL: double asinz(); */
 
 /* fortran code for spherical form 
 --------------------------------*/

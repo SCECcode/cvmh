@@ -71,7 +71,7 @@ double *lat;			/* (I) Latitude */
 
 {
 double dlon;
-double adjust_lon();
+/* REMOVED_KR_DECL: double adjust_lon(); */
 
 /* Inverse  equations
   ------------------*/

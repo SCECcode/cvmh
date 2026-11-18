@@ -51,8 +51,8 @@ double lat0;                    /* center lattitude                     */
 double false_east;              /* x offset in meters                   */
 double false_north;             /* y offset in meters                   */
 {
-double msfnz();			/* function to compute small m		*/
-double qsfnz();			/* function to compute small q		*/
+/* REMOVED_KR_DECL: double msfnz(); */			/* function to compute small m		*/
+/* REMOVED_KR_DECL: double qsfnz(); */			/* function to compute small q		*/
 double sin_po,cos_po;		/* sine and cos values			*/
 double con;			/* temporary variable			*/
 double temp;			/* temporary variable			*/
@@ -119,13 +119,13 @@ double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/
 double *lat;			/* (I) Latitude 		*/
 {
-double qsfnz();			/* function to calculate q	*/
+/* REMOVED_KR_DECL: double qsfnz(); */			/* function to calculate q	*/
 double rh1;			/* height above ellipsoid	*/
 double qs;			/* function q			*/
 double con;			/* temporary sign2 value		*/
 double theta;			/* angle			*/
-double adjust_lon();    /* Function to adjust longitude to -180 - 180   */
-double phi1z ();		/* function to calculate LAT phi	*/
+/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180   */
+/* REMOVED_KR_DECL: double phi1z (); */		/* function to calculate LAT phi	*/
 long   flag;			/* error flag;			*/
 
 

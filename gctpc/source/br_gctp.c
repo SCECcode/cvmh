@@ -1,3 +1,4 @@
+#include <stddef.h>
 
 #ifdef unix
 /*  Fortran bridge routine for the UNIX */

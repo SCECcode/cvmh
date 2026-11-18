@@ -59,8 +59,8 @@ double temp;                    /* temporary variable                   */
 double ts0;                     /* small t 0                            */
 double ts1;                     /* small t 1                            */
 double ts2;                     /* small t 2                            */
-double msfnz();                 /* function to compute small m          */
-double tsfnz();                 /* function to compute small t          */
+/* REMOVED_KR_DECL: double msfnz(); */                 /* function to compute small m          */
+/* REMOVED_KR_DECL: double tsfnz(); */                 /* function to compute small t          */
 r_major = r_maj;
 r_minor = r_min;
 false_northing = false_north;
@@ -124,8 +124,8 @@ double rh1;                     /* height above ellipsoid               */
 double sinphi;                  /* sin value                            */
 double theta;                   /* angle                                */
 double ts;                      /* small value t                        */
-double tsfnz();                 /* function to compute small t          */
-double adjust_lon();            /* function to adust the longitude      */
+/* REMOVED_KR_DECL: double tsfnz(); */                 /* function to compute small t          */
+/* REMOVED_KR_DECL: double adjust_lon(); */            /* function to adust the longitude      */
 
 con  = fabs( fabs(lat) - HALF_PI);
 if (con > EPSLN)

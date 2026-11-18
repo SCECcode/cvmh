@@ -58,8 +58,8 @@ double temp;				/* temporary variable		*/
 double ts0;				/* small t 0			*/
 double ts1;				/* small t 1			*/
 double ts2;				/* small t 2			*/
-double msfnz();				/* function to compute small m	*/
-double tsfnz();				/* function to compute small t	*/
+/* REMOVED_KR_DECL: double msfnz(); */				/* function to compute small m	*/
+/* REMOVED_KR_DECL: double tsfnz(); */				/* function to compute small t	*/
 
 r_major = r_maj;
 r_minor = r_min;
@@ -125,8 +125,8 @@ double rh1;			/* height above ellipsoid	*/
 double con;			/* sign2 variable		*/
 double ts;			/* small t			*/
 double theta;			/* angle			*/
-double phi2z();			/* function to compute phi	*/
-double adjust_lon();		/* functio to adjust longitude	*/
+/* REMOVED_KR_DECL: double phi2z(); */			/* function to compute phi	*/
+/* REMOVED_KR_DECL: double adjust_lon(); */		/* functio to adjust longitude	*/
 long   flag;			/* error flag			*/
 
 flag = 0;

@@ -55,7 +55,7 @@ double shape_n;		/* constant used for Oblated Equal Area		*/
 long   start;		/* where SOM starts beginning or end		*/
 double time;		/* SOM time					*/
 double radius;		/* radius of sphere				*/
-double paksz();		/* function to convert DMS to DEG		*/
+/* REMOVED_KR_DECL: double paksz(); */		/* function to convert DMS to DEG		*/
 long tmpdatum;		/* temporary datum for UTM			*/
 long path;		/* SOM path number				*/
 long satnum;		/* SOM satellite number				*/
@@ -63,36 +63,36 @@ long mode;		/* which initialization method  to use A or B	*/
 
 	/* Function declarations for function pointer use
 	-----------------------------------------------*/
-long utmfor();
-long stplnfor();
-long alberfor();
-long lamccfor();
-long merfor();
-long psfor();
-long polyfor();
-long eqconfor();
-long tmfor();
-long sterfor();
-long lamazfor();
-long azimfor();
-long gnomfor();
-long orthfor();
-long gvnspfor();
-long sinfor();
-long equifor();
-long millfor();
-long vandgfor();
-long omerfor();
-long somfor();
-long hamfor();
-long robfor();
-long goodfor();
-long molwfor();
-long imolwfor();
-long alconfor();
-long wivfor();
-long wviifor();
-long obleqfor();
+/* REMOVED_KR_DECL: long utmfor(); */
+/* REMOVED_KR_DECL: long stplnfor(); */
+/* REMOVED_KR_DECL: long alberfor(); */
+/* REMOVED_KR_DECL: long lamccfor(); */
+/* REMOVED_KR_DECL: long merfor(); */
+/* REMOVED_KR_DECL: long psfor(); */
+/* REMOVED_KR_DECL: long polyfor(); */
+/* REMOVED_KR_DECL: long eqconfor(); */
+/* REMOVED_KR_DECL: long tmfor(); */
+/* REMOVED_KR_DECL: long sterfor(); */
+/* REMOVED_KR_DECL: long lamazfor(); */
+/* REMOVED_KR_DECL: long azimfor(); */
+/* REMOVED_KR_DECL: long gnomfor(); */
+/* REMOVED_KR_DECL: long orthfor(); */
+/* REMOVED_KR_DECL: long gvnspfor(); */
+/* REMOVED_KR_DECL: long sinfor(); */
+/* REMOVED_KR_DECL: long equifor(); */
+/* REMOVED_KR_DECL: long millfor(); */
+/* REMOVED_KR_DECL: long vandgfor(); */
+/* REMOVED_KR_DECL: long omerfor(); */
+/* REMOVED_KR_DECL: long somfor(); */
+/* REMOVED_KR_DECL: long hamfor(); */
+/* REMOVED_KR_DECL: long robfor(); */
+/* REMOVED_KR_DECL: long goodfor(); */
+/* REMOVED_KR_DECL: long molwfor(); */
+/* REMOVED_KR_DECL: long imolwfor(); */
+/* REMOVED_KR_DECL: long alconfor(); */
+/* REMOVED_KR_DECL: long wivfor(); */
+/* REMOVED_KR_DECL: long wviifor(); */
+/* REMOVED_KR_DECL: long obleqfor(); */
 
 /* Initialize forward transformations
 -----------------------------------*/

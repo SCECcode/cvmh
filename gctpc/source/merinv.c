@@ -82,9 +82,9 @@ double y;			/* (O) Y projection coordinate 	*/
 double *lon;			/* (I) Longitude 		*/
 double *lat;			/* (I) Latitude 		*/
 {
-double adjust_lon();	/* Function to adjust longitude to -180 - 180 	*/
-double tsfnz();		/* function to compute t			*/
-double phi2z();		/* function to compute phi			*/
+/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
+/* REMOVED_KR_DECL: double tsfnz(); */		/* function to compute t			*/
+/* REMOVED_KR_DECL: double phi2z(); */		/* function to compute phi			*/
 double ts;		/* small t value				*/
 double sin_phii;	/* sin value					*/
 long flag;		/* error flag 					*/

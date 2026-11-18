@@ -76,14 +76,14 @@ double y;		/* (I) Y projection coordinate */
 double *lon;		/* (O) Longitude */
 double *lat;		/* (O) Latitude */
 {
-double adjust_lon();    /* Function to adjust longitude to -180 - 180 */
+/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 */
 double Rh;
 double z;		/* Great circle dist from proj center to given point */
 double sin_z;		/* Sine of z */
 double cos_z;		/* Cosine of z */
 double temp;		/* Re-used temporary variable */
 
-double asinz();
+/* REMOVED_KR_DECL: double asinz(); */
 
 /* Inverse equations
   -----------------*/
