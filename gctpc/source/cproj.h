@@ -57,10 +57,10 @@ long untfz(long inunit,long outunit,double *factor);
 long sphdz(long isph,double *parm,double *r_major,double *r_minor,double *radius);
 
 /* inv_init.c */
-void inv_init(long insys,long inzone,double *inparm,long indatum,char *fn27,char *fn83,long *iflg,long (*inv_trans[])());
+void inv_init(long insys,long inzone,double *inparm,long indatum,char *fn27,char *fn83,long *iflg,long (*inv_trans[])(double, double, double *, double *));
 
 /* for_init.c */
-void for_init(long outsys,long outzone,double *outparm,long outdatum,char *fn27,char *fn83,long *iflg,long (*for_trans[])());
+void for_init(long outsys,long outzone,double *outparm,long outdatum,char *fn27,char *fn83,long *iflg,long (*for_trans[])(double, double, double *, double *));
 
 /* cproj.c */
 void sincos(double val,double *sin_val,double *cos_val);
@@ -154,9 +154,9 @@ long imolwinvint(double r);
 long imolwinv(double x,double y,double *lon,double *lat);
 
 /* for_init.c  */
-void for_init(long outsys,long outzone,double *outparm,long outdatum,char *fn27,char *fn83,long *iflg,long (*for_trans[])());
+void for_init(long outsys,long outzone,double *outparm,long outdatum,char *fn27,char *fn83,long *iflg,long (*for_trans[])(double, double, double *, double *));
 /* inv_init.c */
-void inv_init(long insys,long inzone,double *inparm,long indatum,char *fn27,char *fn83,long *iflg,long (*inv_trans[])());
+void inv_init(long insys,long inzone,double *inparm,long indatum,char *fn27,char *fn83,long *iflg,long (*inv_trans[])(double, double, double *, double *));
 
 /* lamazfor.c */
 long lamazforint(double r,double center_long,double center_lat,double false_east,double false_north); 
