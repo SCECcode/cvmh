@@ -64,8 +64,8 @@ double y,                       /* (I) Y projection coordinate */
 double *lon,                    /* (O) Longitude */
 double *lat                     /* (O) Latitude */)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 */
-/* REMOVED_KR_DECL: double asinz(); */		/* Function to ensure arcsin is valid */
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180 */
+double asinz(double con);		/* Function to ensure arcsin is valid */
 double temp;		/* Re-used temporary variable */
 double t1, t2, p, c;
 

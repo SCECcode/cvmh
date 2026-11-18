@@ -68,7 +68,7 @@ double *lon,                    /* (I) Longitude */
 double *lat                     /* (I) Latitude */)
 {
 double dlon;
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 
 /* Inverse  equations
   ------------------*/

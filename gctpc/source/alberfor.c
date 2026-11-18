@@ -46,8 +46,8 @@ double lat0,                    /* center lattitude			*/
 double false_east,              /* x offset in meters			*/
 double false_north              /* y offset in meters			*/)
 {
-/* REMOVED_KR_DECL: double msfnz(); */			/* function to compute small m		*/
-/* REMOVED_KR_DECL: double qsfnz(); */			/* function to compute small q		*/
+double msfnz(double eccent, double sinphi, double cosphi);			/* function to compute small m		*/
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to compute small q		*/
 double sin_po,cos_po;		/* sin and cos values			*/
 double con;			/* temporary variable			*/
 double es,temp;			/* eccentricity squared and temp var	*/
@@ -118,8 +118,8 @@ double sin_phi,cos_phi;		/* sine and cos values		*/
 double qs;			/* small q			*/
 double theta;			/* angle			*/ 
 double rh1;			/* height above ellipsoid	*/
-/* REMOVED_KR_DECL: double qsfnz(); */			/* function to calculate q	*/
-/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180   */
+double qsfnz(double eccent, double sinphi, double cosphi);			/* function to calculate q	*/
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180   */
 
 sincos(lat,&sin_phi,&cos_phi);
 qs = qsfnz(e3,sin_phi,cos_phi);

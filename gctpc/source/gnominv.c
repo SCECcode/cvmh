@@ -74,10 +74,10 @@ double y,                       /* (O) Y projection coordinate */
 double *lon,                    /* (I) Longitude */
 double *lat                     /* (I) Latitude */)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 double rh;
 double z,sinz,cosz;
-/* REMOVED_KR_DECL: double asinz(); */
+double asinz(double con);
 double con;
 
 

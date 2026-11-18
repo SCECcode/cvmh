@@ -56,7 +56,11 @@ double false_east,              /* x offset in meters		*/
 double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
-/* REMOVED_KR_DECL: double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); */ 	/* functions	*/
+/* UNKNOWN_KR_DECL: e0fn() */
+/* UNKNOWN_KR_DECL: e1fn() */
+/* UNKNOWN_KR_DECL: e2fn() */
+/* UNKNOWN_KR_DECL: e3fn() */
+/* UNKNOWN_KR_DECL: mlfn() */ 	/* functions	*/
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -104,11 +108,11 @@ double lat,                     /* (I) Latitude 		*/
 double *x,                      /* (O) X projection coordinate 	*/
 double *y                       /* (O) Y projection coordinate 	*/)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double theta;		/* angle					*/
 double delta_theta;	/* adjusted longitude				*/
-/* REMOVED_KR_DECL: double mlfn(); */		/* function to compute small m			*/
+/* UNKNOWN_KR_DECL: mlfn() */		/* function to compute small m			*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double al, als;		/* temporary values				*/
 double b;		/* temporary values				*/

@@ -52,9 +52,9 @@ double con1;				/* temporary angle		*/
 double sinphi;				/* sin value			*/
 double cosphi;				/* cos value			*/
 double es;                     /* eccentricity squared         */
-/* REMOVED_KR_DECL: double e4fn(); */				/* function to compute e4	*/
-/* REMOVED_KR_DECL: double msfnz(); */				/* function to compute small m	*/
-/* REMOVED_KR_DECL: double tsfnz(); */				/* function to compute small t	*/
+double e4fn(double x);				/* function to compute e4	*/
+double msfnz(double eccent, double sinphi, double cosphi);				/* function to compute small m	*/
+double tsfnz(double eccent, double phi, double sinphi);				/* function to compute small t	*/
 
 r_major = r_maj;
 r_minor = r_min;
@@ -100,8 +100,8 @@ double *lat                     /* (I) Latitude 		*/)
 {
 double rh;			/* height above ellipsiod	*/
 double ts;			/* small value t		*/
-/* REMOVED_KR_DECL: double phi2z(); */			/* function to compute phi	*/
-/* REMOVED_KR_DECL: double adjust_lon(); */		/* function to adjust longitude	*/
+double phi2z(double eccent, double ts, long *flag);			/* function to compute phi	*/
+double adjust_lon(double x);		/* function to adjust longitude	*/
 double temp;			/* temporary variable		*/
 long   flag;			/* error flag			*/
 

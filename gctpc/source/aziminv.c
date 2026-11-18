@@ -71,8 +71,8 @@ double y,                       /* (O) Y projection coordinate 	*/
 double *lon,                    /* (I) Longitude 		*/
 double *lat                     /* (I) Latitude 		*/)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
-/* REMOVED_KR_DECL: double asinz(); */
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
+double asinz(double con);
 double rh;		/* height above ellipsoid			*/
 double z;		/* angle					*/
 double sinz,cosz;	/* sin of z and cos of z			*/

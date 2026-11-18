@@ -52,8 +52,12 @@ double false_north,             /* y offset in meters		*/
 long mode                       /* which format is present A B	*/)
 {
 double temp;			/* temporary variable		*/
-/* REMOVED_KR_DECL: double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); */ 	/* functions	*/
-/* REMOVED_KR_DECL: double msfnz(); */
+/* UNKNOWN_KR_DECL: e0fn() */
+/* UNKNOWN_KR_DECL: e1fn() */
+/* UNKNOWN_KR_DECL: e2fn() */
+/* UNKNOWN_KR_DECL: e3fn() */
+/* UNKNOWN_KR_DECL: mlfn() */ 	/* functions	*/
+double msfnz(double eccent, double sinphi, double cosphi);
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
 double ml1,ml2;
@@ -137,10 +141,10 @@ double *lon,                    /* (I) Longitude 		*/
 double *lat                     /* (I) Latitude 		*/)
 {
 
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 double rh1;
 double ml;
-/* REMOVED_KR_DECL: double phi3z(); */
+double phi3z(double ml, double e0, double e1, double e2, double e3, long *flag);
 double con;
 double theta;
 long   flag;

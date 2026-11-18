@@ -108,8 +108,8 @@ double *lon,                    /* (I) Longitude */
 double *lat                     /* (I) Latitude */)
 {
 double dlon;
-/* REMOVED_KR_DECL: double adjust_lon(); */
-/* REMOVED_KR_DECL: double asinz(); */
+double adjust_lon(double x);
+double asinz(double con);
 double sinlon,coslon;
 double esphi;
 double r;

@@ -74,7 +74,7 @@ double lat,                     /* (I) Latitude */
 double *x,                      /* (O) X projection coordinate */
 double *y                       /* (O) Y projection coordinate */)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 double dlon;
 double sinphi,cosphi;
 double coslon;

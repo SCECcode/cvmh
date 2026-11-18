@@ -55,7 +55,11 @@ double scale_fact,              /* scale factor				*/
 long zone                       /* zone number				*/)
 {
 double temp;			/* temprorary variables			*/
-/* REMOVED_KR_DECL: double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); */	/* functions		*/
+/* UNKNOWN_KR_DECL: e0fn() */
+/* UNKNOWN_KR_DECL: e1fn() */
+/* UNKNOWN_KR_DECL: e2fn() */
+/* UNKNOWN_KR_DECL: e3fn() */
+/* UNKNOWN_KR_DECL: mlfn() */	/* functions		*/
 
 if ((abs(zone) < 1) || (abs(zone) > 60))
    {
@@ -105,7 +109,7 @@ double y,                       /* (I) Y projection coordinate 			*/
 double *lon,                    /* (O) Longitude 				*/
 double *lat                     /* (O) Latitude 				*/)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 	*/
+double adjust_lon(double x);    /* Function to adjust longitude to -180 - 180 	*/
 double con,phi;		/* temporary angles				*/
 double delta_phi;	/* difference between longitudes		*/
 long i;			/* counter variable				*/
@@ -113,7 +117,7 @@ double sin_phi, cos_phi, tan_phi;	/* sin cos and tangent values	*/
 double c, cs, t, ts, n, r, d, ds;	/* temporary variables		*/
 double f, h, g, temp;			/* temporary variables		*/
 long max_iter = 6;			/* maximun number of iterations	*/
-/* REMOVED_KR_DECL: double asinz(); */
+double asinz(double con);
 
 /* fortran code for spherical form 
 --------------------------------*/

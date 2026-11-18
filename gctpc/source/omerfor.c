@@ -60,10 +60,10 @@ double lat2,                    /* second point to define central line	*/
 long mode                       /* which format type A or B	*/)
 {
 double temp;			/* temporary variable		*/
-/* REMOVED_KR_DECL: double adjust_lon(); */
-/* REMOVED_KR_DECL: double asinz(); */
+double adjust_lon(double x);
+double asinz(double con);
 double con,com;
-/* REMOVED_KR_DECL: double tsfnz(); */			/* function to compute t	*/
+double tsfnz(double eccent, double phi, double sinphi);			/* function to compute t	*/
 double ts;
 double ts1,ts2;
 double h,l;
@@ -215,8 +215,8 @@ double lat,                     /* (I) Latitude 		*/
 double *x,                      /* (O) X projection coordinate 	*/
 double *y                       /* (O) Y projection coordinate 	*/)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
-/* REMOVED_KR_DECL: double tsfnz(); */		/* function to compute t			*/
+double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
+double tsfnz(double eccent, double phi, double sinphi);		/* function to compute t			*/
 double theta;		/* angle					*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double b;		/* temporary values				*/

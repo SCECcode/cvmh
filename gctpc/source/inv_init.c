@@ -57,7 +57,7 @@ double shape_m;		/* constant used for Oblated Equal Area		*/
 double shape_n;		/* constant used for Oblated Equal Area		*/
 long   start;		/* start of SOM Beginning or end		*/
 double time;		/* SOM time					*/
-/* REMOVED_KR_DECL: double paksz(); */		/* function to convert DMS to DEG		*/
+double paksz(double ang, long *iflg);		/* function to convert DMS to DEG		*/
 long path;		/* SOM path number				*/
 long satnum;		/* SOM satellite number				*/
 long mode;		/* which format is used	A or B			*/
@@ -65,36 +65,36 @@ long tmpdatum;		/* temporary datum for UTM			*/
 
 	/* Function declarations for inverse function pointer
 	---------------------------------------------------*/
-/* REMOVED_KR_DECL: long utminv(); */
-/* REMOVED_KR_DECL: long stplninv(); */
-/* REMOVED_KR_DECL: long alberinv(); */
-/* REMOVED_KR_DECL: long lamccinv(); */
-/* REMOVED_KR_DECL: long merinv(); */
-/* REMOVED_KR_DECL: long psinv(); */
-/* REMOVED_KR_DECL: long polyinv(); */
-/* REMOVED_KR_DECL: long eqconinv(); */
-/* REMOVED_KR_DECL: long tminv(); */
-/* REMOVED_KR_DECL: long sterinv(); */
-/* REMOVED_KR_DECL: long lamazinv(); */
-/* REMOVED_KR_DECL: long aziminv(); */
-/* REMOVED_KR_DECL: long gnominv(); */
-/* REMOVED_KR_DECL: long orthinv(); */
-/* REMOVED_KR_DECL: long gvnspinv(); */
-/* REMOVED_KR_DECL: long sininv(); */
-/* REMOVED_KR_DECL: long equiinv(); */
-/* REMOVED_KR_DECL: long millinv(); */
-/* REMOVED_KR_DECL: long vandginv(); */
-/* REMOVED_KR_DECL: long omerinv(); */
-/* REMOVED_KR_DECL: long sominv(); */
-/* REMOVED_KR_DECL: long haminv(); */
-/* REMOVED_KR_DECL: long robinv(); */
-/* REMOVED_KR_DECL: long goodinv(); */
-/* REMOVED_KR_DECL: long molwinv(); */
-/* REMOVED_KR_DECL: long imolwinv(); */
-/* REMOVED_KR_DECL: long alconinv(); */
-/* REMOVED_KR_DECL: long wivinv(); */
-/* REMOVED_KR_DECL: long wviiinv(); */
-/* REMOVED_KR_DECL: long obleqinv(); */
+long utminv(double x, double y, double *lon, double *lat);
+long stplninv(double x, double y, double *lon, double *lat);
+long alberinv(double x, double y, double *lon, double *lat);
+long lamccinv(double x, double y, double *lon, double *lat);
+long merinv(double x, double y, double *lon, double *lat);
+long psinv(double x, double y, double *lon, double *lat);
+long polyinv(double x, double y, double *lon, double *lat);
+long eqconinv(double x, double y, double *lon, double *lat);
+long tminv(double x, double y, double *lon, double *lat);
+long sterinv(double x, double y, double *lon, double *lat);
+long lamazinv(double x, double y, double *lon, double *lat);
+long aziminv(double x, double y, double *lon, double *lat);
+long gnominv(double x, double y, double *lon, double *lat);
+long orthinv(double x, double y, double *lon, double *lat);
+long gvnspinv(double x, double y, double *lon, double *lat);
+long sininv(double x, double y, double *lon, double *lat);
+long equiinv(double x, double y, double *lon, double *lat);
+long millinv(double x, double y, double *lon, double *lat);
+long vandginv(double x, double y, double *lon, double *lat);
+long omerinv(double x, double y, double *lon, double *lat);
+long sominv(double y, double x, double *lon, double *lat);
+long haminv(double x, double y, double *lon, double *lat);
+long robinv(double x, double y, double *lon, double *lat);
+long goodinv(double x, double y, double *lon, double *lat);
+long molwinv(double x, double y, double *lon, double *lat);
+long imolwinv(double x, double y, double *lon, double *lat);
+long alconinv(double x, double y, double *lon, double *lat);
+long wivinv(double x, double y, double *lon, double *lat);
+long wviiinv(double x, double y, double *lon, double *lat);
+long obleqinv(double x, double y, double *lon, double *lat);
 
 /* Initialize inverse transformations
 -----------------------------------*/

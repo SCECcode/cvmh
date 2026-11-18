@@ -68,8 +68,8 @@ double *x,                      /* (O) X projection coordinate */
 double *y                       /* (O) Y projection coordinate */)
 {
 double dlon;
-/* REMOVED_KR_DECL: double adjust_lon(); */
-/* REMOVED_KR_DECL: double asinz(); */
+double adjust_lon(double x);
+double asinz(double con);
 double theta;
 double al,asq;
 double g,gsq;

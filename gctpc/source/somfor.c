@@ -47,7 +47,7 @@ long flag)
 long i;
 double alf,e2c,e2s,one_es;
 double dlam,fb,fa2,fa4,fc1,fc3,suma2,suma4,sumc1,sumc3,sumb;
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 
 /* Place parameters in static storage for common use
   -------------------------------------------------*/

@@ -118,7 +118,7 @@ double y,                       /* (O) Y projection coordinate */
 double *lon,                    /* (I) Longitude */
 double *lat                     /* (I) Latitude */)
 {
-/* REMOVED_KR_DECL: double adjust_lon(); */
+double adjust_lon(double x);
 double yy;
 double p2;
 double u,v,t,c;

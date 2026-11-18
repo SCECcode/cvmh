@@ -62,8 +62,8 @@ long nadval;
 double table[9];
 char pname[33];
 char buf[100];
-/* REMOVED_KR_DECL: double paksz(); */
-/* REMOVED_KR_DECL: double pakcz(); */
+double paksz(double ang, long *iflg);
+/* UNKNOWN_KR_DECL: pakcz() */
 double r_maj,r_min,scale_fact,center_lon;
 double center_lat,false_east,false_north;
 double azimuth,lat_orig,lon_orig,lon1,lat1,lon2,lat2;

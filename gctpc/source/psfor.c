@@ -52,9 +52,9 @@ double temp;				/* temporary variable		*/
 double con1;				/* temporary angle		*/
 double sinphi;				/* sin value			*/
 double cosphi;				/* cos value			*/
-/* REMOVED_KR_DECL: double e4fn(); */				/* function to compute e4	*/
-/* REMOVED_KR_DECL: double msfnz(); */				/* function to compute m	*/
-/* REMOVED_KR_DECL: double tsfnz(); */				/* function to compute t	*/
+double e4fn(double x);				/* function to compute e4	*/
+double msfnz(double eccent, double sinphi, double cosphi);				/* function to compute m	*/
+double tsfnz(double eccent, double phi, double sinphi);				/* function to compute t	*/
 
 r_major = r_maj;
 r_minor = r_min;
@@ -100,8 +100,8 @@ double *y                       /* (O) Y projection coordinate 	*/)
 {
 double con1;			/* adjusted longitude		*/
 double con2;			/* adjusted latitude		*/
-/* REMOVED_KR_DECL: double adjust_lon(); */		/* function to adjust longitude	*/
-/* REMOVED_KR_DECL: double tsfnz(); */			/* function to compute t	*/
+double adjust_lon(double x);		/* function to adjust longitude	*/
+double tsfnz(double eccent, double phi, double sinphi);			/* function to compute t	*/
 double rh;			/* height above ellipsoid	*/
 double sinphi;			/* sin value			*/
 double ts;			/* value of small t		*/
