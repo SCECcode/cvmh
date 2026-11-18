@@ -114,7 +114,7 @@ double com;
 double sinpi;
 double cospi;
 double phi;
-/* REMOVED_KR_DECL: double asinz(); */
+double asinz(double con);
 long i;
 
       phi = asinz(.5 * qs);
