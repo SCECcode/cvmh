@@ -30,7 +30,7 @@ long indatum;		/* input datum code				*/
 char *fn27;		/* NAD 1927 parameter file			*/
 char *fn83;		/* NAD 1983 parameter file			*/
 long *iflg;		/* status flag					*/
-long (*inv_trans[])();	/* inverse function pointer			*/
+long (*inv_trans[])(double, double, double *, double *);	/* inverse function pointer			*/
 {
 long zone;		/* zone number					*/
 double azimuth;		/* azimuth					*/
