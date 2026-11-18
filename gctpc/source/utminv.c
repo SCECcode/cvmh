@@ -55,7 +55,7 @@ double scale_fact,              /* scale factor				*/
 long zone                       /* zone number				*/)
 {
 double temp;			/* temprorary variables			*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn();	/* functions		*/
+/* REMOVED_KR_DECL: double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); */	/* functions		*/
 
 if ((abs(zone) < 1) || (abs(zone) > 60))
    {

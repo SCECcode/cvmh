@@ -52,7 +52,7 @@ double false_north,             /* y offset in meters		*/
 long mode                       /* which format is present A B	*/)
 {
 double temp;			/* temporary variable		*/
-double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
+/* REMOVED_KR_DECL: double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); */ 	/* functions	*/
 /* REMOVED_KR_DECL: double msfnz(); */
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
