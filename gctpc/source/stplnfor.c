@@ -63,7 +63,7 @@ double table[9];
 char pname[32];
 char buf[100];
 double paksz(double ang, long *iflg);
-/* UNKNOWN_KR_DECL: pakcz() */
+double pakcz(double pak);
 double r_maj,r_min,scale_fact,center_lon;
 double center_lat,false_east,false_north;
 double azimuth,lat_orig,lon_orig,lon1,lat1,lon2,lat2;

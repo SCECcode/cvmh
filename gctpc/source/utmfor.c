@@ -52,11 +52,11 @@ double scale_fact,              /* scale factor				*/
 long zone                       /* zone number				*/)
 {
 double temp;			/* temporary variable			*/
-/* UNKNOWN_KR_DECL: e0fn() */
-/* UNKNOWN_KR_DECL: e1fn() */
-/* UNKNOWN_KR_DECL: e2fn() */
-/* UNKNOWN_KR_DECL: e3fn() */
-/* UNKNOWN_KR_DECL: mlfn() */ 	/* functions		*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions		*/
 
 if ((abs(zone) < 1) || (abs(zone) > 60))
    {
@@ -109,7 +109,7 @@ double adjust_lon(double x);	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/
 double theta;		/* angle					*/
 double delta_theta;	/* adjusted longitude				*/
-/* UNKNOWN_KR_DECL: mlfn() */		/* function to compute small m			*/
+double mlfn(double e0, double e1, double e2, double e3, double phi);		/* function to compute small m			*/
 double sin_phi, cos_phi;/* sin and cos value				*/
 double al, als;		/* temporary values				*/
 double b;		/* temporary values				*/

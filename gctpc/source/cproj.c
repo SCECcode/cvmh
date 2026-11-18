@@ -46,14 +46,13 @@ S. Nelson, EROS		Nov, 1993	Added loop counter in ADJUST_LON
    computer systems which don`t implement this function
   ----------------------------------------------------*/
 #ifndef sun
-void sincos(val, sin_val, cos_val) double val; double *sin_val; double *cos_val;
+void sincos(double val, double *sin_val, double *cos_val)
 { *sin_val = sin(val); *cos_val = cos(val); return; }
 #endif
 
 /* Function to eliminate roundoff errors in asin
 ----------------------------------------------*/
-double asinz(
-double con)
+double asinz(double con)
 {
  if (fabs(con) > 1.0)
    {
@@ -258,9 +257,8 @@ return(004);
 /* Function to convert 2 digit alternate packed DMS format (+/-)DDDMMSS.SSS
    to 3 digit standard packed DMS format (+/-)DDDMMMSSS.SSS.
 -----------------------------------------------------------------*/
-      double pakcz(pak)
-
-      double pak;	/* Angle in alternate packed DMS format	*/
+      double pakcz(
+double pak                      /* Angle in alternate packed DMS format	*/)
       {
       double con;
       double secs;
@@ -283,9 +281,8 @@ return(004);
 
 /* Function to convert radians to 3 digit packed DMS format (+/-)DDDMMMSSS.SSS
 ----------------------------------------------------------------------------*/
-      double pakr2dm(pak)
-
-      double pak;	/* Angle in radians			*/
+      double pakr2dm(
+double pak                      /* Angle in radians			*/)
       {
       double con;
       double secs;
@@ -315,7 +312,7 @@ double tsfnz(
 double eccent,                  /* Eccentricity of the spheroid		*/
 double phi,                     /* Latitude phi				*/
 double sinphi                   /* Sine of the latitude			*/)
-{
+  {
   double con;
   double com;
   
@@ -328,7 +325,7 @@ double sinphi                   /* Sine of the latitude			*/)
 
 /* Function to return the sign2 of an argument
   ------------------------------------------*/
-double sign2(x) double x; { if (x < 0.0) return(-1); else return(1);}
+double sign2(double x) { if (x < 0.0) return(-1); else return(1);}
 
 /* Function to adjust a longitude angle to range from -180 to 180 radians
    added if statments 
@@ -374,17 +371,16 @@ return(x);
    in a series for calculating the distance along a meridian.  The
    input x represents the eccentricity squared.
 ----------------------------------------------------------------*/
-double e0fn(x) double x;{return(1.0-0.25*x*(1.0+x/16.0*(3.0+1.25*x)));}
-double e1fn(x) double x;{return(0.375*x*(1.0+0.25*x*(1.0+0.46875*x)));}
-double e2fn(x) double x;{return(0.05859375*x*x*(1.0+0.75*x));}
-double e3fn(x) double x;{return(x*x*x*(35.0/3072.0));}
+double e0fn(double x) {return(1.0-0.25*x*(1.0+x/16.0*(3.0+1.25*x)));}
+double e1fn(double x) {return(0.375*x*(1.0+0.25*x*(1.0+0.46875*x)));}
+double e2fn(double x) {return(0.05859375*x*x*(1.0+0.75*x));}
+double e3fn(double x) {return(x*x*x*(35.0/3072.0));}
 
 /* Function to compute the constant e4 from the input of the eccentricity
    of the spheroid, x.  This constant is used in the Polar Stereographic
    projection.
 --------------------------------------------------------------------*/
-double e4fn(
-double x)
+double e4fn(double x)
 {
  double con;
  double com;
@@ -396,9 +392,9 @@ double x)
 /* Function computes the value of M which is the distance along a meridian
    from the Equator to latitude phi.
 ------------------------------------------------*/
-double mlfn(e0,e1,e2,e3,phi) double e0,e1,e2,e3,phi;{
+double mlfn(double e0, double e1, double e2, double e3, double phi) {
                 return(e0*phi-e1*sin(2.0*phi)+e2*sin(4.0*phi)-e3*sin(6.0*phi));}
 
 /* Function to calculate UTM zone number--NOTE Longitude entered in DEGREES!!!
   ---------------------------------------------------------------------------*/
-long calc_utm_zone(lon) double lon; { return((long)(((lon + 180.0) / 6.0) + 1.0)); }
+long calc_utm_zone(double lon) { return((long)(((lon + 180.0) / 6.0) + 1.0)); }

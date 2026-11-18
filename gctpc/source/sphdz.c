@@ -94,14 +94,12 @@ static double minor[20] = {6356583.8, 6356514.86955, 6356078.96284, 6356772.2,
 /* Finds the correct ellipsoid axis
 ---------------------------------*/
 
-long sphdz(isph,parm,r_major,r_minor,radius)
-
-long isph;		/* spheroid code number (incorrectly referred to
-			   as datum code throughout GCTPc) */
-double *parm;		/* projection parameters			*/
-double *r_major;	/* major axis					*/
-double *r_minor;	/* minor axis					*/
-double *radius;		/* radius					*/
+long sphdz(
+long isph,                      /* spheroid code number (incorrectly referred to
+double *parm,                   /* projection parameters			*/
+double *r_major,                /* major axis					*/
+double *r_minor,                /* minor axis					*/
+double *radius                  /* radius					*/)
 {
 
 double t_major;		/* temporary major axis				*/

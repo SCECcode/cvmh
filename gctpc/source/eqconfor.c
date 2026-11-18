@@ -52,11 +52,11 @@ double false_north,             /* y offset in meters		*/
 long mode                       /* which format is present A B	*/)
 {
 double temp;			/* temporary variable		*/
-/* UNKNOWN_KR_DECL: e0fn() */
-/* UNKNOWN_KR_DECL: e1fn() */
-/* UNKNOWN_KR_DECL: e2fn() */
-/* UNKNOWN_KR_DECL: e3fn() */
-/* UNKNOWN_KR_DECL: mlfn() */ 	/* functions	*/
+double e0fn(double x);
+double e1fn(double x);
+double e2fn(double x);
+double e3fn(double x);
+double mlfn(double e0, double e1, double e2, double e3, double phi); 	/* functions	*/
 double msfnz(double eccent, double sinphi, double cosphi);
 double sinphi,cosphi;		/* sin and cos values		*/
 double ms1,ms2;
@@ -141,7 +141,7 @@ double *x,                      /* (O) X projection coordinate 	*/
 double *y                       /* (O) Y projection coordinate 	*/)
 {
 double ml;
-/* UNKNOWN_KR_DECL: mlfn() */
+double mlfn(double e0, double e1, double e2, double e3, double phi);
 double adjust_lon(double x);
 double theta;
 double rh1;

@@ -21,16 +21,15 @@ ALGORITHM REFERENCES
 #include "cproj.h"
 #include "proj.h"
 
-void inv_init(insys,inzone,inparm,indatum,fn27,fn83,iflg,inv_trans)
-
-long insys;		/* input system code				*/
-long inzone;		/* input zone number				*/
-double *inparm;		/* input array of projection parameters		*/
-long indatum;		/* input datum code				*/
-char *fn27;		/* NAD 1927 parameter file			*/
-char *fn83;		/* NAD 1983 parameter file			*/
-long *iflg;		/* status flag					*/
-long (*inv_trans[])(double, double, double *, double *);	/* inverse function pointer			*/
+void inv_init(
+long insys,                     /* input system code				*/
+long inzone,                    /* input zone number				*/
+double *inparm,                 /* input array of projection parameters		*/
+long indatum,                   /* input datum code				*/
+char *fn27,                     /* NAD 1927 parameter file			*/
+char *fn83,                     /* NAD 1983 parameter file			*/
+long *iflg,                     /* status flag					*/
+long (*inv_trans[])(double, double, double *, double *)/* inverse function pointer			*/)
 {
 long zone;		/* zone number					*/
 double azimuth;		/* azimuth					*/

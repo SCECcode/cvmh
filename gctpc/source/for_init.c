@@ -21,16 +21,15 @@ ALGORITHM REFERENCES
 #include "cproj.h"
 #include "proj.h"
 
-void for_init(outsys,outzone,outparm,outdatum,fn27,fn83,iflg,for_trans)
-
-long outsys;		/* output system code				*/
-long outzone;		/* output zone number				*/
-double *outparm;	/* output array of projection parameters	*/
-long outdatum;		/* output datum					*/
-char *fn27;		/* NAD 1927 parameter file			*/
-char *fn83;		/* NAD 1983 parameter file			*/
-long *iflg;		/* status flag					*/
-long (*for_trans[])(double, double, double *, double *);	/* forward function pointer			*/
+void for_init(
+long outsys,                    /* output system code				*/
+long outzone,                   /* output zone number				*/
+double *outparm,                /* output array of projection parameters	*/
+long outdatum,                  /* output datum					*/
+char *fn27,                     /* NAD 1927 parameter file			*/
+char *fn83,                     /* NAD 1983 parameter file			*/
+long *iflg,                     /* status flag					*/
+long (*for_trans[])(double, double, double *, double *)/* forward function pointer			*/)
 {
 long zone;		/* zone number					*/
 double azimuth;		/* azimuth					*/
