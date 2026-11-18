@@ -37,12 +37,11 @@ static double false_northing;	/* y offset in meters			*/
 
 /* Initialize the HAMMER projection
   -------------------------------*/
-long hamforint(r, center_long,false_east,false_north) 
-
-double r; 			/* (I) Radius of the earth (sphere) 	*/
-double center_long;		/* (I) Center longitude 		*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long hamforint(
+double r,                       /* (I) Radius of the earth (sphere) 	*/
+double center_long,             /* (I) Center longitude 		*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
 long i;
 
@@ -64,12 +63,11 @@ return(OK);
 
 /* HAMMER forward equations--mapping lat,long to x,y
   ------------------------------------------------------------*/
-long hamfor(lon, lat, x, y)
-double lon;			/* (I) Longitude */
-double lat;			/* (I) Latitude */
-double *x;			/* (O) X projection coordinate */
-double *y;			/* (O) Y projection coordinate */
-
+long hamfor(
+double lon,                     /* (I) Longitude */
+double lat,                     /* (I) Latitude */
+double *x,                      /* (O) X projection coordinate */
+double *y                       /* (O) Y projection coordinate */)
 {
 double dlon;
 /* REMOVED_KR_DECL: double adjust_lon(); */

@@ -40,18 +40,16 @@ static double rh;
 
 /* Initialize the Equidistant Conic projection
   ------------------------------------------*/
-long eqconinvint(r_maj,r_min,lat1,lat2,center_lon,center_lat,false_east,false_north,
-	    mode)
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double lat1;			/* latitude of standard parallel*/
-double lat2;			/* latitude of standard parallel*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
-long   mode;			/* which format is present A B	*/
+long eqconinvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double lat1,                    /* latitude of standard parallel*/
+double lat2,                    /* latitude of standard parallel*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north,             /* y offset in meters		*/
+long mode                       /* which format is present A B	*/)
 {
 double temp;			/* temporary variable		*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
@@ -132,11 +130,11 @@ return(OK);
 
 /* Equidistant Conic inverse equations--mapping x,y to lat/long
   -----------------------------------------------------------*/
-long eqconinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long eqconinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 
 /* REMOVED_KR_DECL: double adjust_lon(); */

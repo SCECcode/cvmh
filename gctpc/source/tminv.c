@@ -48,15 +48,14 @@ static long ind;		/* sphere flag value			*/
 
 /* Initialize the Transverse Mercator (TM) projection
   -------------------------------------------------------------*/
-long tminvint(r_maj,r_min,scale_fact,center_lon,center_lat,false_east,false_north)
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double scale_fact;		/* scale factor			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long tminvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double scale_fact,              /* scale factor			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn();	/* functions		*/
@@ -99,11 +98,11 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
           if a change is implemented, also make the change to UTMINV.c
   --------------------------------------------------------------*/
-long tminv(x, y, lon, lat)
-double x;		/* (I) X projection coordinate 			*/
-double y;		/* (I) Y projection coordinate 			*/
-double *lon;		/* (O) Longitude 				*/
-double *lat;		/* (O) Latitude 				*/
+long tminv(
+double x,                       /* (I) X projection coordinate 			*/
+double y,                       /* (I) Y projection coordinate 			*/
+double *lon,                    /* (O) Longitude 				*/
+double *lat                     /* (O) Latitude 				*/)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 	*/
 double con,phi;		/* temporary angles				*/

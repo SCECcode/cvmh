@@ -52,7 +52,8 @@ void sincos(val, sin_val, cos_val) double val; double *sin_val; double *cos_val;
 
 /* Function to eliminate roundoff errors in asin
 ----------------------------------------------*/
-double asinz(double con)
+double asinz(
+double con)
 {
  if (fabs(con) > 1.0)
    {
@@ -67,7 +68,10 @@ double asinz(double con)
 /* Function to compute the constant small m which is the radius of
    a parallel of latitude, phi, divided by the semimajor axis.
 ---------------------------------------------------------------*/
-double msfnz(double eccent, double sinphi, double cosphi)
+double msfnz(
+double eccent,
+double sinphi,
+double cosphi)
 {
 double con;
 
@@ -78,7 +82,10 @@ double con;
 /* Function to compute constant small q which is the radius of a 
    parallel of latitude, phi, divided by the semimajor axis. 
 ------------------------------------------------------------*/
-double qsfnz(double eccent, double sinphi, double cosphi)
+double qsfnz(
+double eccent,
+double sinphi,
+double cosphi)
 {
 double con;
 
@@ -95,10 +102,10 @@ double con;
 /* Function to compute phi1, the latitude for the inverse of the
    Albers Conical Equal-Area projection.
 -------------------------------------------*/
-double phi1z (eccent,qs,flag)
-     double eccent;	/* Eccentricity angle in radians		*/
-     double qs;		/* Angle in radians				*/
-     long  *flag;	/* Error flag number				*/
+double phi1z(
+double eccent,                  /* Eccentricity angle in radians		*/
+double qs,                      /* Angle in radians				*/
+long *flag                      /* Error flag number				*/)
 {
 double eccnts;
 double dphi;
@@ -133,12 +140,10 @@ long i;
 /* Function to compute the latitude angle, phi2, for the inverse of the
    Lambert Conformal Conic and Polar Stereographic projections.
 ----------------------------------------------------------------*/
-double phi2z(eccent,ts,flag)
-
-double eccent;		/* Spheroid eccentricity		*/
-double ts;		/* Constant value t			*/
-long *flag;		/* Error flag number			*/
- 
+double phi2z(
+double eccent,                  /* Spheroid eccentricity		*/
+double ts,                      /* Constant value t			*/
+long *flag                      /* Error flag number			*/)
 {
 double eccnth;
 double phi;
@@ -168,15 +173,13 @@ long i;
 /* Function to compute latitude, phi3, for the inverse of the Equidistant
    Conic projection.
 -----------------------------------------------------------------*/
-double phi3z(ml,e0,e1,e2,e3,flag)
-
-double ml;		/* Constant 			*/
-double e0;		/* Constant			*/
-double e1;		/* Constant			*/
-double e2;		/* Constant			*/
-double e3;		/* Constant			*/
-long *flag;		/* Error flag number		*/
-
+double phi3z(
+double ml,                      /* Constant 			*/
+double e0,                      /* Constant			*/
+double e1,                      /* Constant			*/
+double e2,                      /* Constant			*/
+double e3,                      /* Constant			*/
+long *flag                      /* Error flag number		*/)
 {
 double phi;
 double dphi;
@@ -202,17 +205,16 @@ return(3);
 /* Function to compute, phi4, the latitude for the inverse of the
    Polyconic projection.
 ------------------------------------------------------------*/
-double phi4z (eccent,e0,e1,e2,e3,a,b,c,phi) 
-
-double eccent;		/* Spheroid eccentricity squared	*/
-double e0;
-double e1;
-double e2;
-double e3;
-double a;
-double b;
-double *c;
-double *phi;
+double phi4z(
+double eccent,                  /* Spheroid eccentricity squared	*/
+double e0,
+double e1,
+double e2,
+double e3,
+double a,
+double b,
+double *c,
+double *phi)
 {
 double sinphi;
 double sin2ph;
@@ -309,11 +311,11 @@ return(004);
    computations in the Lambert Conformal Conic and the Polar
    Stereographic projections.
 --------------------------------------------------------------*/
-double tsfnz(eccent,phi,sinphi)
-  double eccent;	/* Eccentricity of the spheroid		*/
-  double phi;		/* Latitude phi				*/
-  double sinphi;	/* Sine of the latitude			*/
-  {
+double tsfnz(
+double eccent,                  /* Eccentricity of the spheroid		*/
+double phi,                     /* Latitude phi				*/
+double sinphi                   /* Sine of the latitude			*/)
+{
   double con;
   double com;
   
@@ -331,9 +333,8 @@ double sign2(x) double x; { if (x < 0.0) return(-1); else return(1);}
 /* Function to adjust a longitude angle to range from -180 to 180 radians
    added if statments 
   -----------------------------------------------------------------------*/
-double adjust_lon(x) 
-
-double x;		/* Angle in radians			*/
+double adjust_lon(
+double x                        /* Angle in radians			*/)
 {
 long temp;
 long count = 0;
@@ -382,7 +383,8 @@ double e3fn(x) double x;{return(x*x*x*(35.0/3072.0));}
    of the spheroid, x.  This constant is used in the Polar Stereographic
    projection.
 --------------------------------------------------------------------*/
-double e4fn(double x)
+double e4fn(
+double x)
 {
  double con;
  double com;

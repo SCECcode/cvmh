@@ -36,14 +36,13 @@ static double false_easting;	/* x offset in meters			*/
 
 /* Initialize the POLYCONIC projection
   ----------------------------------*/
-long polyinvint(r_maj,r_min,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long polyinvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double temp;			/* temporary variable		*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn(); 	/* functions	*/
@@ -79,11 +78,11 @@ return(OK);
 
 /* Polyconic inverse equations--mapping x,y to lat/long
   ---------------------------------------------------*/
-long polyinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long polyinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
 /* REMOVED_KR_DECL: double asinz(); */

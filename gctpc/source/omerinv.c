@@ -45,22 +45,20 @@ static double sinaz,cosaz;
 
 /* Initialize the Oblique Mercator  projection
   ------------------------------------------*/
-long omerinvint(r_maj,r_min,scale_fact,azimuth,lon_orig,lat_orig,false_east,
-	    false_north,lon1,lat1,lon2,lat2,mode) 
-
-double r_maj;			/* major axis			*/
-double r_min;			/* minor axis			*/
-double scale_fact;		/* scale factor			*/
-double azimuth;			/* azimuth east of north	*/
-double lon_orig;		/* longitude of origin		*/
-double lat_orig;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
-double lon1;			/* fist point to define central line	*/
-double lat1;			/* fist point to define central line	*/
-double lon2;			/* second point to define central line	*/
-double lat2;			/* second point to define central line	*/
-long   mode;			/* which format type A or B	*/
+long omerinvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double scale_fact,              /* scale factor			*/
+double azimuth,                 /* azimuth east of north	*/
+double lon_orig,                /* longitude of origin		*/
+double lat_orig,                /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north,             /* y offset in meters		*/
+double lon1,                    /* fist point to define central line	*/
+double lat1,                    /* fist point to define central line	*/
+double lon2,                    /* second point to define central line	*/
+double lat2,                    /* second point to define central line	*/
+long mode                       /* which format type A or B	*/)
 {
 double temp;			/* temporary variable		*/
 /* REMOVED_KR_DECL: double adjust_lon(); */
@@ -210,11 +208,11 @@ return(OK);
 
 /* Oblique Mercator inverse equations--mapping x,y to lat/long
   ----------------------------------------------------------*/
-long omerinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long omerinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
 double delta_lon;	/* Delta longitude (Given longitude - center 	*/

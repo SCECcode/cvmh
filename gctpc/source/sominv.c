@@ -31,20 +31,18 @@ static double som_series();
 static double false_easting;
 static double false_northing;
 
-long sominvint(r_major,r_minor,satnum,path,alf_in,lon,false_east,false_north,time,
-	  start1,flag)
-
-double	r_major;		/* major axis				*/
-double	r_minor;		/* minor axis				*/
-long satnum;			/* Landsat satellite number (1,2,3,4,5) */
-long path;			/* Landsat path number */
-double alf_in;
-double lon;
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
-double time;
-long start1;
-long flag;
+long sominvint(
+double r_major,                 /* major axis				*/
+double r_minor,                 /* minor axis				*/
+long satnum,                    /* Landsat satellite number (1,2,3,4,5) */
+long path,                      /* Landsat path number */
+double alf_in,
+double lon,
+double false_east,              /* x offset in meters			*/
+double false_north,             /* y offset in meters			*/
+double time,
+long start1,
+long flag)
 {
 long i;
 double alf,e2c,e2s,one_es;
@@ -151,12 +149,11 @@ c3=sumc3/45.0;
 return(OK);
 }
 
-long sominv(y, x, lon, lat)
- 
-double x;               /* (I) X projection coordinate */
-double y;               /* (I) Y projection coordinate */
-double *lon;            /* (O) Longitude */
-double *lat;            /* (O) Latitude */
+long sominv(
+double y,                       /* (I) Y projection coordinate */
+double x,                       /* (I) X projection coordinate */
+double *lon,                    /* (O) Longitude */
+double *lat                     /* (O) Latitude */)
 {
 double tlon,conv,sav,sd,sdsq,blon,dif,st,defac,actan,tlat,dd,bigk,bigk2,xlamt;
 double sl,scl,dlat,dlon,temp;
@@ -228,7 +225,13 @@ return(OK);
 
    Mathematical analysis by John Snyder 6/82
   --------------------------------------------------------------------------*/
-static double som_series(double *fb, double *fa2, double *fa4, double *fc1, double *fc3, double *dlam)
+static double som_series(
+double *fb,
+double *fa2,
+double *fa4,
+double *fc1,
+double *fc3,
+double *dlam)
 {
 double sd,sdsq,h,sq,fc;
 

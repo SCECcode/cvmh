@@ -34,13 +34,12 @@ static double cos_p14;		/* cos of center latitude		*/
 
 /* Initialize the Orthographic projection
   -------------------------------------*/
-long orthinvint(r_maj,center_lon,center_lat,false_east,false_north) 
-
-double r_maj;			/* major axis			*/
-double center_lon;		/* center longitude		*/
-double center_lat;		/* center latitude		*/
-double false_east;		/* x offset in meters		*/
-double false_north;		/* y offset in meters		*/
+long orthinvint(
+double r_maj,                   /* major axis			*/
+double center_lon,              /* center longitude		*/
+double center_lat,              /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 
 /* Place parameters in static storage for common use
@@ -66,11 +65,11 @@ return(OK);
 
 /* Orthographic inverse equations--mapping x,y to lat/long
   ------------------------------------------------------*/
-long orthinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long orthinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 	*/
 /* REMOVED_KR_DECL: double asinz(); */

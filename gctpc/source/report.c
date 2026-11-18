@@ -45,13 +45,11 @@ static char err_file[256];
 
 /* initialize output device
 -------------------------*/
-long init(ipr,jpr,efile,pfile)
-
-long ipr;		/* flag for printing errors (0,1,or 2)		*/
-long jpr;		/* flag for printing parameters (0,1,or 2)	*/
-char *efile;		/* name of error file				*/
-char *pfile;		/* name of parameter file			*/
-
+long init(
+long ipr,                       /* flag for printing errors (0,1,or 2)		*/
+long jpr,                       /* flag for printing parameters (0,1,or 2)	*/
+char *efile,                    /* name of error file				*/
+char *pfile                     /* name of parameter file			*/)
 {
 if (ipr == 0)
    {
@@ -303,7 +301,9 @@ void pblank()
 
 /* Function to report errors 
   -------------------------*/
-void p_error(char *what, char *where)
+void p_error(
+char *what,
+char *where)
 {
    if (terminal_e)
       printf("[%s] %s\n",where,what);

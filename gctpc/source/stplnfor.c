@@ -50,7 +50,11 @@ static long NAD83[134] = {101,102,5010,5300,201,202,203,301,302,401,402,403,
 		5001,5002,5003,5004,5005,5006,5007,5008,5009,5200,0000,5400};                                             
 /* Initialize the State Plane projection
   ------------------------------------*/
-long stplnforint(long zone, long sphere, char *fn27, char *fn83)
+long stplnforint(
+long zone,
+long sphere,
+char *fn27,
+char *fn83)
 {
 long ind;
 long i;
@@ -213,11 +217,11 @@ return(OK);
 
 /* State plane forward equations--mapping lat,long to x,y
   -----------------------------------------------------*/
-long stplnfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long stplnfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
 long iflg;
 

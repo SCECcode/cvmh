@@ -38,7 +38,15 @@ static double cos_lat_o;
 static double false_easting;
 static double false_northing;
 
-long obleqinvint(double r, double center_long, double center_lat, double shape_m, double shape_n, double angle, double false_east, double false_north)
+long obleqinvint(
+double r,
+double center_long,
+double center_lat,
+double shape_m,
+double shape_n,
+double angle,
+double false_east,
+double false_north)
 {
 /* Place parameters in static storage for common use
   -------------------------------------------------*/
@@ -70,12 +78,11 @@ sincos(lat_o, &sin_lat_o, &cos_lat_o);
 return(OK);
 }
 
-long obleqinv(x, y, lon, lat)
-
-double x;		/* (I) X projection coordinate */
-double y;		/* (I) Y projection coordinate */
-double *lon;		/* (O) Longitude */
-double *lat;		/* (O) Latitude */
+long obleqinv(
+double x,                       /* (I) X projection coordinate */
+double y,                       /* (I) Y projection coordinate */
+double *lon,                    /* (O) Longitude */
+double *lat                     /* (O) Latitude */)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */	/* Function to adjust longitude to -180 - 180 */
 double z;

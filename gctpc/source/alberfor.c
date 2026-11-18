@@ -36,16 +36,15 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-long alberforint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
-
-double r_maj;			/* major axis				*/
-double r_min;			/* minor axis				*/
-double lat1;			/* first standard parallel		*/
-double lat2;			/* second standard parallel		*/
-double lon0;			/* center longitude			*/
-double lat0;			/* center lattitude			*/
-double false_east;		/* x offset in meters			*/
-double false_north;		/* y offset in meters			*/
+long alberforint(
+double r_maj,                   /* major axis				*/
+double r_min,                   /* minor axis				*/
+double lat1,                    /* first standard parallel		*/
+double lat2,                    /* second standard parallel		*/
+double lon0,                    /* center longitude			*/
+double lat0,                    /* center lattitude			*/
+double false_east,              /* x offset in meters			*/
+double false_north              /* y offset in meters			*/)
 {
 /* REMOVED_KR_DECL: double msfnz(); */			/* function to compute small m		*/
 /* REMOVED_KR_DECL: double qsfnz(); */			/* function to compute small q		*/
@@ -109,11 +108,11 @@ return(OK);
 
 /* Albers Conical Equal Area forward equations--mapping lat,long to x,y
   -------------------------------------------------------------------*/
-long alberfor(lon, lat, x, y)
-double lon;			/* (I) Longitude 		*/
-double lat;			/* (I) Latitude 		*/
-double *x;			/* (O) X projection coordinate 	*/
-double *y;			/* (O) Y projection coordinate 	*/
+long alberfor(
+double lon,                     /* (I) Longitude 		*/
+double lat,                     /* (I) Latitude 		*/
+double *x,                      /* (O) X projection coordinate 	*/
+double *y                       /* (O) Y projection coordinate 	*/)
 {
 double sin_phi,cos_phi;		/* sine and cos values		*/
 double qs;			/* small q			*/

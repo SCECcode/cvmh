@@ -35,7 +35,10 @@ static double factors[6][6] = {{1.0, 0.0, 0.0, 206264.8062470963,
 
 /* Convert DMS packed angle into deg 
 ----------------------------------*/
-long untfz(long inunit, long outunit, double *factor)
+long untfz(
+long inunit,
+long outunit,
+double *factor)
 {
 if ((outunit >= 0) && (outunit <= MAXUNIT) && (inunit >= 0)
 						&& (inunit <= MAXUNIT))

@@ -40,16 +40,15 @@ ALGORITHM REFERENCES
 
 /* Initialize the Albers projection
   -------------------------------*/
-long alberinvint(r_maj,r_min,lat1,lat2,lon0,lat0,false_east,false_north)
-
-double r_maj;                   /* major axis                           */
-double r_min;                   /* minor axis                           */
-double lat1;                    /* first standard parallel              */
-double lat2;                    /* second standard parallel             */
-double lon0;                    /* center longitude                     */
-double lat0;                    /* center lattitude                     */
-double false_east;              /* x offset in meters                   */
-double false_north;             /* y offset in meters                   */
+long alberinvint(
+double r_maj,                   /* major axis                           */
+double r_min,                   /* minor axis                           */
+double lat1,                    /* first standard parallel              */
+double lat2,                    /* second standard parallel             */
+double lon0,                    /* center longitude                     */
+double lat0,                    /* center lattitude                     */
+double false_east,              /* x offset in meters                   */
+double false_north              /* y offset in meters                   */)
 {
 /* REMOVED_KR_DECL: double msfnz(); */			/* function to compute small m		*/
 /* REMOVED_KR_DECL: double qsfnz(); */			/* function to compute small q		*/
@@ -113,11 +112,11 @@ return(OK);
 
 /* Albers Conical Equal Area inverse equations--mapping x,y to lat/long
   -------------------------------------------------------------------*/
-long alberinv(x, y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
+long alberinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 /* REMOVED_KR_DECL: double qsfnz(); */			/* function to calculate q	*/
 double rh1;			/* height above ellipsoid	*/

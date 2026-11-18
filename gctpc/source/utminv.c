@@ -48,12 +48,11 @@ static long ind;		/* sphere flag value			*/
 
 /* Initialize the Universal Transverse Mercator (UTM) projection
   -------------------------------------------------------------*/
-long utminvint(r_maj,r_min,scale_fact,zone)
-
-double r_maj;			/* major axis				*/
-double r_min;			/* minor axis				*/
-double scale_fact;		/* scale factor				*/
-long zone;			/* zone number				*/
+long utminvint(
+double r_maj,                   /* major axis				*/
+double r_min,                   /* minor axis				*/
+double scale_fact,              /* scale factor				*/
+long zone                       /* zone number				*/)
 {
 double temp;			/* temprorary variables			*/
 double e0fn(),e1fn(),e2fn(),e3fn(),mlfn();	/* functions		*/
@@ -100,11 +99,11 @@ return(OK);
    Note:  The algorithm for UTM is exactly the same as TM and therefore
 	  if a change is implemented, also make the change to TMINV.c
   -----------------------------------------------------------------------*/
-long utminv(x, y, lon, lat)
-double x;		/* (I) X projection coordinate 			*/
-double y;		/* (I) Y projection coordinate 			*/
-double *lon;		/* (O) Longitude 				*/
-double *lat;		/* (O) Latitude 				*/
+long utminv(
+double x,                       /* (I) X projection coordinate 			*/
+double y,                       /* (I) Y projection coordinate 			*/
+double *lon,                    /* (O) Longitude 				*/
+double *lat                     /* (O) Latitude 				*/)
 {
 /* REMOVED_KR_DECL: double adjust_lon(); */    /* Function to adjust longitude to -180 - 180 	*/
 double con,phi;		/* temporary angles				*/

@@ -38,16 +38,15 @@ ALGORITHM REFERENCES
 
 /* Initialize the Lambert Conformal Conic projection
   ------------------------------------------------*/
-long lamccinvint(r_maj,r_min,lat1,lat2,c_lon,c_lat,false_east,false_north)
-
-double c_lat;				/* center latitude		*/
-double c_lon;				/* center longitude		*/
-double lat1;				/* first standard parallel	*/
-double lat2;				/* second standard parallel	*/
-double r_maj;				/* major axis			*/
-double r_min;				/* minor axis			*/
-double false_east;			/* x offset in meters		*/
-double false_north;			/* y offset in meters		*/
+long lamccinvint(
+double r_maj,                   /* major axis			*/
+double r_min,                   /* minor axis			*/
+double lat1,                    /* first standard parallel	*/
+double lat2,                    /* second standard parallel	*/
+double c_lon,                   /* center longitude		*/
+double c_lat,                   /* center latitude		*/
+double false_east,              /* x offset in meters		*/
+double false_north              /* y offset in meters		*/)
 {
 double sin_po;				/* sin value			*/
 double cos_po;				/* cos value			*/
@@ -114,12 +113,11 @@ return(OK);
 
 /* Lambert Conformal Conic inverse equations--mapping x,y to lat/long
   -----------------------------------------------------------------*/
-long lamccinv(x , y, lon, lat)
-double x;			/* (O) X projection coordinate 	*/
-double y;			/* (O) Y projection coordinate 	*/
-double *lon;			/* (I) Longitude 		*/
-double *lat;			/* (I) Latitude 		*/
-
+long lamccinv(
+double x,                       /* (O) X projection coordinate 	*/
+double y,                       /* (O) Y projection coordinate 	*/
+double *lon,                    /* (I) Longitude 		*/
+double *lat                     /* (I) Latitude 		*/)
 {
 double rh1;			/* height above ellipsoid	*/
 double con;			/* sign2 variable		*/
