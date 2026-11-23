@@ -14,7 +14,27 @@
 #include "gts.h"
 #include <stdlib.h>
 
-void gctp ();
+void gctp(
+double *incoor,                 /* input coordinates                            */
+long *insys,                    /* input projection code                        */
+long *inzone,                   /* input zone number                            */
+double *inparm,                 /* input projection parameter array             */
+long *inunit,                   /* input units                                  */
+long *indatum,                  /* input datum                                  */
+long *ipr,
+char *efile,                    /* error file name                              */
+long *jpr,
+char *pfile,                    /* error file name                              */
+double *outcoor,                /* output coordinates                           */
+long *outsys,                   /* output projection code                       */
+long *outzone,                  /* output zone                                  */
+double *outparm,                /* output projection array                      */
+long *outunit,                  /* output units                                 */
+long *outdatum,                 /* output datum                                 */
+char fn27[],                    /* file name of NAD 1927 parameter file         */
+char fn83[],                    /* file name of NAD 1983 parameter file         */
+long *iflg
+);
 char cbuffer;
 char lbuffer[80];
 
